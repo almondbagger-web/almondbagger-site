@@ -35,7 +35,10 @@ const colorMap = {
 
 export default function Price() {
   return (
-    <section id="price" className="relative overflow-hidden bg-white py-20 md:py-28">
+    <section
+      id="price"
+      className="relative scroll-mt-24 overflow-hidden bg-white py-20 md:py-28"
+    >
       <div className="pointer-events-none absolute left-1/2 top-10 h-72 w-72 -translate-x-1/2 rounded-full bg-pink/20 pop-blob" />
       <div className="relative mx-auto max-w-6xl section-pad">
         <Reveal className="text-center">

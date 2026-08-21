@@ -5,15 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
 import { Bounce } from "@/components/Motion";
+import { companyInfo, navLinks } from "@/data/works";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#works", label: "Works" },
-  { href: "#price", label: "Price" },
-  { href: "#company", label: "Company" },
-  { href: "#contact", label: "Contact" },
-] as const;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -59,7 +52,7 @@ export default function Navbar() {
               e.preventDefault();
               handleNav("#top");
             }}
-            aria-label="ALMONDBAGGER トップへ"
+            aria-label={`${companyInfo.shortName} トップへ`}
           >
             <BrandLogo priority />
           </a>
@@ -132,12 +125,18 @@ export default function Navbar() {
                 </motion.a>
               ))}
               <a
+                href={companyInfo.phoneHref}
+                className="mt-4 text-sm font-bold text-pink"
+              >
+                {companyInfo.phone}
+              </a>
+              <a
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNav("#contact");
                 }}
-                className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-pink px-5 py-3 font-bold text-white"
+                className="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-pink px-5 py-3 font-bold text-white"
               >
                 <Phone className="h-4 w-4" />
                 24H相談

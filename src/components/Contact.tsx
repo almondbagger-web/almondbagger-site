@@ -50,7 +50,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-white py-20 md:py-28">
+    <section
+      id="contact"
+      className="relative scroll-mt-24 overflow-hidden bg-white py-20 md:py-28"
+    >
       <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-rose/20 pop-blob" />
       <div className="relative mx-auto max-w-6xl section-pad">
         <Reveal>

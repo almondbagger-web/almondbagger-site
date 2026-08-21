@@ -3,13 +3,15 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
+import { GrowthGridBackground } from "@/components/GrowthVisuals";
 import { Bounce, ConfettiDecor } from "@/components/Motion";
-import { heroSlides } from "@/data/works";
+import { companyInfo, heroSlides } from "@/data/works";
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
+  const [slideFailed, setSlideFailed] = useState(false);
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 500], [0, 120]);
   const yCopy = useTransform(scrollY, [0, 500], [0, -40]);
@@ -22,15 +24,20 @@ export default function Hero() {
     return () => window.clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    setSlideFailed(false);
+  }, [index]);
+
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-soft pt-24 pb-16"
+      className="relative min-h-[100svh] overflow-hidden bg-soft/80 pt-24 pb-16"
     >
+      <GrowthGridBackground intensity="hero" />
       <ConfettiDecor />
-      <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-pink/30 pop-blob" />
-      <div className="pointer-events-none absolute right-0 top-32 h-80 w-80 rounded-full bg-cyan/25 pop-blob" />
-      <div className="pointer-events-none absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-yellow/30 pop-blob" />
+      <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-pink/25 pop-blob" />
+      <div className="pointer-events-none absolute right-0 top-32 h-80 w-80 rounded-full bg-cyan/20 pop-blob" />
+      <div className="pointer-events-none absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-yellow/25 pop-blob" />
 
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 section-pad lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <motion.div style={{ y: yCopy }}>
@@ -47,10 +54,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="neon-badge mb-5 bg-yellow text-foreground"
+            className="neon-badge mb-5 max-w-full bg-yellow text-left text-foreground"
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            八王子発・全国対応の制作サポート
+            <Sparkles className="h-3.5 w-3.5 shrink-0" />
+            <span className="leading-snug">
+              八王子フィルムコミッション（八王子FC）公式連携プロダクション
+            </span>
           </motion.span>
 
           <motion.h1
@@ -70,8 +79,8 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg"
           >
-            株式会社ALMONDBAGGER（アーモンドバガー）は、制作進行・ロケ・許可・車両から
-            SNS縦型まで。現場が止まらないエンタメ制作をお届けします。
+            映画・ドラマから縦型ショートまで。八王子FCとの強固なネットワークによる圧倒的なロケ地提案力
+            × 24時間止まらない現場進行力。数字が伸びる映像を、ポップに、確実に。
           </motion.p>
 
           <motion.div
@@ -83,7 +92,7 @@ export default function Hero() {
             <Bounce>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose via-pink to-purple px-6 py-3.5 text-sm font-bold text-white shadow-[0_14px_30px_rgba(236,72,153,0.4)]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-rose via-pink to-purple px-6 py-3.5 text-sm font-bold text-white shadow-[0_14px_30px_rgba(244,63,94,0.4)]"
               >
                 24時間緊急対応へ
                 <ArrowRight className="h-4 w-4" />
@@ -91,10 +100,13 @@ export default function Hero() {
             </Bounce>
             <Bounce>
               <a
-                href="#works"
+                href={companyInfo.partnerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border-2 border-cyan bg-white px-6 py-3.5 text-sm font-bold text-cyan shadow-sm"
               >
-                作品を見る
+                八王子FC 公式サイトを見る
+                <ArrowUpRight className="h-4 w-4" />
               </a>
             </Bounce>
           </motion.div>
@@ -118,7 +130,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div style={{ y: yBg }} className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_80px_rgba(236,72,153,0.25)] ring-4 ring-white md:aspect-[5/6]">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_80px_rgba(244,63,94,0.22)] ring-4 ring-white md:aspect-[5/6]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={heroSlides[index].id}
@@ -128,16 +140,25 @@ export default function Hero() {
                 transition={{ duration: 0.55 }}
                 className="absolute inset-0"
               >
-                <Image
-                  src={heroSlides[index].image}
-                  alt={heroSlides[index].label}
-                  fill
-                  priority={index === 0}
-                  sizes="(max-width:1024px) 100vw, 45vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-pink/50 via-transparent to-cyan/20" />
-                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-pink shadow">
+                {!slideFailed ? (
+                  <Image
+                    src={heroSlides[index].image}
+                    alt={heroSlides[index].label}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width:1024px) 100vw, 45vw"
+                    className="object-cover"
+                    onError={() => setSlideFailed(true)}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-rose via-pink to-purple p-8 text-center">
+                    <p className="font-display text-2xl font-bold text-white">
+                      {companyInfo.shortName}
+                    </p>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-rose/45 via-transparent to-cyan/15" />
+                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-rose shadow">
                   {heroSlides[index].label}
                 </span>
               </motion.div>
@@ -156,27 +177,27 @@ export default function Hero() {
             transition={{ duration: 3.4, repeat: Infinity }}
             className="absolute -right-2 top-16 rounded-2xl bg-purple px-4 py-3 text-sm font-bold text-white shadow-lg md:-right-6"
           >
-            24H対応
+            八王子FC連携
           </motion.div>
         </motion.div>
       </div>
 
-      <div className="relative z-10 mt-14 overflow-hidden border-y border-pink/10 bg-white/70 py-3">
+      <div className="relative z-10 mt-14 overflow-hidden border-y border-rose/10 bg-white/75 py-3 backdrop-blur-sm">
         <div className="marquee-track gap-8 px-4 font-display text-lg font-bold">
           {[...Array(2)].map((_, loop) => (
             <div key={loop} className="flex gap-8">
               {[
-                "MOVIE",
-                "DRAMA",
-                "MV",
-                "CM",
-                "YouTube",
+                "ALGORITHM",
+                "ENGAGEMENT",
+                "IMPRESSIONS",
+                "八王子FC",
                 "TikTok",
                 "SHORTS",
-                "LOCATION",
+                "RETENTION",
+                "24H",
               ].map((t) => (
                 <span key={`${loop}-${t}`} className="whitespace-nowrap">
-                  <span className="text-pink">★</span> {t}
+                  <span className="text-rose">★</span> {t}
                 </span>
               ))}
             </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { companyInfo } from "@/data/works";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
@@ -35,7 +36,7 @@ export default function BrandLogo({
       <span className="absolute -inset-2 rounded-2xl bg-pink/0 blur-lg transition duration-300 group-hover:bg-pink/25" />
       <Image
         src="/logo.png"
-        alt="ALMONDBAGGER"
+        alt={companyInfo.shortName}
         width={280}
         height={160}
         priority={priority}

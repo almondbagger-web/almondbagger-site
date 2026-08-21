@@ -70,7 +70,7 @@ export const works: Work[] = [
     thumbnail: t(3),
     year: 2025,
     description:
-      "NETFLIX・FOD・U-NEXTで見放題配信。制作部として参加した配信作品。",
+      "Netflix・FOD・U-NEXTで見放題配信。制作部として参加した配信作品。",
     aspect: "landscape",
     officialUrl: "https://www.magi-boys.com/index.html",
   },
@@ -373,7 +373,7 @@ export const pricePlans: PricePlan[] = [
     badge: "人気",
     priceLines: ["参考価格：30万円〜 / 本", "月額運用プラン：50万円〜 / 月"],
     description:
-      "縦型コンテンツの企画から投稿まで。テンポ編集と音効で、止まりにくいショートを制作します。",
+      "企画・構成・縦型撮影・テンポ編集・テロップ・音効まで。止まりにくいショートを制作します。",
     features: ["企画・構成", "縦型撮影", "テンポ編集", "テロップ", "音効"],
   },
   {
@@ -383,7 +383,7 @@ export const pricePlans: PricePlan[] = [
     badge: "成長支援",
     priceLines: ["参考価格：25万円〜 / 本"],
     description:
-      "チャンネルの世界観に合わせた企画〜サムネまで。継続制作にも対応します。",
+      "企画・台本・撮影・編集・サムネイル制作まで。継続制作にも対応します。",
     features: ["企画・台本", "撮影", "編集", "サムネイル制作"],
   },
   {
@@ -393,7 +393,7 @@ export const pricePlans: PricePlan[] = [
     badge: "オーダーメイド",
     priceLines: ["参考価格：内容・規模により個別お見積もり"],
     description:
-      "企画提案からMAまで完全オーダーメイド。ブランド価値を落とさない品質でご提案します。",
+      "企画提案・キャストオーディション・本格撮影・カラーグレーディング・MA音響まで完全オーダーメイド対応。",
     features: [
       "企画提案",
       "キャストオーディション",
@@ -468,6 +468,7 @@ export const serviceCards = [
 
 export const companyInfo = {
   name: "株式会社ALMONDBAGGER（アーモンドバガー）",
+  shortName: "ALMONDBAGGER",
   representative: "弓田 悠太",
   postal: "〒192-0082",
   address: "東京都八王子市東町1番10号 グランデハイツ八王子801",
@@ -479,6 +480,17 @@ export const companyInfo = {
   email: "almondbagger@gmail.com",
   emailHref: "mailto:almondbagger@gmail.com",
   area: "東京都・八王子市・関東圏・全国対応可（八王子FC連携）",
+  partner: "八王子フィルムコミッション",
+  partnerUrl: "https://www.hkc.or.jp/fc/",
   mapEmbed:
     "https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E6%9D%B1%E7%94%BA1%E7%95%AA10%E5%8F%B7&t=&z=16&ie=UTF8&iwloc=&output=embed",
-};
+} as const;
+
+/** ナビ・フッター共通。セクション id と必ず一致させる */
+export const navLinks = [
+  { href: "#services", label: "Services" },
+  { href: "#works", label: "Works" },
+  { href: "#price", label: "Price" },
+  { href: "#company", label: "Company" },
+  { href: "#contact", label: "Contact" },
+] as const;

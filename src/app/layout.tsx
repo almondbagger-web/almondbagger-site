@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fredoka, M_PLUS_Rounded_1c } from "next/font/google";
+import { companyInfo } from "@/data/works";
 import "./globals.css";
 
 const display = Fredoka({
@@ -16,27 +17,26 @@ const sans = M_PLUS_Rounded_1c({
 
 export const metadata: Metadata = {
   title: {
-    default: "ALMONDBAGGER | 映画・ドラマから、縦型ショートまで。",
-    template: "%s | ALMONDBAGGER",
+    default: `${companyInfo.shortName} | 映画・ドラマから、縦型ショートまで。`,
+    template: `%s | ${companyInfo.shortName}`,
   },
-  description:
-    "株式会社ALMONDBAGGER（アーモンドバガー）は映像制作サポート・SNS縦型ショート制作の会社です。八王子本社、代表 弓田悠太。映画・ドラマ・MV・CM・YouTube・TikTok対応。",
+  description: `${companyInfo.name}は映像制作サポート・SNS縦型ショート制作の会社です。八王子本社、代表 ${companyInfo.representative}。映画・ドラマ・MV・CM・YouTube・TikTok対応。`,
   keywords: [
-    "ALMONDBAGGER",
+    companyInfo.shortName,
     "アーモンドバガー",
     "映像制作",
     "縦型ショート",
     "TikTok",
     "八王子",
-    "弓田悠太",
+    companyInfo.representative,
   ],
   openGraph: {
-    title: "ALMONDBAGGER | 映画・ドラマから、縦型ショートまで。",
+    title: `${companyInfo.shortName} | 映画・ドラマから、縦型ショートまで。`,
     description:
       "映像制作サポート事業＆SNS・縦型ショート動画制作。八王子本社・全国対応。",
     type: "website",
     locale: "ja_JP",
-    siteName: "ALMONDBAGGER",
+    siteName: companyInfo.shortName,
   },
   robots: { index: true, follow: true },
 };
