@@ -488,6 +488,8 @@ export const companyInfo = {
 
 /** ナビ・フッター共通。セクション id と必ず一致させる */
 export const navLinks = [
+  { href: "#about", label: "Growth" },
+  { href: "#ai", label: "AI" },
   { href: "#services", label: "Services" },
   { href: "#works", label: "Works" },
   { href: "#price", label: "Price" },

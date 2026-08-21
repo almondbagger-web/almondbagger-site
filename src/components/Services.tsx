@@ -5,8 +5,8 @@ import { ArrowUpRight, MapPinned } from "lucide-react";
 import {
   AlgoDotGrid,
   AlgorithmNetwork,
+  BounceArrow,
   GrowthInsightCards,
-  ImpactStatsStrip,
   RisingNeonGraph,
 } from "@/components/GrowthVisuals";
 import { Bounce, Reveal } from "@/components/Motion";
@@ -24,7 +24,10 @@ export default function Services() {
 
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
         <Reveal>
-          <span className="neon-badge bg-cyan text-white">ABOUT / SERVICES</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="neon-badge bg-cyan text-white">ABOUT / SERVICES</span>
+            <BounceArrow size="sm" />
+          </div>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
             エンタメを、
             <span className="text-rose">カラフルに支える。</span>
@@ -33,10 +36,6 @@ export default function Services() {
             映画・ドラマからMV・CM、YouTube・TikTok縦型ショートまで。
             制作現場の進行を、ポップに、確実に。数字が伸びる映像まで伴走します。
           </p>
-        </Reveal>
-
-        <Reveal delay={0.06} className="mt-10">
-          <ImpactStatsStrip />
         </Reveal>
 
         <Reveal delay={0.08} className="mt-10">

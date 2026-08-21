@@ -5,7 +5,11 @@ import Image from "next/image";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
-import { GrowthGridBackground } from "@/components/GrowthVisuals";
+import {
+  BounceArrow,
+  GrowthGridBackground,
+  RisingArrowsDecor,
+} from "@/components/GrowthVisuals";
 import { Bounce, ConfettiDecor } from "@/components/Motion";
 import { companyInfo, heroSlides } from "@/data/works";
 
@@ -34,6 +38,7 @@ export default function Hero() {
       className="relative min-h-[100svh] overflow-hidden bg-soft/80 pt-24 pb-16"
     >
       <GrowthGridBackground intensity="hero" />
+      <RisingArrowsDecor className="opacity-40 md:opacity-60" />
       <ConfettiDecor />
       <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-pink/25 pop-blob" />
       <div className="pointer-events-none absolute right-0 top-32 h-80 w-80 rounded-full bg-cyan/20 pop-blob" />
@@ -50,17 +55,23 @@ export default function Hero() {
             <BrandLogo priority imageClassName="h-16 md:h-20" />
           </motion.div>
 
-          <motion.span
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="neon-badge mb-5 max-w-full bg-yellow text-left text-foreground"
+            transition={{ delay: 0.1 }}
+            className="mb-4 flex flex-wrap items-center gap-2"
           >
-            <Sparkles className="h-3.5 w-3.5 shrink-0" />
-            <span className="leading-snug">
-              八王子フィルムコミッション（八王子FC）公式連携プロダクション
+            <span className="neon-badge bg-yellow text-foreground">
+              <Sparkles className="h-3.5 w-3.5 shrink-0" />
+              <span className="leading-snug">
+                八王子FC 公式連携プロダクション
+              </span>
             </span>
-          </motion.span>
+            <span className="neon-badge ai-neon-badge bg-gradient-to-r from-purple via-rose to-cyan text-white">
+              ✨ AI Creator Joined
+            </span>
+            <BounceArrow size="sm" />
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 36 }}
@@ -79,8 +90,8 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg"
           >
-            映画・ドラマから縦型ショートまで。八王子FCとの強固なネットワークによる圧倒的なロケ地提案力
-            × 24時間止まらない現場進行力。数字が伸びる映像を、ポップに、確実に。
+            八王子FC連携のロケ提案力 × 24時間現場進行力 × 一流AIクリエイター参画。
+            SNSアルゴリズムに刺さり、数字が伸びる映像をポップに、確実に。
           </motion.p>
 
           <motion.div
@@ -100,19 +111,17 @@ export default function Hero() {
             </Bounce>
             <Bounce>
               <a
-                href={companyInfo.partnerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-cyan bg-white px-6 py-3.5 text-sm font-bold text-cyan shadow-sm"
+                href="#ai"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-purple bg-white px-6 py-3.5 text-sm font-bold text-purple shadow-sm"
               >
-                八王子FC 公式サイトを見る
+                AIクリエイター参画を見る
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </Bounce>
           </motion.div>
 
           <div className="mt-8 flex flex-wrap gap-2">
-            {["Movie", "Drama", "TikTok", "CM"].map((tag, i) => (
+            {["Movie", "Drama", "TikTok", "AI"].map((tag, i) => (
               <motion.span
                 key={tag}
                 initial={{ opacity: 0, y: 12 }}
@@ -120,7 +129,7 @@ export default function Hero() {
                 transition={{ delay: 0.55 + i * 0.06 }}
                 className="rounded-full bg-white px-3 py-1 text-xs font-bold shadow-sm ring-1 ring-black/5"
                 style={{
-                  color: ["#f43f5e", "#a855f7", "#ec4899", "#06b6d4"][i],
+                  color: ["#f43f5e", "#8b5cf6", "#06b6d4", "#84cc16"][i],
                 }}
               >
                 #{tag}
@@ -179,6 +188,20 @@ export default function Hero() {
           >
             八王子FC連携
           </motion.div>
+          <motion.div
+            animate={{ y: [0, -8, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 2.2, repeat: Infinity }}
+            className="absolute right-2 bottom-28 rounded-2xl bg-rose px-3 py-2 text-xs font-black text-white shadow-lg md:-right-4"
+          >
+            ❤️ +240K
+          </motion.div>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2.8, repeat: Infinity, delay: 0.3 }}
+            className="absolute left-2 top-28 rounded-2xl bg-cyan px-3 py-2 text-xs font-black text-white shadow-lg md:-left-6"
+          >
+            🔥 Algo Picked!
+          </motion.div>
         </motion.div>
       </div>
 
@@ -189,12 +212,12 @@ export default function Hero() {
               {[
                 "ALGORITHM",
                 "ENGAGEMENT",
-                "IMPRESSIONS",
+                "1.2億+ PV",
+                "AI CREATOR",
                 "八王子FC",
                 "TikTok",
                 "SHORTS",
-                "RETENTION",
-                "24H",
+                "↗ GROWTH",
               ].map((t) => (
                 <span key={`${loop}-${t}`} className="whitespace-nowrap">
                   <span className="text-rose">★</span> {t}

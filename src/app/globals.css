@@ -8,8 +8,8 @@
   --pink: #ec4899;
   --rose: #f43f5e;
   --cyan: #06b6d4;
-  --lime: #10b981;
-  --purple: #a855f7;
+  --lime: #84cc16;
+  --purple: #8b5cf6;
   --yellow: #facc15;
   --muted: #6b7280;
   --soft: #fff1f7;
@@ -125,6 +125,38 @@ body {
   font-weight: 700;
   letter-spacing: 0.04em;
   box-shadow: 0 8px 24px rgba(236, 72, 153, 0.18);
+}
+
+.ai-neon-badge {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 8px 28px rgba(139, 92, 246, 0.35),
+    0 0 24px rgba(6, 182, 212, 0.25);
+  animation: ai-badge-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes ai-badge-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.08);
+  }
+}
+
+@keyframes bounce-rise {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(6deg);
+  }
+}
+
+.bounce-rise {
+  animation: bounce-rise 1.2s ease-in-out infinite;
 }
 
 .confetti-dot {

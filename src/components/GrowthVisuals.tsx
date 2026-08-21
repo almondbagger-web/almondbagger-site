@@ -293,20 +293,20 @@ export function SiteAtmosphere() {
 /* ─── Floating engagement badges ─── */
 const ENGAGEMENT_BADGES = [
   {
-    label: "🔥 ALGORITHM HIT!",
+    label: "❤️ +240K Likes",
     className: "bg-rose text-white",
     style: { top: "14%", left: "2%" },
     delay: 0,
   },
   {
-    label: "❤️ +128.4K LIKES",
-    className: "bg-purple text-white",
+    label: "🔁 45K Shares",
+    className: "bg-cyan text-white",
     style: { top: "22%", right: "3%" },
     delay: 0.25,
   },
   {
-    label: "🚀 RETENTION 84.6%",
-    className: "bg-lime text-white",
+    label: "🔥 Algorithm Picked!",
+    className: "bg-purple text-white",
     style: { top: "48%", left: "1.5%" },
     delay: 0.5,
   },
@@ -317,8 +317,8 @@ const ENGAGEMENT_BADGES = [
     delay: 0.75,
   },
   {
-    label: "🔁 12.8K SHARES",
-    className: "bg-cyan text-white",
+    label: "🚀 ENGAGEMENT BLAST",
+    className: "bg-lime text-foreground",
     style: { bottom: "18%", left: "4%" },
     delay: 1,
   },
@@ -435,39 +435,37 @@ export function CountUp({
 
 const IMPACT_STATS = [
   {
-    label: "総再生回数",
-    to: 1000000,
-    suffix: "+",
+    label: "総インプレッション数",
+    to: 1.2,
+    decimals: 1,
+    suffix: "億+ PV",
     prefix: "",
     accent: "text-rose",
-    hint: "Views",
-  },
-  {
-    label: "インプレッション向上率",
-    to: 450,
-    suffix: "%",
-    prefix: "+",
-    accent: "text-cyan",
     hint: "Impressions",
   },
   {
-    label: "現場稼働率",
-    to: 99,
+    label: "平均エンゲージメント率",
+    to: 380,
+    decimals: 0,
+    suffix: "% UP",
+    prefix: "",
+    accent: "text-cyan",
+    hint: "Engagement",
+  },
+  {
+    label: "急上昇・アルゴリズム突破率",
+    to: 94.2,
+    decimals: 1,
     suffix: "%",
     prefix: "",
-    accent: "text-lime",
-    hint: "On-set",
+    accent: "text-purple",
+    hint: "Algo Hit",
   },
 ] as const;
 
 export function ImpactStatsStrip({ className }: { className?: string }) {
   return (
-    <div
-      className={cn(
-        "grid gap-3 sm:grid-cols-3",
-        className,
-      )}
-    >
+    <div className={cn("grid gap-3 sm:grid-cols-3", className)}>
       {IMPACT_STATS.map((s, i) => (
         <motion.div
           key={s.label}
@@ -477,13 +475,117 @@ export function ImpactStatsStrip({ className }: { className?: string }) {
           transition={{ delay: i * 0.1, duration: 0.5 }}
           className="relative overflow-hidden rounded-3xl bg-white p-5 shadow-[0_14px_36px_rgba(31,18,53,0.07)] ring-1 ring-black/5"
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-muted">
-            {s.hint}
-          </p>
-          <p className={cn("mt-2 font-display text-3xl font-bold md:text-4xl", s.accent)}>
-            <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} duration={1.55} />
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-muted">
+              {s.hint}
+            </p>
+            <BounceArrow size="sm" />
+          </div>
+          <p
+            className={cn(
+              "mt-2 font-display text-3xl font-bold tabular-nums md:text-4xl",
+              s.accent,
+            )}
+          >
+            <CountUp
+              to={s.to}
+              decimals={s.decimals}
+              prefix={s.prefix}
+              suffix={s.suffix}
+              duration={1.65}
+            />
           </p>
           <p className="mt-1 text-sm font-bold text-foreground">{s.label}</p>
+          <RisingNeonGraph
+            loop
+            variant="card"
+            className="pointer-events-none absolute -bottom-1 right-0 h-12 w-28 opacity-40"
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+/** 右肩上がりにリズミカルに跳ねる矢印 */
+export function BounceArrow({
+  size = "md",
+  className,
+}: {
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}) {
+  const scale =
+    size === "lg" ? "text-4xl" : size === "sm" ? "text-base" : "text-2xl";
+  return (
+    <motion.span
+      aria-hidden
+      className={cn("inline-flex select-none", scale, className)}
+      animate={{ y: [0, -10, 0], rotate: [0, -8, 0], scale: [1, 1.12, 1] }}
+      transition={{
+        duration: 1.15,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      <span className="bg-gradient-to-br from-rose via-purple to-cyan bg-clip-text text-transparent drop-shadow-sm">
+        ↗
+      </span>
+      <motion.span
+        className="ml-0.5"
+        animate={{ y: [2, -8, 2] }}
+        transition={{ duration: 1.15, repeat: Infinity, ease: "easeInOut", delay: 0.12 }}
+      >
+        🚀
+      </motion.span>
+    </motion.span>
+  );
+}
+
+export function RisingArrowsDecor({ className }: { className?: string }) {
+  const items = [
+    { top: "12%", left: "8%", delay: 0, size: "md" as const },
+    { top: "30%", right: "10%", delay: 0.35, size: "lg" as const },
+    { bottom: "24%", left: "18%", delay: 0.7, size: "sm" as const },
+    { bottom: "36%", right: "16%", delay: 0.2, size: "md" as const },
+  ];
+  return (
+    <div
+      aria-hidden
+      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+    >
+      {items.map((it, i) => (
+        <motion.div
+          key={i}
+          className="absolute opacity-70"
+          style={{
+            top: "top" in it ? it.top : undefined,
+            left: "left" in it ? it.left : undefined,
+            right: "right" in it ? it.right : undefined,
+            bottom: "bottom" in it ? it.bottom : undefined,
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.75 }}
+          transition={{ delay: 0.4 + it.delay }}
+        >
+          <motion.span
+            className={cn(
+              "inline-flex",
+              it.size === "lg" ? "text-5xl" : it.size === "sm" ? "text-xl" : "text-3xl",
+            )}
+            animate={{ y: [0, -16, 0], rotate: [-6, 8, -6] }}
+            transition={{
+              duration: 1.4 + i * 0.15,
+              repeat: Infinity,
+              delay: it.delay,
+              ease: "easeInOut",
+            }}
+          >
+            <span className="bg-gradient-to-tr from-rose to-cyan bg-clip-text text-transparent">
+              ↗
+            </span>
+            <span className="ml-1">🚀</span>
+          </motion.span>
         </motion.div>
       ))}
     </div>
