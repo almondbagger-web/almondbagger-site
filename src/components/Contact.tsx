@@ -56,7 +56,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden bg-transparent section-y"
+      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-transparent section-y"
     >
       <AuroraLayer className="opacity-40" />
       <GeometricGridLayer className="opacity-30" />

@@ -31,13 +31,13 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-transparent pt-28 pb-16"
+      className="relative min-h-[100svh] overflow-hidden bg-transparent pt-36 pb-16 md:pt-40 lg:pt-44"
     >
       <GrowthGridBackground intensity="hero" />
 
       <div className="relative z-10 mx-auto grid max-w-6xl gap-14 section-pad lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <Reveal direction="left">
-          <BrandLogo priority imageClassName="h-11 md:h-12" />
+          <BrandLogo variant="hero" priority />
 
           <div className="hero-accent-line mt-6 max-w-md" aria-hidden="true" />
 

@@ -57,6 +57,14 @@ export const metadata: Metadata = {
   creator: companyInfo.shortName,
   publisher: companyInfo.name,
   alternates: { canonical: "https://www.almondbagger.com/" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: siteTitle,
     description: siteDescription,
@@ -64,16 +72,30 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     siteName: companyInfo.shortName,
     url: "https://www.almondbagger.com",
+    images: [
+      {
+        url: "/会社LOGO.png",
+        width: 2400,
+        height: 1792,
+        alt: `${companyInfo.shortName} ロゴ`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
+    images: ["/会社LOGO.png"],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
+  },
+  appleWebApp: {
+    capable: true,
+    title: companyInfo.shortName,
+    statusBarStyle: "default",
   },
 };
 

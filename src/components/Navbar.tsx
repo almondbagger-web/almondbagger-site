@@ -37,14 +37,14 @@ export default function Navbar() {
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-x-0 top-0 z-50 section-pad pt-3"
+        className="fixed inset-x-0 top-0 z-50 section-pad pt-2 md:pt-3"
       >
         <div
           className={cn(
-            "mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 md:px-5 md:py-3.5",
+            "mx-auto flex max-w-6xl items-center gap-3 rounded-2xl px-3 py-2.5 transition-all duration-300 sm:gap-4 sm:px-4 md:px-5 md:py-3 lg:gap-6",
             scrolled
               ? "lux-glass border border-white/80 shadow-sm"
-              : "border border-transparent bg-white/85 backdrop-blur-sm",
+              : "border border-transparent bg-white/90 backdrop-blur-sm",
           )}
         >
           <a
@@ -54,12 +54,12 @@ export default function Navbar() {
               handleNav("#top");
             }}
             aria-label={`${companyInfo.shortName} トップへ`}
-            className="shrink-0"
+            className="min-w-0 shrink-0"
           >
-            <BrandLogo priority />
+            <BrandLogo variant="header" priority />
           </a>
 
-          <nav className="hidden items-center gap-0.5 lg:flex">
+          <nav className="ml-auto hidden min-w-0 flex-1 items-center justify-end gap-0.5 xl:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -68,14 +68,14 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNav(link.href);
                 }}
-                className="rounded-full px-2.5 py-2 text-xs font-semibold text-foreground/60 transition hover:bg-brand-soft hover:text-brand xl:px-3"
+                className="whitespace-nowrap rounded-full px-2 py-2 text-[0.7rem] font-semibold text-foreground/60 transition hover:bg-brand-soft hover:text-brand xl:px-2.5 2xl:px-3 2xl:text-xs"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <Bounce>
               <a
                 href="#contact"
@@ -83,7 +83,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNav("#contact");
                 }}
-                className="btn-primary hidden text-xs md:inline-flex"
+                className="btn-primary hidden text-xs lg:inline-flex"
               >
                 <Phone className="h-3.5 w-3.5" />
                 お問い合わせ
@@ -93,7 +93,7 @@ export default function Navbar() {
               type="button"
               aria-label="メニュー"
               onClick={() => setOpen((v) => !v)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/80 lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/80 xl:hidden"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -108,9 +108,12 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 32 }}
             transition={{ ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white/97 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-white/97 backdrop-blur-sm xl:hidden"
           >
-            <div className="flex h-full flex-col justify-center gap-2 px-8">
+            <div className="flex h-full flex-col justify-center gap-2 px-8 pt-24">
+              <div className="mb-6">
+                <BrandLogo variant="header" />
+              </div>
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.href}

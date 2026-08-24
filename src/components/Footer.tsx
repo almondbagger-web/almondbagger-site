@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
             <a href="#top" aria-label={`${companyInfo.shortName} トップへ`}>
-              <BrandLogo imageClassName="h-14 max-w-[260px] md:h-16 md:max-w-[300px]" />
+              <BrandLogo variant="footer" />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               20年の映画・ドラマ制作部統括力 × 次世代AIパイプライン。

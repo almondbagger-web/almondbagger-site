@@ -13,7 +13,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative scroll-mt-24 overflow-hidden bg-surface/55 section-y"
+      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-surface/55 section-y"
     >
       <AuroraLayer className="opacity-40" />
       <GeometricGridLayer className="opacity-50" />

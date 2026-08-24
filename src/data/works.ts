@@ -37,6 +37,19 @@ const t = (n: number) => `/works/work-${String(n).padStart(2, "0")}.jpg`;
  */
 export const works: Work[] = [
   {
+    id: "w-waterman",
+    title: "WATERMAN",
+    client: "AKBB feat. Waterman",
+    category: "MV & CM",
+    roles: ["制作部", "ロケ地手配", "撮影協力"],
+    thumbnail: "/mv-waterman.jpg",
+    year: 2026,
+    description:
+      "AI ✖️ 口パク ✖️ エアーギターの最新型ロックバンド。制作部・現場統括・ロケーション支援・実写✕AI映像制作協力として参加。",
+    aspect: "portrait",
+    officialUrl: "https://youtu.be/7wWeWsUuzdI",
+  },
+  {
     id: "w-01",
     title: "憧れの作家は人間じゃありませんでした",
     client: "Prime Video / ストームレーベルズ・共同テレビ",
@@ -488,6 +501,7 @@ export const companyInfo = {
 
 /** ナビ・フッター共通。セクション id と必ず一致させる */
 export const navLinks = [
+  { href: "#news", label: "NEWS" },
   { href: "#about", label: "強み" },
   { href: "#services", label: "制作部" },
   { href: "#ai", label: "AI" },
