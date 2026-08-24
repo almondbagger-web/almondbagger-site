@@ -57,7 +57,7 @@ export default function Recruit() {
   return (
     <section
       id="recruit"
-      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-surface/55 section-y"
+      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-surface/55 section-y"
     >
       <GeometricGridLayer className="opacity-45" />
       <div className="relative z-10 mx-auto max-w-6xl section-pad">

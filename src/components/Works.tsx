@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 
 type Filter = (typeof workCategories)[number];
 
-const WATERMAN_YOUTUBE = "https://youtu.be/7wWeWsUuzdI";
+const WATERMAN_TIKTOK = "https://vt.tiktok.com/ZSVx84VPA/";
 
 const credits = [
   { label: "Artist", value: "AKBB（A.I. Kuchipaku Band Brothers）" },
@@ -112,13 +112,13 @@ function FeaturedWaterman() {
               </span>
             </div>
             <a
-              href={WATERMAN_YOUTUBE}
+              href={WATERMAN_TIKTOK}
               target="_blank"
               rel="noopener noreferrer"
               className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs font-extrabold text-brand shadow-lg backdrop-blur-sm transition hover:scale-[1.03]"
             >
               <Play className="h-3.5 w-3.5 fill-brand" />
-              本編を再生
+              TikTokで観る
             </a>
           </div>
 
@@ -173,12 +173,12 @@ function FeaturedWaterman() {
             <div className="mt-7">
               <Bounce>
                 <a
-                  href={WATERMAN_YOUTUBE}
+                  href={WATERMAN_TIKTOK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-neon-release text-sm md:text-base"
                 >
-                  YouTubeで本編MVを視聴する
+                  TikTokでMV・動画をチェック
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </Bounce>
@@ -210,7 +210,7 @@ export default function Works() {
   return (
     <section
       id="works"
-      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-transparent section-y"
+      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-transparent section-y"
     >
       <AuroraLayer className="opacity-35" />
       <GeometricGridLayer className="opacity-30" />

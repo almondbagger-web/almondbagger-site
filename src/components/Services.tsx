@@ -59,7 +59,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-transparent section-y"
+      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-transparent section-y"
     >
       <GeometricGridLayer className="opacity-45" />
 

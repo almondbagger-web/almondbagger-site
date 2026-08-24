@@ -44,7 +44,7 @@ export default function Company() {
   return (
     <section
       id="company"
-      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-surface/55 section-y"
+      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-surface/55 section-y"
     >
       <AuroraLayer className="opacity-35" />
       <GeometricGridLayer className="opacity-40" />

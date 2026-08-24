@@ -63,7 +63,7 @@ export default function AIFeature() {
   return (
     <section
       id="ai"
-      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-surface/55 section-y"
+      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-surface/55 section-y"
     >
       <AuroraLayer className="opacity-60" />
       <GeometricGridLayer className="opacity-40" />

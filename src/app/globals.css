@@ -660,6 +660,66 @@ body {
     0 0 32px rgba(163, 230, 53, 0.35);
 }
 
+/* Header impact nav — cinematic black gothic */
+.nav-impact-link {
+  font-family: var(--font-hero-ja), "Noto Sans JP", sans-serif;
+  font-size: clamp(1.05rem, 1.15vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap;
+  border-radius: 9999px;
+  padding: 0.45rem 0.7rem;
+  color: #0f172a;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    text-shadow 0.2s ease,
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-impact-link:hover {
+  color: #ef4444;
+  background: color-mix(in oklab, #ef4444 8%, white);
+  text-shadow:
+    0 0 18px rgba(239, 68, 68, 0.45),
+    0 0 28px rgba(163, 230, 53, 0.25);
+  transform: translateY(-1px);
+}
+
+.nav-impact-link--mobile {
+  display: block;
+  font-size: clamp(1.75rem, 8vw, 2.75rem);
+  padding: 0.55rem 0.25rem;
+  border-radius: 0.75rem;
+}
+
+.nav-impact-link--mobile:hover {
+  transform: translateX(4px);
+}
+
+.nav-cta-btn {
+  font-family: var(--font-hero-ja), "Noto Sans JP", sans-serif;
+  font-size: 0.95rem !important;
+  font-weight: 900 !important;
+  padding: 0.85rem 1.45rem !important;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  .nav-cta-btn {
+    font-size: 1.05rem !important;
+    padding: 0.95rem 1.7rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .nav-impact-link {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.85rem;
+  }
+}
+
 .btn-secondary,
 .jelly-btn {
   display: inline-flex;

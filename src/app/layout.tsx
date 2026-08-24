@@ -59,11 +59,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.almondbagger.com/" },
   icons: {
     icon: [
+      { url: "/icon.png", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.ico",
+    apple: "/icon.png",
   },
   openGraph: {
     title: siteTitle,
@@ -236,6 +235,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fontCinema.variable} ${fontHeroJa.variable} ${fontSyne.variable} h-full antialiased`}
     >
       <head>
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/icon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

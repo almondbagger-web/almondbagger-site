@@ -32,7 +32,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative scroll-mt-36 md:scroll-mt-40 overflow-hidden bg-transparent section-y"
+      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-transparent section-y"
       itemScope
       itemType="https://schema.org/FAQPage"
     >

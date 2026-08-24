@@ -47,7 +47,7 @@ export const works: Work[] = [
     description:
       "AI ✖️ 口パク ✖️ エアーギターの最新型ロックバンド。制作部・現場統括・ロケーション支援・実写✕AI映像制作協力として参加。",
     aspect: "portrait",
-    officialUrl: "https://youtu.be/7wWeWsUuzdI",
+    officialUrl: "https://vt.tiktok.com/ZSVx84VPA/",
   },
   {
     id: "w-01",

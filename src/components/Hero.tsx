@@ -31,7 +31,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] overflow-hidden bg-transparent pt-36 pb-16 md:pt-40 lg:pt-44"
+      className="relative min-h-[100svh] overflow-hidden bg-transparent pt-40 pb-16 md:pt-44 lg:pt-48"
     >
       <GrowthGridBackground intensity="hero" />
 
