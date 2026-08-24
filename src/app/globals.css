@@ -373,8 +373,8 @@ body {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     0 8px 32px rgba(15, 23, 42, 0.04);
-  backdrop-filter: blur(18px) saturate(1.4);
-  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
 }
 
 .lux-card,
@@ -785,130 +785,43 @@ body {
   }
 }
 
-/* ─── Fast Arrow Graph (crossweave ascending) ─── */
-.fast-arrow-graph {
-  mix-blend-mode: multiply;
-  contain: strict;
+/* ─── Fast Arrow Graph — GPU-only CSS animation ─── */
+.fag {
+  contain: paint layout;
   z-index: 0;
 }
 
-.fast-arrow-graph__svg {
+.fag__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   transform: translate3d(0, 0, 0);
   will-change: transform;
 }
 
-.fast-arrow-graph__stroke {
+.fag__line {
   fill: none;
-  stroke-dasharray: var(--fag-dash, 220) 1000;
-  stroke-dashoffset: 1000;
-  animation: fag-dash var(--fag-duration, 2.4s) linear var(--fag-delay, 0s)
-    infinite;
-  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 260 1000;
+  stroke-dashoffset: 1100;
+  animation: fag-rush linear infinite;
+  will-change: stroke-dashoffset;
 }
 
-.fast-arrow-graph__wave {
-  transform-box: fill-box;
-  transform-origin: center;
-  will-change: transform;
-}
+.fag__line--1 { animation-duration: 1.6s; animation-delay: 0s; }
+.fag__line--2 { animation-duration: 2.1s; animation-delay: 0.12s; }
+.fag__line--3 { animation-duration: 1.8s; animation-delay: 0.24s; }
+.fag__line--4 { animation-duration: 2.5s; animation-delay: 0.36s; }
+.fag__line--5 { animation-duration: 1.5s; animation-delay: 0.08s; }
+.fag__line--6 { animation-duration: 2.0s; animation-delay: 0.18s; }
+.fag__line--7 { animation-duration: 2.3s; animation-delay: 0.3s; }
+.fag__line--8 { animation-duration: 1.7s; animation-delay: 0.05s; }
 
-.fast-arrow-graph__wave--1 {
-  animation: fag-wave-a 2.2s ease-in-out var(--fag-wave-delay, 0s) infinite
-    alternate;
-}
-
-.fast-arrow-graph__wave--2 {
-  animation: fag-wave-b 2.8s ease-in-out var(--fag-wave-delay, 0s) infinite
-    alternate;
-}
-
-.fast-arrow-graph__wave--3 {
-  animation: fag-wave-c 1.9s ease-in-out var(--fag-wave-delay, 0s) infinite
-    alternate;
-}
-
-.fast-arrow-graph__spark,
-.fast-arrow-graph__star {
-  opacity: 0.1;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: fag-spark var(--fag-spark-duration, 1.8s) ease-in-out
-    var(--fag-spark-delay, 0s) infinite;
-  will-change: opacity, transform;
-}
-
-.fast-arrow-graph__star {
-  animation-name: fag-star;
-}
-
-@keyframes fag-dash {
-  0% {
-    stroke-dashoffset: 1100;
-  }
-  100% {
-    stroke-dashoffset: -1300;
-  }
-}
-
-@keyframes fag-wave-a {
-  0% {
-    transform: translate3d(0, 22px, 0);
-  }
-  100% {
-    transform: translate3d(0, -34px, 0);
-  }
-}
-
-@keyframes fag-wave-b {
-  0% {
-    transform: translate3d(0, 28px, 0);
-  }
-  100% {
-    transform: translate3d(0, -40px, 0);
-  }
-}
-
-@keyframes fag-wave-c {
-  0% {
-    transform: translate3d(0, -24px, 0);
-  }
-  100% {
-    transform: translate3d(0, 30px, 0);
-  }
-}
-
-@keyframes fag-spark {
-  0%,
-  62%,
-  100% {
-    opacity: 0.12;
-    transform: scale(0.55);
-  }
-  72% {
-    opacity: 1;
-    transform: scale(2.1);
-  }
-  82% {
-    opacity: 0.55;
-    transform: scale(1.35);
-  }
-}
-
-@keyframes fag-star {
-  0%,
-  66%,
-  100% {
-    opacity: 0;
-    transform: scale(0.5) rotate(0deg);
-  }
-  74% {
-    opacity: 1;
-    transform: scale(1.85) rotate(22deg);
-  }
-  84% {
-    opacity: 0.35;
-    transform: scale(1.15) rotate(36deg);
-  }
+@keyframes fag-rush {
+  0%   { stroke-dashoffset: 1100; }
+  100% { stroke-dashoffset: -1400; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -921,30 +834,21 @@ body {
   .jelly-btn--solid::after,
   .fast-graph-stroke,
   .fast-graph-node,
-  .fast-arrow-graph__stroke,
-  .fast-arrow-graph__wave,
-  .fast-arrow-graph__spark,
-  .fast-arrow-graph__star {
+  .fag__line {
     animation: none !important;
   }
 
   .geo-chart-stroke,
   .velocity-stroke,
   .fast-graph-stroke,
-  .fast-arrow-graph__stroke {
+  .fag__line {
     stroke-dashoffset: 0;
     stroke-dasharray: none;
     opacity: 0.35;
   }
 
-  .fast-graph-node,
-  .fast-arrow-graph__spark,
-  .fast-arrow-graph__star {
+  .fast-graph-node {
     opacity: 0.25;
-    transform: none;
-  }
-
-  .fast-arrow-graph__wave {
     transform: none;
   }
 

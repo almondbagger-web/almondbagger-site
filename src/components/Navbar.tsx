@@ -44,7 +44,7 @@ export default function Navbar() {
             "mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 md:px-5 md:py-3.5",
             scrolled
               ? "lux-glass border border-white/80 shadow-sm"
-              : "border border-transparent bg-white/70 backdrop-blur-md",
+              : "border border-transparent bg-white/85 backdrop-blur-sm",
           )}
         >
           <a
@@ -108,7 +108,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 32 }}
             transition={{ ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-40 bg-white/97 backdrop-blur-sm lg:hidden"
           >
             <div className="flex h-full flex-col justify-center gap-2 px-8">
               {navLinks.map((link, i) => (
