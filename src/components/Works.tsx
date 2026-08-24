@@ -46,6 +46,27 @@ type CinemaTheme = {
 };
 
 const CINEMA_THEMES: Record<string, CinemaTheme> = {
+  "w-luvntcom": {
+    gradient: "cinema-grad--luvntcom",
+    accent: "#f43f5e",
+    platform: "Storm Labels",
+    timecode: "TC 01:02:18:07",
+    english: "LOVE ≠ COMEDY",
+  },
+  "w-bl-drama": {
+    gradient: "cinema-grad--fod-bl",
+    accent: "#a78bfa",
+    platform: "FOD SHORT",
+    timecode: "TC 00:00:45:12",
+    english: "NO GIRLS IN BL",
+  },
+  "w-jikihai": {
+    gradient: "cinema-grad--fod-jiki",
+    accent: "#f472b6",
+    platform: "FOD SHORT",
+    timecode: "TC 00:00:38:04",
+    english: "JIKI / HAI",
+  },
   "w-jimenshi": {
     gradient: "cinema-grad--jimenshi",
     accent: "#c9a227",
@@ -119,14 +140,14 @@ const CINEMA_THEMES: Record<string, CinemaTheme> = {
   "w-romakira": {
     gradient: "cinema-grad--romakira",
     accent: "#f43f5e",
-    platform: "東宝",
+    platform: "Netflix",
     timecode: "TC 00:38:02:11",
     english: "ROMANTIC KILLER",
   },
   "w-akogare": {
     gradient: "cinema-grad--akogare",
     accent: "#818cf8",
-    platform: "Prime Video",
+    platform: "配信ドラマ",
     timecode: "TC 00:47:33:09",
     english: "MY IDOL IS NOT HUMAN",
   },
@@ -139,12 +160,22 @@ const CINEMA_THEMES: Record<string, CinemaTheme> = {
   },
 };
 
-function roleTagsOf(work: Work) {
+function isShortDrama(work: Work) {
+  return work.tags.some((tag) => tag.includes("ショートドラマ"));
+}
+
+function formatTagsOf(work: Work) {
   return work.tags.filter(
     (tag) =>
-      !/Netflix|WOWOW|Amazon|地上波|連続ドラマ|劇場|大型特別|短編|映画 \/ 配信|ドラマ \/ 配信|オリジナル/i.test(
+      /ショート|劇場|Netflix|WOWOW|Amazon|地上波|配信|短編|大型特別|オリジナル/i.test(
         tag,
-      ) || /制作|ロケ|現場|バックオフィス|ロケーション/.test(tag),
+      ) && !/制作|ロケ|現場|バックオフィス|ロケーション/.test(tag),
+  );
+}
+
+function roleTagsOf(work: Work) {
+  return work.tags.filter((tag) =>
+    /制作|ロケ|現場|バックオフィス|ロケーション/.test(tag),
   );
 }
 
@@ -159,24 +190,29 @@ function CinemaFilmFrame({ work }: { work: Work }) {
   const displayTitle = work.title
     .replace(/^連続ドラマW 池井戸潤スペシャル/, "")
     .trim();
+  const short = isShortDrama(work);
 
   return (
-    <div className="cinema-frame group/frame">
+    <div className={cn("cinema-frame group/frame", short && "cinema-frame--short")}>
       <div className="cinema-frame__sprocket cinema-frame__sprocket--left" aria-hidden />
       <div className="cinema-frame__sprocket cinema-frame__sprocket--right" aria-hidden />
 
-      <div className={cn("cinema-frame__stage", theme.gradient)}>
+      <div className={cn("cinema-frame__stage", theme.gradient, short && "cinema-frame__stage--short")}>
         <div className="cinema-frame__grain" aria-hidden />
         <div className="cinema-frame__vignette" aria-hidden />
 
         <div className="cinema-frame__meta">
-          <span className="cinema-frame__ratio">2.39:1</span>
+          <span className="cinema-frame__ratio">{short ? "9:16 VERTICAL" : "2.39:1"}</span>
           <span className="cinema-frame__tc">{theme.timecode}</span>
         </div>
 
         <div className="cinema-frame__platform" style={{ borderColor: theme.accent }}>
           {theme.platform}
         </div>
+
+        {short ? (
+          <span className="cinema-frame__short-badge">SHORT DRAMA</span>
+        ) : null}
 
         <div className="cinema-frame__title-block">
           {theme.english ? (
@@ -192,7 +228,7 @@ function CinemaFilmFrame({ work }: { work: Work }) {
         </div>
 
         <div className="cinema-frame__footer-meta">
-          <span>SCOPE</span>
+          <span>{short ? "VERTICAL" : "SCOPE"}</span>
           <span>ALMONDBAGGER PROD.</span>
         </div>
       </div>
@@ -202,6 +238,7 @@ function CinemaFilmFrame({ work }: { work: Work }) {
 
 function CinemaWorkCard({ work, index }: { work: Work; index: number }) {
   const roles = roleTagsOf(work);
+  const formats = formatTagsOf(work);
 
   return (
     <motion.article
@@ -222,6 +259,17 @@ function CinemaWorkCard({ work, index }: { work: Work; index: number }) {
           {work.client}
         </p>
         <div className="mt-3 flex flex-wrap gap-1.5">
+          {formats.map((tag) => (
+            <span
+              key={tag}
+              className={cn(
+                "cinema-format-tag",
+                tag.includes("ショート") && "cinema-format-tag--short",
+              )}
+            >
+              {tag}
+            </span>
+          ))}
           {roles.map((tag) => (
             <span key={tag} className="cinema-role-tag">
               {tag}
@@ -360,7 +408,10 @@ export default function Works() {
       filter === "すべて"
         ? works
         : works.filter((w) => w.category === (filter as WorkCategory));
-    return list.filter((w) => w.id !== "w-waterman");
+    return list
+      .filter((w) => w.id !== "w-waterman")
+      .slice()
+      .sort((a, b) => b.year - a.year);
   }, [filter]);
 
   return (
@@ -385,7 +436,7 @@ export default function Works() {
             <MiniGrowthSpark />
           </div>
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            著作権に配慮したシネマティック・フィルムフレームで、超大作・話題作の制作部実績をご覧ください。
+            劇場映画からNetflix・FODショートドラマまで、最新作を先頭に制作部実績を年代順で掲載しています。
           </p>
         </Reveal>
 
