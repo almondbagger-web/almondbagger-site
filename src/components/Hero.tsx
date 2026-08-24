@@ -58,7 +58,7 @@ export default function Hero() {
               <br />
               BAGGER
             </span>
-            <span className="font-hero-ja hero-headline-shadow mt-5 block text-[clamp(1.75rem,4.8vw,3.15rem)] font-black leading-[1.18] tracking-tight">
+            <span className="font-hero-ja mt-5 block text-[clamp(1.75rem,4.8vw,3.15rem)] font-black leading-[1.18] tracking-tight">
               <span className="hero-headline-dark">20年の現場統括力</span>
               <span className="hero-headline-sep"> × </span>
               <span className="hero-headline-red">八王子ロケーション</span>
