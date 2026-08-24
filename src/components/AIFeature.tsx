@@ -7,54 +7,54 @@ import { Reveal } from "@/components/Motion";
 
 const STILLS = [
   {
-    title: "現場ロケ × 企業PR",
-    tag: "On-Location PV",
+    title: "AI Previs（動くコンテ）",
+    tag: "Moving Storyboard",
     chip: "tag-chip--red",
     grad: "linear-gradient(145deg, #fff1f2 0%, #fce7f3 45%, #ede9fe 100%)",
   },
   {
-    title: "3D空間キャプチャ",
-    tag: "Spatial Capture",
+    title: "現場共有・企画可視化",
+    tag: "On-Set Alignment",
     chip: "tag-chip--cyan",
     grad: "linear-gradient(160deg, #ecfeff 0%, #e0f2fe 50%, #f0fdf4 100%)",
   },
   {
-    title: "生成AI合成",
-    tag: "AI Composite",
+    title: "AI VFX / バレ消し",
+    tag: "Clean Plate",
     chip: "tag-chip--purple",
     grad: "linear-gradient(125deg, #faf5ff 0%, #fdf2f8 40%, #fff7ed 100%)",
   },
 ] as const;
 
 const legacyPoints = [
-  { icon: Wallet, text: "スタジオ維持費・大規模セット組み立てによる固定費の上乗せ" },
-  { icon: Timer, text: "箱物スタジオに閉じた撮影スケジュールの制約" },
-  { icon: Clapperboard, text: "セット構築に時間とコストがかかり、表現の柔軟性が低下" },
+  { icon: Timer, text: "静止コンテだけでは現場共有に時間がかかり、企画承認が遅れる" },
+  { icon: Wallet, text: "ロケの映り込み修正を従来VFXに頼ると、ポスプロ費と納期が膨らむ" },
+  { icon: Clapperboard, text: "現場を知らないAI提案は、香盤・許可・予算と噛み合わず破綻しやすい" },
 ] as const;
 
 const aiPoints = [
-  { icon: Sparkles, text: "現地ロケ素材をベースに、生成AIでスケール感を拡張" },
-  { icon: Bot, text: "3D空間キャプチャとAI合成で、セット不要の大規模表現" },
-  { icon: Zap, text: "スタジオ固定費ゼロのロケーション特化型パイプライン" },
+  { icon: Sparkles, text: "AI Previsで動くコンテを光速化し、企画承認と現場共有を一気に前進" },
+  { icon: Bot, text: "電柱・看板などのロケバレをAI VFXで消去し、ポスプロコストを圧縮" },
+  { icon: Zap, text: "制作部が現場を熟知しているからこそ、破綻のない実用的なAIを提供" },
 ] as const;
 
 const features = [
   {
     icon: Sparkles,
-    title: "実写ロケ",
-    body: "クライアント現場や八王子・多摩のロケーションで撮影。リアルな質感と説得力を確保します。",
+    title: "AI Previs",
+    body: "ハリウッドでも導入が進む動く絵コンテ。企画の意図を映像で可視化し、監督・制作部・クライアントの合意形成を加速します。",
     tone: "tag-chip--red",
   },
   {
     icon: Bot,
-    title: "3D × AI合成",
-    body: "3D空間キャプチャと生成AIを融合。大がかりなセットを組まず、スタジオ以上のスケール感を創出。",
+    title: "AI VFX / バレ消し",
+    body: "ロケ撮影で映り込んだ不要物をAIで消去。現場の制約をポスプロで吸収し、納期と予算を最適化します。",
     tone: "tag-chip--purple",
   },
   {
     icon: Clapperboard,
-    title: "適正コスト",
-    body: "固定スタジオを持たない機動型プロダクションだから、映像品質へ予算を集中投下できます。",
+    title: "現場直結",
+    body: "20年の制作部統括があるから、香盤・許認可・安全管理と矛盾しないAI活用だけを現場に投入します。",
     tone: "tag-chip--lime",
   },
 ] as const;
@@ -71,17 +71,17 @@ export default function AIFeature() {
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
         <Reveal direction="left">
           <div className="flex flex-wrap gap-2">
-            <span className="lux-badge">ロケーション特化型パイプライン</span>
-            <span className="tag-chip tag-chip--yellow">3Dキャプチャ</span>
-            <span className="tag-chip tag-chip--purple">AI合成</span>
+            <span className="lux-badge">現場力をブーストする最新武器</span>
+            <span className="tag-chip tag-chip--yellow">AI Previs</span>
+            <span className="tag-chip tag-chip--purple">AI VFX</span>
           </div>
           <h2 className="mt-5 max-w-3xl font-display text-2xl font-bold leading-snug tracking-tight md:text-4xl">
-            実写ロケ × 3D空間キャプチャ ×
+            制作部の現場力に直結する
             <br />
-            <span className="mesh-text">生成AI合成</span>
+            <span className="mesh-text">AI Previs & AI VFX</span>
           </h2>
           <p className="mt-5 max-w-3xl leading-relaxed text-muted md:text-lg">
-            大がかりなセットや固定スタジオに頼らず、現地で撮影した素材に3D空間キャプチャと生成AIを融合。スタジオ撮影以上のスケール感を、適正コストと短納期で具現化する次世代制作プロダクションのクリエイティブパイプラインです。
+            AIは主役ではなく、20年の制作部統括を加速させる武器です。動く絵コンテで企画を可視化し、ロケ後のバレ消しでポスプロを圧縮。現場を知り尽くしているからこそ、破綻のない実用的なAIソリューションを提供します。
           </p>
         </Reveal>
 
@@ -108,8 +108,8 @@ export default function AIFeature() {
         <Reveal delay={0.08} className="mt-10">
           <div className="grid gap-5 lg:grid-cols-2">
             <article className="lux-card geo-frame p-6 md:p-8">
-              <p className="eyebrow">従来のスタジオセット制作</p>
-              <h3 className="mt-3 text-lg font-semibold">固定スタジオ型アプローチ</h3>
+              <p className="eyebrow">従来の企画〜ポスプロ</p>
+              <h3 className="mt-3 text-lg font-semibold">現場と分断されたアプローチ</h3>
               <ul className="mt-6 space-y-4">
                 {legacyPoints.map((p) => (
                   <li key={p.text} className="flex items-start gap-3 text-sm text-muted">
@@ -125,9 +125,9 @@ export default function AIFeature() {
             <article className="prism-panel relative p-6 md:p-8">
               <div className="relative z-[1]">
                 <InsightChart className="pointer-events-none absolute -right-2 top-0 h-20 w-44 opacity-30" />
-                <p className="eyebrow">ALMONDBAGGER Pipeline</p>
+                <p className="eyebrow">制作部直結型</p>
                 <h3 className="mt-3 text-lg font-semibold">
-                  <span className="mesh-text">ロケーション特化型 × AI</span>
+                  <span className="mesh-text">AI Previs × AI VFX</span>
                 </h3>
                 <ul className="mt-6 space-y-4">
                   {aiPoints.map((p) => (

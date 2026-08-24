@@ -8,20 +8,20 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "固定スタジオでの撮影は可能ですか？",
-    a: "当社は固定スタジオを保有していません。完全現場主義のロケーション特化型プロダクションとして、八王子・多摩のロケーションやクライアント現場へ直接駆けつけて撮影します。必要に応じて外部スタジオのレンタル手配も可能ですが、基本方針は「現場で撮る」ことです。",
+    q: "制作部・ロケ手配のみの依頼も可能ですか？",
+    a: "もちろん可能です。映画・ドラマ・CM・MVなど、規模を問わずロケ地選定・許認可申請から撮影当日の現場オペレーション、バックオフィス業務まで柔軟に対応いたします。",
+  },
+  {
+    q: "AI PrevisやAIバレ消しは、制作部業務とどのように連携できますか？",
+    a: "企画段階での動くコンテ作成や、ロケ撮影時にどうしても映り込んでしまう不要物のAI消去など、現場の判断とポスプロを直結させることで制作期間と予算を大幅に最適化できます。",
   },
   {
     q: "八王子エリアでのロケ撮影やフィルムコミッションの相談は可能ですか？",
-    a: "はい。八王子フィルムコミッションと連携し、山林・都市・工場・歴史施設などのロケ地提案、道路使用等の許認可申請、制作部としての現場進行まで一気通貫でサポートします。",
+    a: "はい。八王子フィルムコミッション公認連携のもと、ロケ地提案、道路使用等の許認可申請、制作部としての現場進行まで一気通貫でサポートします。",
   },
   {
     q: "動画制作の予算が限られている中小企業でも相談できますか？",
-    a: "もちろん可能です。固定スタジオを持たない機動型プロダクションのため、スタジオ維持費などの固定費を制作費に上乗せせず、映像のクオリティへ予算を集中投下できます。実写ロケと3D空間キャプチャ・生成AIを組み合わせた最適プランをご提案します。",
-  },
-  {
-    q: "実写ロケ × 3D空間キャプチャ × AI合成とはどのような制作手法ですか？",
-    a: "現地で撮影した実写素材をベースに、3D空間キャプチャや生成AIを融合させるロケーション特化型パイプラインです。大がかりなセットを組まなくても、スタジオ撮影以上のスケール感を、適正コストと短納期で実現できます。",
+    a: "可能です。映画・ドラマ制作部の進行管理を基盤に、必要な範囲だけ制作部支援・AI Previs・PR映像制作を組み合わせ、予算規模に合わせた最適プランをご提案します。",
   },
 ] as const;
 
@@ -41,18 +41,19 @@ export default function FAQ() {
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
         <Reveal direction="left">
           <div className="flex flex-wrap gap-2">
-            <span className="tag-chip tag-chip--red">完全現場主義</span>
+            <span className="tag-chip tag-chip--red">制作部</span>
             <span className="tag-chip tag-chip--cyan">FAQ</span>
-            <span className="tag-chip tag-chip--purple">ロケーション特化</span>
+            <span className="tag-chip tag-chip--purple">AI Previs / VFX</span>
           </div>
           <p className="eyebrow mt-5">よくあるご質問</p>
           <h2 className="mt-4 font-display text-2xl font-bold tracking-tight md:text-4xl">
-            ロケーション特化型
-            <span className="mesh-text">制作プロダクション</span>
+            制作部統括と
+            <span className="mesh-text">現場直結AI</span>
             について
           </h2>
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            完全現場主義、八王子ロケーション、適正コスト、実写×AI合成パイプラインに関するご質問にお答えします。
+            制作部・ロケ手配、八王子フィルムコミッション連携、AI Previs / AI
+            VFXに関するご質問にお答えします。
           </p>
         </Reveal>
 

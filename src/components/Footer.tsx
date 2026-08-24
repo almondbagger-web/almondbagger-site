@@ -18,13 +18,13 @@ export default function Footer() {
               <BrandLogo imageClassName="h-14 max-w-[260px] md:h-16 md:max-w-[300px]" />
             </a>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              20年の現場統括力 × 八王子ロケーション × 次世代AIパイプライン。
-              完全現場主義のロケーション特化型制作プロダクションとして、企画から運用まで誠実に伴走します。
+              20年の映画・ドラマ制作部統括力 × 次世代AIパイプライン。
+              現場の確固たる進行管理と最新技術で、映像制作を支え抜きます。
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
-              <span className="tag-chip tag-chip--red">On-Location</span>
-              <span className="tag-chip tag-chip--cyan">Production</span>
-              <span className="tag-chip tag-chip--purple">AI</span>
+              <span className="tag-chip tag-chip--red">制作部</span>
+              <span className="tag-chip tag-chip--cyan">バックオフィス</span>
+              <span className="tag-chip tag-chip--purple">AI Previs</span>
             </div>
             <p className="mt-4 text-sm font-medium text-foreground/80">
               {companyInfo.postal}

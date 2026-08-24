@@ -489,8 +489,8 @@ export const companyInfo = {
 /** ナビ・フッター共通。セクション id と必ず一致させる */
 export const navLinks = [
   { href: "#about", label: "強み" },
+  { href: "#services", label: "制作部" },
   { href: "#ai", label: "AI" },
-  { href: "#services", label: "サービス" },
   { href: "#works", label: "実績" },
   { href: "#price", label: "料金" },
   { href: "#faq", label: "FAQ" },

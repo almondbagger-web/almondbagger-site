@@ -42,14 +42,22 @@ export default function Hero() {
           <div className="hero-accent-line mt-6 max-w-md" aria-hidden="true" />
 
           <div className="mt-7 flex flex-wrap gap-2">
-            <span className="tag-chip tag-chip--red">完全現場主義</span>
-            <span className="tag-chip tag-chip--cyan">ロケーション特化</span>
-            <span className="tag-chip tag-chip--lime">適正コスト</span>
-            <span className="tag-chip tag-chip--purple">AIパイプライン</span>
+            <span className="tag-chip tag-chip--red">
+              映画・ドラマ制作部 現場統括20年
+            </span>
+            <span className="tag-chip tag-chip--cyan">
+              八王子フィルムコミッション公認連携
+            </span>
+            <span className="tag-chip tag-chip--lime">
+              予算・権利・許認可管理の徹底
+            </span>
+            <span className="tag-chip tag-chip--purple">
+              現場直結型 AI Previs & AI VFX
+            </span>
           </div>
 
           <p className="eyebrow mt-6 font-syne text-[0.65rem] font-extrabold tracking-[0.22em]">
-            Next-Gen Production · Hachioji · Field-First Team
+            Production Division · Back-Office · Hachioji FC
           </p>
 
           <h1 className="mt-6">
@@ -59,9 +67,7 @@ export default function Hero() {
               BAGGER
             </span>
             <span className="font-hero-ja mt-5 block text-[clamp(1.75rem,4.8vw,3.15rem)] font-black leading-[1.18] tracking-tight">
-              <span className="hero-headline-dark">20年の現場統括力</span>
-              <span className="hero-headline-sep"> × </span>
-              <span className="hero-headline-red">八王子ロケーション</span>
+              <span className="hero-headline-dark">20年の映画・ドラマ制作部統括力</span>
               <span className="hero-headline-sep"> × </span>
               <span className="hero-headline-ai">次世代AIパイプライン</span>
               <span className="hero-headline-sep">。</span>
@@ -69,11 +75,11 @@ export default function Hero() {
           </h1>
 
           <p className="font-hero-ja mt-5 max-w-xl text-[clamp(1rem,2.2vw,1.25rem)] font-black leading-[1.45] tracking-tight text-[#1e293b]">
-            スタジオの固定概念を超え、あらゆる現場と先端テクノロジーを統合する制作プロダクション。
+            現場の確固たる進行管理と最新技術で、映像制作を支え抜く。
           </p>
 
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted md:text-base">
-            固定スタジオを持たない機動型プロダクションだからこそ、スタジオ維持費を制作費に上乗せせず、映像のクオリティへ予算を集中投下。八王子フィルムコミッションと連携し、山林・都市・工場・歴史施設やクライアント現場へ直接駆けつける完全現場主義。実写ロケと3D空間キャプチャ・生成AIを融合し、セットを組まなくてもスタジオ撮影以上のスケール感を創出します。
+            商業映画・地上波連続ドラマの最前線で培った「制作部・バックオフィス統括（ロケ手配・許認可・香盤・予算管理）」の確かな現場力。八王子フィルムコミッションとの公認連携に加え、企画を光速で具現化する「AI Previs」やロケ撮影後の「AI VFX/バレ消し」まで。現場を熟知したプロフェッショナルが、作品の成功をワンストップで支えます。
           </p>
 
           <div className="mt-10 flex flex-wrap gap-3">
@@ -91,7 +97,7 @@ export default function Hero() {
             <Bounce>
               <a href="#ai" className="btn-secondary">
                 <Sparkles className="h-4 w-4 text-brand" />
-                AI制作
+                AI Previs / VFX
               </a>
             </Bounce>
           </div>
