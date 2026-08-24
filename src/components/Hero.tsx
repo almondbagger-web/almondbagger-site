@@ -59,19 +59,17 @@ export default function Hero() {
               BAGGER
             </span>
             <span className="font-hero-ja hero-headline-shadow mt-5 block text-[clamp(1.75rem,4.8vw,3.15rem)] font-black leading-[1.18] tracking-tight">
-              <span className="hero-title-gradient">20年の現場統括力</span>
-              <span className="text-foreground"> × </span>
-              <span className="text-foreground">八王子ロケーション</span>
-              <span className="text-foreground"> × </span>
-              <span className="hero-title-gradient">次世代AIパイプライン</span>
-              <span className="text-foreground">。</span>
+              <span className="hero-headline-dark">20年の現場統括力</span>
+              <span className="hero-headline-sep"> × </span>
+              <span className="hero-headline-red">八王子ロケーション</span>
+              <span className="hero-headline-sep"> × </span>
+              <span className="hero-headline-ai">次世代AIパイプライン</span>
+              <span className="hero-headline-sep">。</span>
             </span>
           </h1>
 
-          <p className="font-hero-ja mt-5 max-w-xl text-[clamp(1rem,2.2vw,1.25rem)] font-black leading-[1.45] tracking-tight">
-            <span className="hero-sub-gradient">
-              スタジオの固定概念を超え、あらゆる現場と先端テクノロジーを統合する制作プロダクション。
-            </span>
+          <p className="font-hero-ja mt-5 max-w-xl text-[clamp(1rem,2.2vw,1.25rem)] font-black leading-[1.45] tracking-tight text-[#1e293b]">
+            スタジオの固定概念を超え、あらゆる現場と先端テクノロジーを統合する制作プロダクション。
           </p>
 
           <p className="mt-6 max-w-xl text-sm leading-relaxed text-muted md:text-base">

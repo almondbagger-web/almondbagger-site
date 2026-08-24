@@ -41,7 +41,7 @@ export default function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-300 md:px-5",
+            "mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 md:px-5 md:py-3.5",
             scrolled
               ? "lux-glass border border-white/80 shadow-sm"
               : "border border-transparent bg-white/70 backdrop-blur-md",
@@ -54,8 +54,9 @@ export default function Navbar() {
               handleNav("#top");
             }}
             aria-label={`${companyInfo.shortName} トップへ`}
+            className="shrink-0"
           >
-            <BrandLogo priority imageClassName="h-10 max-w-[180px] md:h-12 md:max-w-[220px]" />
+            <BrandLogo priority />
           </a>
 
           <nav className="hidden items-center gap-0.5 lg:flex">

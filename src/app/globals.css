@@ -150,17 +150,38 @@ body {
   color: transparent;
 }
 
-.hero-sub-gradient {
+.hero-headline-dark {
+  background: linear-gradient(180deg, #0f172a 0%, #334155 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-headline-red {
+  background: linear-gradient(135deg, #dc2626 0%, #e11d48 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-headline-ai {
   background: linear-gradient(
-    105deg,
-    #0f172a 0%,
-    #1e293b 35%,
-    #991b1b 68%,
-    #dc2626 100%
+    115deg,
+    #7c3aed 0%,
+    #0891b2 52%,
+    #ef4444 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.hero-headline-sep {
+  color: #475569;
+}
+
+.hero-sub-solid {
+  color: #1e293b;
 }
 
 .hero-title-glow {
@@ -790,17 +811,17 @@ body {
 }
 
 .fast-arrow-graph__wave--1 {
-  animation: fag-wave-a 5.5s ease-in-out var(--fag-wave-delay, 0s) infinite
+  animation: fag-wave-a 2.6s ease-in-out var(--fag-wave-delay, 0s) infinite
     alternate;
 }
 
 .fast-arrow-graph__wave--2 {
-  animation: fag-wave-b 6.8s ease-in-out var(--fag-wave-delay, 0s) infinite
+  animation: fag-wave-b 3.2s ease-in-out var(--fag-wave-delay, 0s) infinite
     alternate;
 }
 
 .fast-arrow-graph__wave--3 {
-  animation: fag-wave-c 4.6s ease-in-out var(--fag-wave-delay, 0s) infinite
+  animation: fag-wave-c 2.2s ease-in-out var(--fag-wave-delay, 0s) infinite
     alternate;
 }
 
@@ -856,35 +877,35 @@ body {
 
 @keyframes fag-spark {
   0%,
-  68%,
+  62%,
   100% {
-    opacity: 0.08;
-    transform: scale(0.6);
+    opacity: 0.12;
+    transform: scale(0.55);
   }
-  76% {
+  72% {
     opacity: 1;
-    transform: scale(1.45);
+    transform: scale(2.1);
   }
-  84% {
-    opacity: 0.4;
-    transform: scale(1);
+  82% {
+    opacity: 0.55;
+    transform: scale(1.35);
   }
 }
 
 @keyframes fag-star {
   0%,
-  72%,
+  66%,
   100% {
     opacity: 0;
-    transform: scale(0.4) rotate(0deg);
+    transform: scale(0.5) rotate(0deg);
   }
-  78% {
-    opacity: 0.95;
-    transform: scale(1.2) rotate(18deg);
+  74% {
+    opacity: 1;
+    transform: scale(1.85) rotate(22deg);
   }
-  86% {
-    opacity: 0.25;
-    transform: scale(0.85) rotate(32deg);
+  84% {
+    opacity: 0.35;
+    transform: scale(1.15) rotate(36deg);
   }
 }
 
