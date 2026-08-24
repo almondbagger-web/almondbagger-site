@@ -1,47 +1,36 @@
-export type WorkCategory = "Movie & Drama" | "MV & CM" | "Vertical & SNS";
+export type WorkCategory = "映画" | "ドラマ・配信" | "MV・PR";
 
 export type WorkAspect = "landscape" | "portrait";
-
-export type WorkRole =
-  | "制作担当"
-  | "制作主任"
-  | "制作進行"
-  | "制作部"
-  | "制作応援"
-  | "現場応援"
-  | "車両管理"
-  | "撮影協力"
-  | "ロケ地手配"
-  | "撮影支援";
 
 export type Work = {
   id: string;
   title: string;
   client: string;
   category: WorkCategory;
-  roles: WorkRole[];
-  /** "/works/work-NN.jpg" または外部URL。未設定時はUIフォールバック */
+  /** 画面表示用の担当領域・作品属性バッジ */
+  tags: string[];
+  /** "/works/..." またはルート画像。未設定時はシネマプレースホルダー */
   thumbnail?: string;
   year: number;
   description: string;
   aspect: WorkAspect;
-  /** 公式サイト / 公式関連URL */
+  /** 公式サイト / 配信ページ */
   officialUrl?: string;
 };
 
 const t = (n: number) => `/works/work-${String(n).padStart(2, "0")}.jpg`;
 
 /**
- * 実績データ出典: https://almondbagger.com/?page_id=54 / ?cat=1
- * 動画埋め込みなし。サムネイル + officialUrl の外部リンク形式。
+ * 制作実績：映画・ドラマ・配信・MV
+ * Featured WATERMAN は UI 側で別カード表示。
  */
 export const works: Work[] = [
   {
     id: "w-waterman",
     title: "WATERMAN",
     client: "AKBB feat. Waterman",
-    category: "MV & CM",
-    roles: ["制作部", "ロケ地手配", "撮影協力"],
+    category: "MV・PR",
+    tags: ["制作部 / 現場統括", "ロケーション支援", "実写 ✕ AI映像制作協力"],
     thumbnail: "/mv-waterman.jpg",
     year: 2026,
     description:
@@ -50,315 +39,174 @@ export const works: Work[] = [
     officialUrl: "https://vt.tiktok.com/ZSVx84VPA/",
   },
   {
-    id: "w-01",
-    title: "憧れの作家は人間じゃありませんでした",
-    client: "Prime Video / ストームレーベルズ・共同テレビ",
-    category: "Movie & Drama",
-    roles: ["制作担当"],
-    thumbnail: t(1),
-    year: 2026,
-    description:
-      "Prime Video独占配信ドラマ。制作担当として参加。原作は澤村御影『憧れの作家は人間じゃありませんでした』（角川文庫／KADOKAWA）。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-02",
-    title: "晩餐ブルース Special",
-    client: "テレビ東京",
-    category: "Movie & Drama",
-    roles: ["制作担当", "制作進行"],
-    thumbnail: t(2),
-    year: 2026,
-    description:
-      "テレビ東京『晩餐ブルース Special』に制作担当・制作進行として参加。放送後はU-NEXT / TELASA 等で配信。",
-    aspect: "landscape",
-    officialUrl: "https://www.tv-tokyo.co.jp/bansanblues_sp/",
-  },
-  {
-    id: "w-03",
-    title: "MAGI -天正遣欧少年使節-",
-    client: "Netflix / FOD / U-NEXT",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(3),
-    year: 2025,
-    description:
-      "Netflix・FOD・U-NEXTで見放題配信。制作部として参加した配信作品。",
-    aspect: "landscape",
-    officialUrl: "https://www.magi-boys.com/index.html",
-  },
-  {
-    id: "w-04",
-    title: "浅草ラスボスおばあちゃん",
-    client: "東海テレビ",
-    category: "Movie & Drama",
-    roles: ["制作担当", "制作主任"],
-    thumbnail: t(4),
-    year: 2025,
-    description:
-      "東海テレビドラマ。制作担当・制作主任として現場進行をサポート。",
-    aspect: "landscape",
-    officialUrl: "https://www.tokai-tv.com/asakusa-lastboss/",
-  },
-  {
-    id: "w-05",
-    title: "アイシー～瞬間記憶捜査・柊班～",
-    client: "フジテレビ",
-    category: "Movie & Drama",
-    roles: ["制作担当", "制作主任"],
-    thumbnail: t(5),
-    year: 2025,
-    description:
-      "フジテレビドラマ。制作担当・制作主任として制作部体制で参加。",
-    aspect: "landscape",
-    officialUrl: "https://www.fujitv.co.jp/eyesee/",
-  },
-  {
-    id: "w-06",
-    title: "街並み照らすヤツら",
-    client: "日本テレビ",
-    category: "Movie & Drama",
-    roles: ["制作担当", "制作主任"],
-    thumbnail: t(6),
-    year: 2025,
-    description:
-      "日本テレビ土曜ドラマ。制作担当・制作主任として携わった参加作品。",
-    aspect: "landscape",
-    officialUrl: "https://www.ntv.co.jp/machinami-ntv/story/01.html",
-  },
-  {
-    id: "w-07",
-    title: "今日からヒットマン",
-    client: "テレビ朝日",
-    category: "Movie & Drama",
-    roles: ["制作応援"],
-    thumbnail: t(7),
-    year: 2025,
-    description:
-      "テレビ朝日金曜ナイトドラマ。制作応援として撮影現場をサポート。",
-    aspect: "landscape",
-    officialUrl: "https://www.tv-asahi.co.jp/hitman/story/0008/",
-  },
-  {
-    id: "w-08",
+    id: "w-jimenshi",
     title: "地面師たち",
     client: "Netflix",
-    category: "Movie & Drama",
-    roles: ["制作担当"],
+    category: "ドラマ・配信",
+    tags: ["Netflixオリジナル", "制作部 / 現場統括", "ロケーション支援"],
     thumbnail: t(8),
     year: 2024,
-    description:
-      "Netflix配信ドラマ。制作担当として参加した大規模配信作品。",
+    description: "社会現象となった話題作。大規模ロケ手配および現場進行を統括支援。",
     aspect: "landscape",
+    officialUrl: "https://www.netflix.com/jp/title/81574118",
   },
   {
-    id: "w-09",
-    title: "東京彼女 クズ男製造女子篇",
-    client: "東京彼女",
-    category: "Vertical & SNS",
-    roles: ["現場応援"],
-    thumbnail: t(9),
-    year: 2024,
-    description:
-      "2024年4月号ドラマ企画。現場応援として参加。公式はYouTubeで各話公開。",
-    aspect: "portrait",
-    officialUrl: "https://www.youtube.com/watch?v=nvsvDVqyy9U",
-  },
-  {
-    id: "w-10",
-    title: "STRANGERS",
-    client: "映画『STRANGERS』製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(10),
-    year: 2024,
-    description:
-      "映画『STRANGERS』に制作部として参加。ロケ進行・制作オペレーションをサポート。",
-    aspect: "landscape",
-    officialUrl: "https://strangers1102.studio.site",
-  },
-  {
-    id: "w-11",
-    title: "ロマンティック・キラー",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(11),
-    year: 2023,
-    description:
-      "公式WORKS掲載の映画参加作品。制作部・現場サポートとして携わった実績。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-12",
-    title: "釣られた埋蔵金",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(12),
-    year: 2023,
-    description:
-      "公式WORKS掲載の映画参加作品。制作部体制での現場支援実績。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-13",
-    title: "東京リベンジャーズ２ 血のハロウィン編 運命／決戦",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部", "車両管理"],
+    id: "w-tokrev",
+    title: "東京リベンジャーズ",
+    client: "ワーナー ブラザース ジャパン",
+    category: "映画",
+    tags: ["劇場公開映画", "制作部", "ロケーション統括"],
     thumbnail: t(13),
-    year: 2023,
+    year: 2021,
     description:
-      "大規模アクション映画の制作現場に参加。制作部としてスケジュールとオペレーションを支援。",
+      "大ヒットコミック実写映画。アクションシーンや大規模ロケーションの現場管理を完走。",
     aspect: "landscape",
+    officialUrl: "https://wwws.warnerbros.co.jp/tokyo-revengersjp/",
   },
   {
-    id: "w-14",
-    title: "四角の中の人たち",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(14),
-    year: 2023,
-    description:
-      "公式WORKS掲載の映画参加作品。制作進行・現場サポート領域で参加。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-15",
-    title: "そばかす",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(15),
-    year: 2023,
-    description:
-      "公式WORKS掲載の映画参加作品。制作部スタッフとして現場をサポート。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-16",
-    title: "COLD BLOOD 三つ巴の抗争",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(16),
-    year: 2022,
-    description:
-      "公式WORKS掲載の映画参加作品（シリーズ）。制作部として参加。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-17",
-    title: "COLD BLOOD 三つ巴の抗争２",
-    client: "映画製作委員会",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(17),
-    year: 2023,
-    description:
-      "公式WORKS掲載の映画参加作品（続編）。制作部として現場を支援。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-18",
-    title: "池井戸潤スペシャル「かばん屋の相続」",
-    client: "WOWOW",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(18),
-    year: 2024,
-    description:
-      "WOWOWスペシャルドラマ。制作部・現場サポートとして参加した実績。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-19",
-    title: "往生際の意味を知れ",
-    client: "MBS",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(19),
-    year: 2023,
-    description: "MBSドラマ。公式WORKS掲載の制作部参加作品。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-20",
+    id: "w-mitarai",
     title: "御手洗家、炎上する",
     client: "Netflix",
-    category: "Movie & Drama",
-    roles: ["制作部"],
+    category: "ドラマ・配信",
+    tags: ["Netflixオリジナル", "制作部 / バックオフィス"],
     thumbnail: t(20),
     year: 2023,
-    description: "Netflix配信ドラマ。制作部として参加した配信作品。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-21",
-    title: "それでも愛を誓いますか？",
-    client: "ABCテレビ",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(21),
-    year: 2023,
-    description: "ABCドラマ。公式WORKS掲載の制作部参加作品。",
-    aspect: "landscape",
-  },
-  {
-    id: "w-22",
-    title: "誰かが、見ている",
-    client: "Amazon Prime Video",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(22),
-    year: 2023,
     description:
-      "Amazonプライム配信ドラマ。制作部として現場サポートに参加。",
+      "復讐とサスペンスを描く話題のドラマシリーズ。撮影現場オペレーションを担当。",
     aspect: "landscape",
+    officialUrl:
+      "https://about.netflix.com/ja/news/burn-the-house-down-main-trailer-and-main-key-art-debut",
   },
   {
-    id: "w-23",
+    id: "w-alice",
     title: "厨房のありす",
     client: "日本テレビ",
-    category: "Movie & Drama",
-    roles: ["制作部"],
+    category: "ドラマ・配信",
+    tags: ["地上波連続ドラマ", "制作部 / 現場進行"],
     thumbnail: t(23),
     year: 2024,
-    description: "日本テレビドラマ。公式WORKS掲載の制作部参加作品。",
+    description: "ハートフル・ミステリードラマの現場統括・ロケーション調整。",
     aspect: "landscape",
+    officialUrl: "https://www.ntv.co.jp/alice/",
   },
   {
-    id: "w-24",
+    id: "w-mysteryday",
     title: "THE MYSTERY DAY",
     client: "日本テレビ（開局70年特別番組）",
-    category: "Movie & Drama",
-    roles: ["制作部"],
+    category: "ドラマ・配信",
+    tags: ["大型特別ドラマ", "制作部 / 現場統括"],
     thumbnail: t(24),
     year: 2023,
     description:
-      "日本テレビ開局70年特別番組。制作部として番組制作現場をサポート。",
+      "豪華キャストが集結した大型ミステリー特番の現場進行・バックオフィス管理。",
     aspect: "landscape",
+    officialUrl: "https://www.ntv.co.jp/mysteryday/",
   },
   {
-    id: "w-25",
-    title: "３年VR組",
-    client: "関西テレビ",
-    category: "Movie & Drama",
-    roles: ["制作部"],
-    thumbnail: t(25),
-    year: 2023,
-    description: "関西テレビドラマ。公式WORKS掲載の制作部参加作品。",
+    id: "w-kabanya",
+    title: "連続ドラマW 池井戸潤スペシャル『かばん屋の相続』",
+    client: "WOWOW",
+    category: "ドラマ・配信",
+    tags: ["WOWOWオリジナル", "制作部"],
+    thumbnail: t(18),
+    year: 2024,
+    description:
+      "池井戸潤原作の重厚なヒューマンドラマ。確かな制作部管理体制で現場を支え抜く。",
     aspect: "landscape",
+    officialUrl: "https://www.wowow.co.jp/drama/original/kabanyano-souzoku/",
+  },
+  {
+    id: "w-dareka",
+    title: "誰かが、見ている",
+    client: "Amazon Original",
+    category: "ドラマ・配信",
+    tags: ["Amazon Original", "制作部"],
+    thumbnail: t(22),
+    year: 2020,
+    description: "三谷幸喜×香取慎吾のシチュエーションコメディ作品の制作部支援。",
+    aspect: "landscape",
+    officialUrl: "https://www.amazon.co.jp/dp/B08H4XGHNZ",
+  },
+  {
+    id: "w-oujou",
+    title: "往生際の意味を知れ！",
+    client: "MBS / TBS ドラマイズム",
+    category: "ドラマ・配信",
+    tags: ["連続ドラマ", "制作部 / ロケーション"],
+    thumbnail: t(19),
+    year: 2023,
+    description: "クレイジーで過激な恋愛やり直しラブストーリーの現場統括。",
+    aspect: "landscape",
+    officialUrl: "https://www.mbs.jp/oujougiwa_no_imioshire/",
+  },
+  {
+    id: "w-soreai",
+    title: "それでも愛を誓いますか？",
+    client: "ABCテレビ・テレビ朝日",
+    category: "ドラマ・配信",
+    tags: ["地上波連続ドラマ", "制作部"],
+    thumbnail: t(21),
+    year: 2021,
+    description: "大人の切ない恋愛・結婚生活を描いた連続ドラマの制作進行。",
+    aspect: "landscape",
+    officialUrl: "https://www.asahi.co.jp/soreai/",
+  },
+  {
+    id: "w-sobakasu",
+    title: "そばかす",
+    client: "(NOT) HEROINE MOVIES",
+    category: "映画",
+    tags: ["劇場公開映画", "制作部 / ロケ支援"],
+    thumbnail: t(15),
+    year: 2023,
+    description:
+      "「(NOT) HEROINE MOVIES」プロジェクトの映画作品。丁寧なロケ地管理と現場統括。",
+    aspect: "landscape",
+    officialUrl: "https://notheroinemovies.com/sobakasu/",
+  },
+  {
+    id: "w-romakira",
+    title: "ロマンティック・キラー",
+    client: "東宝",
+    category: "映画",
+    tags: ["映画 / 配信", "制作部"],
+    thumbnail: t(11),
+    year: 2022,
+    description: "人気コミック実写化作品の現場制作支援。",
+    aspect: "landscape",
+    officialUrl: "https://romakira-movie.toho.co.jp/",
+  },
+  {
+    id: "w-akogare",
+    title: "憧れの作家は人間じゃありませんでした",
+    client: "Prime Video",
+    category: "ドラマ・配信",
+    tags: ["ドラマ / 配信", "制作部 / 現場管理"],
+    thumbnail: t(1),
+    year: 2026,
+    description: "独特な世界観を持つ話題作の制作部・現場管理を推進。",
+    aspect: "landscape",
+    officialUrl: "https://www.amazon.co.jp/gp/video/detail/B0GY2FX132",
+  },
+  {
+    id: "w-shikaku",
+    title: "四角の人たち",
+    client: "短編映像作品",
+    category: "映画",
+    tags: ["短編 / 映像作品", "制作部"],
+    thumbnail: t(14),
+    year: 2022,
+    description: "個性豊かなショートフィルム作品のロケーションおよび制作部協力。",
+    aspect: "landscape",
+    officialUrl: "https://373kaze.com/2022/10/27/post-22303/",
   },
 ];
 
 export const workCategories: Array<"すべて" | WorkCategory> = [
   "すべて",
-  "Movie & Drama",
-  "MV & CM",
-  "Vertical & SNS",
+  "映画",
+  "ドラマ・配信",
+  "MV・PR",
 ];
 
 export const heroSlides = [
