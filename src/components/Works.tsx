@@ -30,72 +30,220 @@ const credits = [
   { label: "Written & Composed by", value: "YUDAI" },
 ] as const;
 
-const roleTags = [
+const featuredRoleTags = [
   "制作部 / 現場統括",
   "ロケーション支援",
   "実写 ✕ AI映像制作協力",
 ] as const;
 
-const posterGradients = [
-  "from-[#1e1b4b] via-[#7f1d1d] to-[#0f172a]",
-  "from-[#0c4a6e] via-[#831843] to-[#1e1b4b]",
-  "from-[#14532d] via-[#7c2d12] to-[#0f172a]",
-  "from-[#312e81] via-[#be123c] to-[#164e63]",
-  "from-[#422006] via-[#9f1239] to-[#1e293b]",
-  "from-[#1e3a5f] via-[#6b21a8] to-[#0f172a]",
-] as const;
+/** 作品固有のシネマティック・ビジュアル（著作権フリーの純デザイン） */
+type CinemaTheme = {
+  gradient: string;
+  accent: string;
+  platform: string;
+  timecode: string;
+  english?: string;
+};
 
-function workInitials(title: string) {
-  const cleaned = title.replace(/[『』「」！!・\s]/g, "");
-  if (!cleaned) return "AB";
-  return cleaned.slice(0, 2);
+const CINEMA_THEMES: Record<string, CinemaTheme> = {
+  "w-jimenshi": {
+    gradient: "cinema-grad--jimenshi",
+    accent: "#c9a227",
+    platform: "Netflix",
+    timecode: "TC 01:14:27:08",
+    english: "THE LAND SWINDLERS",
+  },
+  "w-tokrev": {
+    gradient: "cinema-grad--tokrev",
+    accent: "#ef4444",
+    platform: "Warner Bros.",
+    timecode: "TC 00:42:11:03",
+    english: "TOKYO REVENGERS",
+  },
+  "w-mitarai": {
+    gradient: "cinema-grad--mitarai",
+    accent: "#e11d48",
+    platform: "Netflix",
+    timecode: "TC 00:58:03:19",
+    english: "BURN THE HOUSE DOWN",
+  },
+  "w-alice": {
+    gradient: "cinema-grad--alice",
+    accent: "#f97316",
+    platform: "日テレ",
+    timecode: "TC 00:21:44:12",
+    english: "ALICE IN WONDER KITCHEN",
+  },
+  "w-mysteryday": {
+    gradient: "cinema-grad--mystery",
+    accent: "#38bdf8",
+    platform: "日テレ",
+    timecode: "TC 02:03:55:01",
+    english: "THE MYSTERY DAY",
+  },
+  "w-kabanya": {
+    gradient: "cinema-grad--kabanya",
+    accent: "#a78bfa",
+    platform: "WOWOW",
+    timecode: "TC 01:07:18:22",
+    english: "THE BAG SHOP HEIR",
+  },
+  "w-dareka": {
+    gradient: "cinema-grad--dareka",
+    accent: "#22d3ee",
+    platform: "Amazon Prime",
+    timecode: "TC 00:33:09:07",
+    english: "SOMEONE IS WATCHING",
+  },
+  "w-oujou": {
+    gradient: "cinema-grad--oujou",
+    accent: "#f472b6",
+    platform: "TBS / MBS",
+    timecode: "TC 00:16:52:14",
+    english: "KNOW THE MEANING",
+  },
+  "w-soreai": {
+    gradient: "cinema-grad--soreai",
+    accent: "#fb7185",
+    platform: "テレビ朝日",
+    timecode: "TC 00:29:41:05",
+    english: "WILL YOU STILL VOW?",
+  },
+  "w-sobakasu": {
+    gradient: "cinema-grad--sobakasu",
+    accent: "#fbbf24",
+    platform: "劇場公開",
+    timecode: "TC 00:51:26:18",
+    english: "SOBAKASU",
+  },
+  "w-romakira": {
+    gradient: "cinema-grad--romakira",
+    accent: "#f43f5e",
+    platform: "東宝",
+    timecode: "TC 00:38:02:11",
+    english: "ROMANTIC KILLER",
+  },
+  "w-akogare": {
+    gradient: "cinema-grad--akogare",
+    accent: "#818cf8",
+    platform: "Prime Video",
+    timecode: "TC 00:47:33:09",
+    english: "MY IDOL IS NOT HUMAN",
+  },
+  "w-shikaku": {
+    gradient: "cinema-grad--shikaku",
+    accent: "#94a3b8",
+    platform: "短編映画",
+    timecode: "TC 00:12:08:00",
+    english: "THE SQUARE PEOPLE",
+  },
+};
+
+function roleTagsOf(work: Work) {
+  return work.tags.filter(
+    (tag) =>
+      !/Netflix|WOWOW|Amazon|地上波|連続ドラマ|劇場|大型特別|短編|映画 \/ 配信|ドラマ \/ 配信|オリジナル/i.test(
+        tag,
+      ) || /制作|ロケ|現場|バックオフィス|ロケーション/.test(tag),
+  );
 }
 
-function WorkPoster({ work, index }: { work: Work; index: number }) {
-  const src = work.thumbnail?.trim() || "";
-  const [failed, setFailed] = useState(!src);
-  const gradient = posterGradients[index % posterGradients.length];
-  const initials = workInitials(work.title);
+function CinemaFilmFrame({ work }: { work: Work }) {
+  const theme = CINEMA_THEMES[work.id] ?? {
+    gradient: "cinema-grad--default",
+    accent: "#ef4444",
+    platform: work.client,
+    timecode: `TC 00:${String(work.year % 100).padStart(2, "0")}:00:00`,
+  };
+
+  const displayTitle = work.title
+    .replace(/^連続ドラマW 池井戸潤スペシャル/, "")
+    .trim();
 
   return (
-    <div className="group relative aspect-[2.35/1] overflow-hidden bg-slate-900">
-      <div className="absolute inset-0 transition duration-700 group-hover:scale-105">
-        {!failed && src ? (
-          <Image
-            src={src}
-            alt={work.title}
-            fill
-            sizes="(max-width:768px) 100vw, 33vw"
-            className="object-cover"
-            onError={() => setFailed(true)}
-          />
-        ) : (
+    <div className="cinema-frame group/frame">
+      <div className="cinema-frame__sprocket cinema-frame__sprocket--left" aria-hidden />
+      <div className="cinema-frame__sprocket cinema-frame__sprocket--right" aria-hidden />
+
+      <div className={cn("cinema-frame__stage", theme.gradient)}>
+        <div className="cinema-frame__grain" aria-hidden />
+        <div className="cinema-frame__vignette" aria-hidden />
+
+        <div className="cinema-frame__meta">
+          <span className="cinema-frame__ratio">2.39:1</span>
+          <span className="cinema-frame__tc">{theme.timecode}</span>
+        </div>
+
+        <div className="cinema-frame__platform" style={{ borderColor: theme.accent }}>
+          {theme.platform}
+        </div>
+
+        <div className="cinema-frame__title-block">
+          {theme.english ? (
+            <p className="cinema-frame__english">{theme.english}</p>
+          ) : null}
+          <h3 className="cinema-frame__title">{displayTitle}</h3>
           <div
-            className={cn(
-              "film-poster-frame absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br p-6 text-center",
-              gradient,
-            )}
-          >
-            <span className="font-cinema text-5xl tracking-widest text-white/90 drop-shadow-lg md:text-6xl">
-              {initials}
-            </span>
-            <p className="mt-3 max-w-[90%] font-hero-ja text-sm font-black leading-snug text-white/95 md:text-base">
-              {work.title}
-            </p>
-            <p className="mt-2 text-[0.65rem] font-bold tracking-[0.2em] text-white/55">
-              FILM POSTER FRAME
-            </p>
-          </div>
-        )}
+            className="cinema-frame__rule"
+            style={{ background: theme.accent }}
+            aria-hidden
+          />
+          <p className="cinema-frame__year">{work.year}</p>
+        </div>
+
+        <div className="cinema-frame__footer-meta">
+          <span>SCOPE</span>
+          <span>ALMONDBAGGER PROD.</span>
+        </div>
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
-      <span className="absolute left-3 top-3 z-[2] rounded-full bg-white/90 px-2.5 py-1 text-[0.65rem] font-extrabold tracking-wide text-slate-900 shadow-sm">
-        {work.category}
-      </span>
-      <span className="absolute right-3 top-3 z-[2] rounded-full bg-black/55 px-2.5 py-1 text-[0.65rem] font-bold text-white backdrop-blur-sm">
-        {work.year}
-      </span>
     </div>
+  );
+}
+
+function CinemaWorkCard({ work, index }: { work: Work; index: number }) {
+  const roles = roleTagsOf(work);
+
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        delay: Math.min(index, 8) * 0.04,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="cinema-card group flex h-full flex-col overflow-hidden"
+    >
+      <CinemaFilmFrame work={work} />
+
+      <div className="flex flex-1 flex-col bg-white/95 p-5">
+        <p className="text-xs font-semibold tracking-wide text-muted">
+          {work.client}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {roles.map((tag) => (
+            <span key={tag} className="cinema-role-tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+          {work.description}
+        </p>
+        {work.officialUrl ? (
+          <a
+            href={work.officialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cinema-cta mt-5"
+          >
+            公式サイト / 配信で観る
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        ) : null}
+      </div>
+    </motion.article>
   );
 }
 
@@ -172,7 +320,7 @@ function FeaturedWaterman() {
                 担当領域
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {roleTags.map((tag) => (
+                {featuredRoleTags.map((tag) => (
                   <span key={tag} className="tag-chip tag-chip--red">
                     {tag}
                   </span>
@@ -225,9 +373,9 @@ export default function Works() {
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
         <Reveal direction="left">
           <div className="flex flex-wrap gap-2">
-            <span className="tag-chip tag-chip--red">Cinema</span>
-            <span className="tag-chip tag-chip--cyan">Drama</span>
-            <span className="tag-chip tag-chip--purple">Streaming</span>
+            <span className="tag-chip tag-chip--red">Cinema Frame</span>
+            <span className="tag-chip tag-chip--cyan">2.39:1</span>
+            <span className="tag-chip tag-chip--purple">Production Credit</span>
           </div>
           <p className="eyebrow mt-5">制作実績</p>
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -237,7 +385,7 @@ export default function Works() {
             <MiniGrowthSpark />
           </div>
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            Netflix・劇場映画・地上波ドラマなど、超大作・話題作の制作部実績をシネマティックカードでご覧ください。
+            著作権に配慮したシネマティック・フィルムフレームで、超大作・話題作の制作部実績をご覧ください。
           </p>
         </Reveal>
 
@@ -281,52 +429,7 @@ export default function Works() {
               </div>
             ) : (
               filtered.map((work, i) => (
-                <motion.article
-                  layout
-                  key={work.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: Math.min(i, 8) * 0.04,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="lux-card card-lift group flex h-full flex-col overflow-hidden"
-                >
-                  <WorkPoster work={work} index={i} />
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="font-hero-ja text-base font-black leading-snug tracking-tight md:text-lg">
-                      {work.title}
-                    </h3>
-                    <p className="mt-1 text-xs font-semibold text-muted">
-                      {work.client}
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-1.5">
-                      {work.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-brand/15 bg-brand/5 px-2.5 py-1 text-[0.65rem] font-bold text-brand"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                      {work.description}
-                    </p>
-                    {work.officialUrl ? (
-                      <a
-                        href={work.officialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary mt-5 !px-4 !py-2.5 text-xs"
-                      >
-                        公式サイト / 配信ページを見る
-                        <ArrowUpRight className="h-3.5 w-3.5" />
-                      </a>
-                    ) : null}
-                  </div>
-                </motion.article>
+                <CinemaWorkCard key={work.id} work={work} index={i} />
               ))
             )}
           </AnimatePresence>
