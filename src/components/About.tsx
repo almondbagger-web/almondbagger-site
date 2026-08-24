@@ -1,58 +1,74 @@
 "use client";
 
 import {
-  AlgoDotGrid,
-  AlgorithmNetwork,
-  BounceArrow,
-  FloatingEngagementBadges,
+  AuroraLayer,
+  GeometricGridLayer,
+  GrowthInsightCards,
   ImpactStatsStrip,
-  RisingArrowsDecor,
-  RisingNeonGraph,
-} from "@/components/GrowthVisuals";
+  InsightChart,
+} from "@/components/VelocityVisuals";
 import { Reveal } from "@/components/Motion";
 
 export default function About() {
   return (
     <section
       id="about"
-      className="algo-section relative scroll-mt-24 overflow-hidden bg-white py-20 md:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-surface/55 section-y"
     >
-      <AlgoDotGrid className="opacity-55" />
-      <AlgorithmNetwork className="opacity-25" />
-      <RisingArrowsDecor className="opacity-50" />
-      <FloatingEngagementBadges scope="hero" />
-      <div className="pointer-events-none absolute -left-16 top-24 h-56 w-56 rounded-full bg-rose/15 pop-blob" />
-      <div className="pointer-events-none absolute -right-10 bottom-10 h-64 w-64 rounded-full bg-cyan/15 pop-blob" />
-
+      <AuroraLayer className="opacity-40" />
+      <GeometricGridLayer className="opacity-50" />
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
-        <Reveal>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="neon-badge bg-rose text-white">
-              ALGORITHM / GROWTH
-            </span>
-            <BounceArrow size="md" />
+        <Reveal direction="left">
+          <div className="flex flex-wrap gap-2">
+            <span className="tag-chip tag-chip--red">On-Location</span>
+            <span className="tag-chip tag-chip--cyan">Field-First</span>
+            <span className="tag-chip tag-chip--lime">Production</span>
           </div>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold tracking-tight md:text-5xl">
-            SNSアルゴリズムに
-            <span className="text-cyan">刺さる映像</span>で、
-            <br />
-            数字を<span className="pop-gradient">爆発的に伸ばす。</span>
+          <p className="eyebrow mt-5">強み · 機動制作プロダクション</p>
+          <h2 className="mt-4 max-w-3xl font-display text-2xl font-bold leading-snug tracking-tight md:text-4xl">
+            20年の現場統括力と、
+            <span className="mesh-text">完全現場主義</span>
+            の制作管理。
           </h2>
-          <p className="mt-4 max-w-2xl text-muted">
-            視聴維持・拡散・急上昇を前提に設計。インプレッションとエンゲージメントが
-            右肩上がりに伸び続けるクリエイティブと運用を、制作現場から伴走します。
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+            固定スタジオに閉じこもらず、八王子・多摩のロケーションやクライアント現場へ直接駆けつける機動型プロダクション。現場で培った統括力とデータ分析を組み合わせ、企画から撮影・合成・配信まで一貫して伴走します。
           </p>
         </Reveal>
 
-        <div className="relative mt-10 overflow-hidden rounded-[2rem] bg-soft/80 p-5 ring-1 ring-rose/10 md:p-8">
-          <RisingNeonGraph
-            loop
-            className="pointer-events-none absolute inset-x-4 top-2 h-24 opacity-50 md:h-32"
-          />
-          <div className="relative">
-            <ImpactStatsStrip />
-          </div>
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
+          <Reveal delay={0.08} direction="left">
+            <div className="lux-card geo-frame relative overflow-hidden p-6 md:p-8">
+              <InsightChart className="pointer-events-none absolute inset-x-6 top-4 h-20 opacity-50 md:h-24" />
+              <div className="relative mt-14 md:mt-16">
+                <ImpactStatsStrip />
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={0.12} direction="right">
+            <div className="lux-card geo-frame flex h-full flex-col justify-center p-6 md:p-8">
+              <p className="eyebrow">制作体制</p>
+              <h3 className="mt-3 text-lg font-semibold">一貫したプロジェクト管理</h3>
+              <ul className="mt-5 space-y-3 text-sm text-muted">
+                <li className="flex gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                  企画段階からKPIとターゲットを明確化
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
+                  撮影・編集・配信まで進行を可視化
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
+                  公開後の数値をもとに改善サイクルを設計
+                </li>
+              </ul>
+            </div>
+          </Reveal>
         </div>
+
+        <Reveal direction="left" className="mt-12">
+          <GrowthInsightCards />
+        </Reveal>
       </div>
     </section>
   );

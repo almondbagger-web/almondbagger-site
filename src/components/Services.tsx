@@ -1,130 +1,146 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight, MapPinned } from "lucide-react";
 import {
-  AlgoDotGrid,
-  AlgorithmNetwork,
-  BounceArrow,
-  GrowthInsightCards,
-  RisingNeonGraph,
-} from "@/components/GrowthVisuals";
+  ArrowUpRight,
+  Camera,
+  MapPinned,
+  Sparkles,
+  Wallet,
+} from "lucide-react";
+import { GeometricGridLayer } from "@/components/VelocityVisuals";
 import { Bounce, Reveal } from "@/components/Motion";
-import { companyInfo, serviceCards } from "@/data/works";
+import { companyInfo } from "@/data/works";
+import { cn } from "@/lib/utils";
+
+const pillars = [
+  {
+    icon: Wallet,
+    title: "固定スタジオを持たないからこそ実現する適正コスト",
+    body: "スタジオ維持費などの余計な固定費を制作費に上乗せせず、映像のクオリティそのものに予算を集中投下。機動型プロダクションだからこそ、圧倒的なコストパフォーマンスを実現します。",
+    theme: "theme-card--red",
+    chip: "tag-chip--red",
+    label: "Cost Performance",
+    question: "なぜ他社より予算を映像品質に回せるのですか？",
+  },
+  {
+    icon: MapPinned,
+    title: "八王子・多摩を舞台にした完全現場主義",
+    body: "箱物のスタジオに閉じこもらず、八王子フィルムコミッションと連携したリアルなロケーション（山林、都市、工場、歴史施設）やクライアントの現場へ直接駆けつける、ロケーション特化型の機動制作チームです。",
+    theme: "theme-card--cyan",
+    chip: "tag-chip--cyan",
+    label: "On-Location",
+    question: "八王子でのロケや許認可は相談できますか？",
+  },
+  {
+    icon: Camera,
+    title: "実写ロケ × 3D空間キャプチャ・AI合成",
+    body: "大がかりなセットを組まなくても、現地で撮影した素材や3D空間キャプチャ・生成AIを融合させることで、スタジオ撮影以上のスケール感と表現力を創出します。",
+    theme: "theme-card--purple",
+    chip: "tag-chip--purple",
+    label: "Hybrid Pipeline",
+    question: "セットを組まずに大規模な映像表現は可能ですか？",
+  },
+  {
+    icon: Sparkles,
+    title: "20年の現場統括力 × 次世代AIパイプライン",
+    body: "商業映画・連続ドラマの制作部現場を熟知した統括力と、生成AI・3Dキャプチャを組み合わせたロケーション特化型パイプライン。企画から撮影・合成・納品までワンストップで伴走します。",
+    theme: "theme-card--lime",
+    chip: "tag-chip--lime",
+    label: "Production",
+    question: "どのような制作体制で進行しますか？",
+  },
+] as const;
 
 export default function Services() {
   return (
     <section
       id="services"
-      className="algo-section relative scroll-mt-24 overflow-hidden bg-white/90 py-20 md:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-transparent section-y"
     >
-      <AlgoDotGrid className="opacity-50" />
-      <AlgorithmNetwork className="opacity-20" />
-      <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-purple/12 pop-blob" />
+      <GeometricGridLayer className="opacity-45" />
 
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
-        <Reveal>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="neon-badge bg-cyan text-white">ABOUT / SERVICES</span>
-            <BounceArrow size="sm" />
+        <Reveal direction="left">
+          <div className="flex flex-wrap gap-2">
+            <span className="tag-chip tag-chip--red">完全現場主義</span>
+            <span className="tag-chip tag-chip--cyan">ロケーション特化</span>
+            <span className="tag-chip tag-chip--purple">AI合成</span>
+            <span className="tag-chip tag-chip--lime">適正コスト</span>
           </div>
-          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
-            エンタメを、
-            <span className="text-rose">カラフルに支える。</span>
+          <p className="eyebrow mt-5">強み · 機動制作プロダクション</p>
+          <h2 className="mt-4 font-display text-2xl font-bold tracking-tight md:text-4xl">
+            スタジオに依存しない
+            <span className="mesh-text">ロケーション特化型</span>
+            の制作力
           </h2>
-          <p className="mt-4 max-w-2xl text-muted">
-            映画・ドラマからMV・CM、YouTube・TikTok縦型ショートまで。
-            制作現場の進行を、ポップに、確実に。数字が伸びる映像まで伴走します。
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
+            固定スタジオを持たない機動型プロダクションとして、適正コスト・完全現場主義・実写×AI合成の3つの強みで、八王子・多摩から全国の現場へ。
           </p>
         </Reveal>
 
-        <Reveal delay={0.08} className="mt-10">
-          <Bounce>
-            <article className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-rose via-pink to-purple p-7 text-white shadow-[0_24px_60px_rgba(244,63,94,0.32)] md:p-10">
-              <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-yellow/30 blur-2xl" />
-              <div className="relative flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur">
-                  <MapPinned className="h-3.5 w-3.5" />
-                  最大の強み
-                </span>
-                <span className="rounded-full bg-yellow px-3 py-1 text-xs font-bold text-foreground">
-                  八王子FC 公式連携
-                </span>
-              </div>
-              <h3 className="relative mt-5 font-display text-2xl font-bold leading-snug md:text-4xl">
-                八王子FC連携による
-                <br />
-                圧倒的ロケーション対応力
-              </h3>
-              <p className="relative mt-5 max-w-4xl text-sm leading-relaxed text-white/90 md:text-base">
-                八王子フィルムコミッションとの緊密な連携体制により、都心からアクセスの良い八王子・多摩エリアの豊富なロケーション（大自然・街並み・公共施設・廃墟・空き家など）を迅速にご提案。複雑な道路使用許可や公共施設・私有地の撮影許可申請、地域密着のロケ弁・宿泊・車両手配までワンストップで全面サポート。他社には真似できないスピード感と調整力で、撮影現場を全力でバックアップします。
-              </p>
-              <a
-                href={companyInfo.partnerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-rose shadow-lg transition hover:scale-[1.03]"
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {pillars.map((pillar, i) => (
+            <Reveal key={pillar.title} delay={i * 0.06} direction="left">
+              <article
+                className={cn(
+                  "lux-card card-lift geo-frame flex h-full flex-col p-6 md:p-7",
+                  pillar.theme,
+                )}
               >
-                八王子フィルムコミッション公式サイトへ
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </article>
-          </Bounce>
-        </Reveal>
-
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {serviceCards.map((card, i) => (
-            <Reveal
-              key={card.title}
-              delay={i * 0.08}
-              direction={i % 2 === 0 ? "left" : "right"}
-            >
-              <Bounce>
-                <article
-                  className={`relative overflow-hidden rounded-3xl p-6 shadow-[0_18px_40px_rgba(31,18,53,0.08)] ${card.color}`}
-                >
-                  <motion.span
-                    className="absolute -right-4 -top-4 text-7xl font-black opacity-20"
-                    animate={{ rotate: [0, 8, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </motion.span>
-                  <p className="text-xs font-bold tracking-[0.2em] opacity-80">
-                    {card.en}
-                  </p>
-                  <h3 className="mt-3 font-display text-2xl font-bold">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed opacity-90">
-                    {card.body}
-                  </p>
-                </article>
-              </Bounce>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="theme-icon">
+                    <pillar.icon className="h-5 w-5" />
+                  </span>
+                  <span className={cn("tag-chip", pillar.chip)}>
+                    {pillar.label}
+                  </span>
+                </div>
+                <p className="mt-4 text-xs font-semibold tracking-wide text-muted">
+                  Q. {pillar.question}
+                </p>
+                <h3 className="mt-2 text-lg font-semibold leading-snug">
+                  {pillar.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                  {pillar.body}
+                </p>
+              </article>
             </Reveal>
           ))}
         </div>
 
-        <Reveal className="mt-16">
-          <div className="relative overflow-hidden rounded-[2rem] bg-soft/90 p-6 ring-1 ring-rose/10 md:p-10">
-            <AlgoDotGrid className="opacity-40" />
-            <RisingNeonGraph
-              loop
-              className="pointer-events-none absolute -right-4 top-2 h-28 w-56 opacity-65 md:h-36 md:w-72"
-            />
-            <div className="relative">
-              <span className="neon-badge bg-rose text-white">GROWTH / SNS</span>
-              <h3 className="mt-4 font-display text-2xl font-bold md:text-4xl">
-                届く映像、
-                <span className="text-cyan">伸びる数字。</span>
-              </h3>
-              <p className="mt-3 max-w-2xl text-sm text-muted md:text-base">
-                単なる映像制作にとどまらず、視聴維持・インプレッション・エンゲージメントを伸ばす制作体制。
-                マーケティング成果につながる縦型ショート／プロモーションを設計します。
-              </p>
-              <GrowthInsightCards />
-            </div>
-          </div>
+        <Reveal delay={0.1} direction="left" className="mt-12">
+          <Bounce>
+            <article className="prism-panel relative overflow-hidden p-7 md:p-10">
+              <div className="relative z-[1]">
+                <div className="relative flex flex-wrap items-center gap-3">
+                  <span className="inline-flex items-center gap-2 lux-badge">
+                    <MapPinned className="h-3.5 w-3.5" />
+                    八王子フィルムコミッション連携
+                  </span>
+                  <span className="tag-chip tag-chip--lime">
+                    ロケーション特化型パイプライン
+                  </span>
+                </div>
+                <h3 className="relative mt-5 text-xl font-semibold md:text-2xl">
+                  八王子のロケ地から許認可・現場進行まで、完全現場主義で伴走
+                </h3>
+                <p className="relative mt-4 max-w-3xl text-sm leading-relaxed text-muted md:text-base">
+                  {companyInfo.partner}
+                  との連携実績を活かし、映画・ドラマ・CM撮影のロケーション提案、許可申請、制作部としての現場進行までを一気通貫でサポート。スタジオに閉じこもらず、八王子・多摩のリアルな舞台で撮影を進めます。
+                </p>
+                <a
+                  href={companyInfo.partnerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline"
+                >
+                  {companyInfo.partner} 公式サイト
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </article>
+          </Bounce>
         </Reveal>
       </div>
     </section>

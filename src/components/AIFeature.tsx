@@ -1,35 +1,61 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Bot, Clapperboard, Sparkles, Zap } from "lucide-react";
-import {
-  AlgoDotGrid,
-  BounceArrow,
-  RisingNeonGraph,
-} from "@/components/GrowthVisuals";
-import { Bounce, Reveal } from "@/components/Motion";
+import { Bot, Clapperboard, Sparkles, Timer, Wallet, Zap } from "lucide-react";
+import { AuroraLayer, GeometricGridLayer, InsightChart } from "@/components/VelocityVisuals";
+/* AuroraLayer = prismatic glow backdrop */
+import { Reveal } from "@/components/Motion";
+
+const STILLS = [
+  {
+    title: "現場ロケ × 企業PR",
+    tag: "On-Location PV",
+    chip: "tag-chip--red",
+    grad: "linear-gradient(145deg, #fff1f2 0%, #fce7f3 45%, #ede9fe 100%)",
+  },
+  {
+    title: "3D空間キャプチャ",
+    tag: "Spatial Capture",
+    chip: "tag-chip--cyan",
+    grad: "linear-gradient(160deg, #ecfeff 0%, #e0f2fe 50%, #f0fdf4 100%)",
+  },
+  {
+    title: "生成AI合成",
+    tag: "AI Composite",
+    chip: "tag-chip--purple",
+    grad: "linear-gradient(125deg, #faf5ff 0%, #fdf2f8 40%, #fff7ed 100%)",
+  },
+] as const;
+
+const legacyPoints = [
+  { icon: Wallet, text: "スタジオ維持費・大規模セット組み立てによる固定費の上乗せ" },
+  { icon: Timer, text: "箱物スタジオに閉じた撮影スケジュールの制約" },
+  { icon: Clapperboard, text: "セット構築に時間とコストがかかり、表現の柔軟性が低下" },
+] as const;
+
+const aiPoints = [
+  { icon: Sparkles, text: "現地ロケ素材をベースに、生成AIでスケール感を拡張" },
+  { icon: Bot, text: "3D空間キャプチャとAI合成で、セット不要の大規模表現" },
+  { icon: Zap, text: "スタジオ固定費ゼロのロケーション特化型パイプライン" },
+] as const;
 
 const features = [
   {
     icon: Sparkles,
-    title: "ハイエンドAIビジュアル生成",
-    body: "実写と見紛う高精細な映像世界をAIで即座に具現化。クオリティを落とさず、表現の幅を一気に広げます。",
-    accent: "from-rose to-purple",
-    badge: "✨ Visual",
+    title: "実写ロケ",
+    body: "クライアント現場や八王子・多摩のロケーションで撮影。リアルな質感と説得力を確保します。",
+    tone: "tag-chip--red",
   },
   {
-    icon: Zap,
-    title: "アルゴリズム最適化された高速PDCA",
-    body: "視聴維持率を高めるAIクリエイティブを最短納期で量産。伸びる仮説を、スピードで検証します。",
-    accent: "from-cyan to-lime",
-    badge: "🚀 Speed",
+    icon: Bot,
+    title: "3D × AI合成",
+    body: "3D空間キャプチャと生成AIを融合。大がかりなセットを組まず、スタジオ以上のスケール感を創出。",
+    tone: "tag-chip--purple",
   },
   {
     icon: Clapperboard,
-    title: "次世代の映像体験",
-    body: "従来の制作コスト・期間の常識を覆す最高峰の表現力。プロの現場知見と生成AIを融合した新体制です。",
-    accent: "from-purple to-rose",
-    badge: "🎬 Next-Gen",
+    title: "適正コスト",
+    body: "固定スタジオを持たない機動型プロダクションだから、映像品質へ予算を集中投下できます。",
+    tone: "tag-chip--lime",
   },
 ] as const;
 
@@ -37,99 +63,100 @@ export default function AIFeature() {
   return (
     <section
       id="ai"
-      className="algo-section relative scroll-mt-24 overflow-hidden bg-white py-20 md:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-surface/55 section-y"
     >
-      <AlgoDotGrid className="opacity-40" />
-      <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-purple/20 pop-blob" />
-      <div className="pointer-events-none absolute -right-8 bottom-0 h-64 w-64 rounded-full bg-cyan/20 pop-blob" />
+      <AuroraLayer className="opacity-60" />
+      <GeometricGridLayer className="opacity-40" />
 
       <div className="relative z-10 mx-auto max-w-6xl section-pad">
-        <Reveal>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="neon-badge ai-neon-badge bg-gradient-to-r from-purple via-rose to-cyan text-white">
-              ✨ Next-Gen AI Production
-            </span>
-            <span className="neon-badge bg-foreground text-white">
-              🤖 Prompt & Cine Magic
-            </span>
-            <BounceArrow size="sm" />
+        <Reveal direction="left">
+          <div className="flex flex-wrap gap-2">
+            <span className="lux-badge">ロケーション特化型パイプライン</span>
+            <span className="tag-chip tag-chip--yellow">3Dキャプチャ</span>
+            <span className="tag-chip tag-chip--purple">AI合成</span>
           </div>
-
-          <p className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-purple">
-            TOP-TIER AI CREATOR JOINED
-          </p>
-          <h2 className="mt-3 max-w-4xl font-display text-3xl font-bold tracking-tight md:text-5xl">
-            一流AIクリエイター参画。
+          <h2 className="mt-5 max-w-3xl font-display text-2xl font-bold leading-snug tracking-tight md:text-4xl">
+            実写ロケ × 3D空間キャプチャ ×
             <br />
-            <span className="pop-gradient">他社を圧倒する映像美とスピード。</span>
+            <span className="mesh-text">生成AI合成</span>
           </h2>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted md:text-lg">
-            最新生成AI × 映像制作のプロ。一流AIクリエイターの参画により、
-            他社に負けない圧倒的クオリティと制作スピードを実現。
+          <p className="mt-5 max-w-3xl leading-relaxed text-muted md:text-lg">
+            大がかりなセットや固定スタジオに頼らず、現地で撮影した素材に3D空間キャプチャと生成AIを融合。スタジオ撮影以上のスケール感を、適正コストと短納期で具現化する次世代制作プロダクションのクリエイティブパイプラインです。
           </p>
         </Reveal>
 
+        <Reveal delay={0.06} direction="left" className="mt-10">
+          <div className="grid gap-4 md:grid-cols-3">
+            {STILLS.map((s) => (
+              <article
+                key={s.title}
+                className="lux-card card-lift group relative aspect-[2.35/1] overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 transition duration-500 group-hover:scale-105"
+                  style={{ background: s.grad }}
+                />
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <span className={`tag-chip ${s.chip}`}>{s.tag}</span>
+                  <p className="mt-2 text-sm font-semibold">{s.title}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Reveal>
+
         <Reveal delay={0.08} className="mt-10">
-          <Bounce>
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-foreground via-[#2a1848] to-[#0e3a4a] p-7 text-white shadow-[0_28px_70px_rgba(139,92,246,0.35)] md:p-10">
-              <RisingNeonGraph
-                loop
-                className="pointer-events-none absolute -right-4 top-4 h-28 w-56 opacity-60 md:h-40 md:w-80"
-              />
-              <div className="pointer-events-none absolute -left-10 -bottom-10 h-40 w-40 rounded-full bg-rose/40 blur-3xl" />
-              <div className="relative flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-bold backdrop-blur">
-                  <Bot className="h-3.5 w-3.5" />
-                  AI Creator Unit
-                </span>
-                <span className="rounded-full bg-lime px-3 py-1 text-xs font-bold text-foreground">
-                  NOW JOINED
-                </span>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <article className="lux-card geo-frame p-6 md:p-8">
+              <p className="eyebrow">従来のスタジオセット制作</p>
+              <h3 className="mt-3 text-lg font-semibold">固定スタジオ型アプローチ</h3>
+              <ul className="mt-6 space-y-4">
+                {legacyPoints.map((p) => (
+                  <li key={p.text} className="flex items-start gap-3 text-sm text-muted">
+                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-2">
+                      <p.icon className="h-3.5 w-3.5 text-slate" />
+                    </span>
+                    {p.text}
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="prism-panel relative p-6 md:p-8">
+              <div className="relative z-[1]">
+                <InsightChart className="pointer-events-none absolute -right-2 top-0 h-20 w-44 opacity-30" />
+                <p className="eyebrow">ALMONDBAGGER Pipeline</p>
+                <h3 className="mt-3 text-lg font-semibold">
+                  <span className="mesh-text">ロケーション特化型 × AI</span>
+                </h3>
+                <ul className="mt-6 space-y-4">
+                  {aiPoints.map((p) => (
+                    <li
+                      key={p.text}
+                      className="flex items-start gap-3 text-sm text-foreground/85"
+                    >
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand/10">
+                        <p.icon className="h-3.5 w-3.5 text-brand" />
+                      </span>
+                      {p.text}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="relative mt-5 max-w-2xl font-display text-2xl font-bold leading-snug md:text-3xl">
-                プロの演出眼 × 生成AIの瞬発力。
-                <br />
-                届く映像を、これまで以上の速さで。
-              </h3>
-              <p className="relative mt-4 max-w-2xl text-sm leading-relaxed text-white/85 md:text-base">
-                企画・絵作り・縦型最適化まで一気通貫。アルゴリズムに刺さるフック設計と、
-                ハイエンドなビジュアル生成を同時に回せるのが新体制の強みです。
-              </p>
-            </div>
-          </Bounce>
+            </article>
+          </div>
         </Reveal>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {features.map((f, i) => (
-            <Reveal key={f.title} delay={0.1 + i * 0.08}>
-              <Bounce>
-                <article className="relative h-full overflow-hidden rounded-3xl bg-white p-6 shadow-[0_16px_40px_rgba(31,18,53,0.08)] ring-1 ring-black/5">
-                  <div
-                    className={`inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${f.accent} px-3 py-1 text-[11px] font-black text-white`}
-                  >
-                    <f.icon className="h-3.5 w-3.5" />
-                    {f.badge}
-                  </div>
-                  <h3 className="mt-4 font-display text-xl font-bold text-foreground">
-                    {f.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{f.body}</p>
-                  <motion.div
-                    className="mt-5 h-1.5 overflow-hidden rounded-full bg-soft"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                  >
-                    <motion.div
-                      className={`h-full rounded-full bg-gradient-to-r ${f.accent}`}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                  </motion.div>
-                </article>
-              </Bounce>
+            <Reveal key={f.title} delay={0.06 + i * 0.05} direction="left">
+              <article className="lux-card card-lift h-full p-6">
+                <span className={`tag-chip ${f.tone}`}>{f.title}</span>
+                <span className="mt-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
+                  <f.icon className="h-4 w-4" />
+                </span>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{f.body}</p>
+              </article>
             </Reveal>
           ))}
         </div>

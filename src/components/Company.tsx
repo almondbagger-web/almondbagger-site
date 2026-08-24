@@ -1,6 +1,10 @@
 "use client";
 
 import { ArrowUpRight, MapPin } from "lucide-react";
+import {
+  AuroraLayer,
+  GeometricGridLayer,
+} from "@/components/VelocityVisuals";
 import { Reveal } from "@/components/Motion";
 import { companyInfo } from "@/data/works";
 
@@ -40,32 +44,34 @@ export default function Company() {
   return (
     <section
       id="company"
-      className="relative scroll-mt-24 overflow-hidden bg-soft py-20 md:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-surface/55 section-y"
     >
-      <div className="pointer-events-none absolute right-10 top-10 h-56 w-56 rounded-full bg-cyan/25 pop-blob" />
-      <div className="relative mx-auto max-w-6xl section-pad">
-        <Reveal>
-          <span className="neon-badge bg-lime text-white">COMPANY</span>
-          <h2 className="mt-4 font-display text-3xl font-bold md:text-5xl">
-            会社概要
+      <AuroraLayer className="opacity-35" />
+      <GeometricGridLayer className="opacity-40" />
+
+      <div className="relative z-10 mx-auto max-w-6xl section-pad">
+        <Reveal direction="left">
+          <span className="lux-badge">Company</span>
+          <h2 className="mt-5 font-display text-2xl font-bold tracking-tight md:text-4xl">
+            <span className="mesh-text">会社概要</span>
           </h2>
-          <p className="mt-3 max-w-2xl text-muted">
+          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
             八王子本社を拠点に、関東〜全国の現場へ。
             八王子フィルムコミッションとの公式連携で、ロケ地提案から許可申請までを加速します。
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal direction="left">
-            <div className="overflow-hidden rounded-3xl bg-white shadow-[0_18px_40px_rgba(31,18,53,0.08)] ring-1 ring-black/5">
+            <div className="overflow-hidden lux-card geo-frame">
               <table className="w-full text-left text-sm">
                 <tbody>
                   {rows.map((row, i) => (
                     <tr
                       key={row.label}
-                      className={i % 2 === 0 ? "bg-white" : "bg-soft/60"}
+                      className={i % 2 === 0 ? "bg-white/50" : "bg-surface/80"}
                     >
-                      <th className="w-[32%] px-4 py-4 align-top font-bold text-pink md:px-5">
+                      <th className="w-[32%] px-4 py-4 align-top font-bold tracking-wide text-brand md:px-5">
                         {row.label}
                       </th>
                       <td className="px-4 py-4 leading-relaxed text-foreground md:px-5">
@@ -78,7 +84,7 @@ export default function Company() {
                                   rel: "noopener noreferrer",
                                 }
                               : {})}
-                            className="inline-flex items-center gap-1 font-medium text-cyan underline-offset-2 hover:underline"
+                            className="inline-flex items-center gap-1 font-medium text-brand underline-offset-2 hover:underline"
                           >
                             {row.value}
                             {row.external ? (
@@ -97,12 +103,12 @@ export default function Company() {
           </Reveal>
 
           <Reveal direction="right">
-            <div className="overflow-hidden rounded-3xl bg-white shadow-[0_18px_40px_rgba(31,18,53,0.08)] ring-1 ring-black/5">
-              <div className="flex items-center gap-2 border-b border-black/5 px-5 py-4">
-                <MapPin className="h-4 w-4 text-rose" />
-                <p className="text-sm font-bold">八王子本社マップ</p>
+            <div className="overflow-hidden lux-card card-lift geo-frame">
+              <div className="flex items-center gap-2 border-b border-border/70 px-5 py-4">
+                <MapPin className="h-4 w-4 text-brand" />
+                <p className="text-sm font-bold tracking-wide">八王子本社マップ</p>
               </div>
-              <div className="aspect-[4/3] w-full bg-soft">
+              <div className="aspect-[4/3] w-full bg-surface">
                 <iframe
                   title={`${companyInfo.shortName} 八王子本社`}
                   src={companyInfo.mapEmbed}
@@ -121,7 +127,7 @@ export default function Company() {
                   href={companyInfo.partnerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-pink hover:underline"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-brand hover:underline"
                 >
                   提携：{companyInfo.partner}
                   <ArrowUpRight className="h-4 w-4" />

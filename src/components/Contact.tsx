@@ -2,6 +2,10 @@
 
 import { type FormEvent, useState } from "react";
 import { CheckCircle2, Clock, Mail, Phone, Send } from "lucide-react";
+import {
+  AuroraLayer,
+  GeometricGridLayer,
+} from "@/components/VelocityVisuals";
 import { Bounce, Reveal } from "@/components/Motion";
 import { companyInfo, priceDisclaimer } from "@/data/works";
 import { cn } from "@/lib/utils";
@@ -38,7 +42,7 @@ const planOptions = [
 ] as const;
 
 const fieldClass =
-  "w-full rounded-2xl border border-black/8 bg-white px-4 py-3.5 text-foreground outline-none transition placeholder:text-muted/60 focus:border-pink focus:ring-4 focus:ring-pink/15";
+  "field-focus w-full rounded-2xl border border-border/80 bg-white/80 px-4 py-3.5 text-foreground outline-none backdrop-blur transition placeholder:text-muted/60";
 
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initial);
@@ -52,17 +56,24 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden bg-white py-20 md:py-28"
+      className="relative scroll-mt-24 overflow-hidden bg-transparent section-y"
     >
-      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-rose/20 pop-blob" />
-      <div className="relative mx-auto max-w-6xl section-pad">
-        <Reveal>
-          <span className="neon-badge bg-rose text-white">CONTACT</span>
-          <h2 className="mt-4 font-display text-3xl font-bold md:text-5xl">
-            24時間緊急対応
-            <span className="text-pink">フォーム</span>
+      <AuroraLayer className="opacity-40" />
+      <GeometricGridLayer className="opacity-30" />
+
+      <div className="relative z-10 mx-auto max-w-6xl section-pad">
+        <Reveal direction="left">
+          <div className="flex flex-wrap gap-2">
+            <span className="tag-chip tag-chip--red">24H</span>
+            <span className="tag-chip tag-chip--cyan">Standby</span>
+            <span className="tag-chip tag-chip--pink">Urgent</span>
+          </div>
+          <p className="eyebrow mt-5">お問い合わせ</p>
+          <h2 className="mt-4 font-display text-2xl font-bold tracking-tight md:text-4xl">
+            24時間
+            <span className="mesh-text">緊急対応</span>
           </h2>
-          <p className="mt-3 max-w-xl text-muted">
+          <p className="mt-5 max-w-xl leading-relaxed text-muted">
             撮影変更・許可・ロケトラブルに加え、低バジェット〜大規模の制作ご相談も歓迎です。
             参考料金は目安のため、まずは応相談でお気軽にどうぞ。
           </p>
@@ -70,12 +81,12 @@ export default function Contact() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal direction="left" className="space-y-4">
-            <div className="rounded-3xl bg-gradient-to-br from-rose via-pink to-purple p-6 text-white shadow-[0_20px_50px_rgba(236,72,153,0.3)]">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
+            <div className="relative overflow-hidden rounded-[1.25rem] mesh-bg p-6 text-white md:p-8">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur">
                 <Clock className="h-3.5 w-3.5" />
                 24H STANDBY
               </div>
-              <h3 className="font-display text-2xl font-bold">
+              <h3 className="font-display text-2xl font-bold tracking-wide">
                 緊急時も、予算相談も。
               </h3>
               <p className="mt-3 text-sm text-white/85">
@@ -84,31 +95,31 @@ export default function Contact() {
               <div className="mt-6 space-y-3 text-sm">
                 <a
                   href={companyInfo.phoneHref}
-                  className="flex items-center gap-3 rounded-2xl bg-white/15 px-4 py-3 backdrop-blur"
+                  className="flex items-center gap-3 rounded-2xl bg-white/15 px-4 py-3 backdrop-blur transition hover:bg-white/25"
                 >
                   <Phone className="h-4 w-4" />
                   {companyInfo.phone}
                 </a>
                 <a
                   href={companyInfo.emailHref}
-                  className="flex items-center gap-3 rounded-2xl bg-white/15 px-4 py-3 backdrop-blur"
+                  className="flex items-center gap-3 rounded-2xl bg-white/15 px-4 py-3 backdrop-blur transition hover:bg-white/25"
                 >
                   <Mail className="h-4 w-4" />
                   {companyInfo.email}
                 </a>
               </div>
             </div>
-            <div className="rounded-2xl bg-yellow/25 px-4 py-3 text-xs font-bold leading-relaxed text-foreground ring-1 ring-yellow/50">
+            <div className="lux-glass rounded-2xl px-4 py-3 text-xs font-bold leading-relaxed text-foreground/80">
               {priceDisclaimer}
             </div>
           </Reveal>
 
           <Reveal direction="right">
-            <div className="rounded-3xl bg-soft p-6 ring-1 ring-pink/10 md:p-8">
+            <div className="lux-card p-6 md:p-8">
               {submitted ? (
                 <div className="flex min-h-[340px] flex-col items-center justify-center text-center">
                   <CheckCircle2 className="mb-4 h-12 w-12 text-lime" />
-                  <h3 className="font-display text-2xl font-bold">
+                  <h3 className="font-display text-2xl font-bold tracking-wide">
                     送信を受け付けました
                   </h3>
                   <p className="mt-3 max-w-md text-sm text-muted">
@@ -120,7 +131,7 @@ export default function Contact() {
                       setSubmitted(false);
                       setForm(initial);
                     }}
-                    className="mt-6 rounded-full bg-pink px-5 py-2.5 text-sm font-bold text-white"
+                    className="btn-secondary mt-6"
                   >
                     フォームに戻る
                   </button>
@@ -129,7 +140,7 @@ export default function Contact() {
                 <form onSubmit={onSubmit} className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2">
                     <label className="block space-y-2">
-                      <span className="text-xs font-bold text-muted">
+                      <span className="text-xs font-bold tracking-wide text-muted">
                         お名前 <span className="text-pink">*</span>
                       </span>
                       <input
@@ -143,7 +154,9 @@ export default function Contact() {
                       />
                     </label>
                     <label className="block space-y-2">
-                      <span className="text-xs font-bold text-muted">会社名</span>
+                      <span className="text-xs font-bold tracking-wide text-muted">
+                        会社名
+                      </span>
                       <input
                         className={fieldClass}
                         value={form.company}
@@ -156,7 +169,7 @@ export default function Contact() {
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
                     <label className="block space-y-2">
-                      <span className="text-xs font-bold text-muted">
+                      <span className="text-xs font-bold tracking-wide text-muted">
                         メール <span className="text-pink">*</span>
                       </span>
                       <input
@@ -171,7 +184,7 @@ export default function Contact() {
                       />
                     </label>
                     <label className="block space-y-2">
-                      <span className="text-xs font-bold text-muted">
+                      <span className="text-xs font-bold tracking-wide text-muted">
                         電話 <span className="text-pink">*</span>
                       </span>
                       <input
@@ -187,7 +200,7 @@ export default function Contact() {
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
                     <label className="block space-y-2">
-                      <span className="text-xs font-bold text-muted">
+                      <span className="text-xs font-bold tracking-wide text-muted">
                         ご希望プラン
                       </span>
                       <select
@@ -205,7 +218,7 @@ export default function Contact() {
                       </select>
                     </label>
                     <label className="block space-y-2">
-                      <span className="text-xs font-bold text-muted">
+                      <span className="text-xs font-bold tracking-wide text-muted">
                         ご予算感（任意）
                       </span>
                       <input
@@ -219,7 +232,9 @@ export default function Contact() {
                     </label>
                   </div>
                   <div className="space-y-2">
-                    <span className="text-xs font-bold text-muted">緊急度</span>
+                    <span className="text-xs font-bold tracking-wide text-muted">
+                      緊急度
+                    </span>
                     <div className="grid grid-cols-2 gap-2">
                       {(["通常", "緊急（24H）"] as const).map((level) => (
                         <Bounce key={level}>
@@ -232,9 +247,9 @@ export default function Contact() {
                               "w-full rounded-2xl px-3 py-3 text-sm font-bold transition",
                               form.urgency === level
                                 ? level === "緊急（24H）"
-                                  ? "bg-rose text-white"
-                                  : "bg-cyan text-white"
-                                : "bg-white text-foreground/70 ring-1 ring-black/5",
+                                  ? "mesh-bg text-white shadow-lg"
+                                  : "bg-cyan text-white shadow-lg"
+                                : "bg-crystal text-foreground/70 ring-1 ring-white/90",
                             )}
                           >
                             {level}
@@ -244,7 +259,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <label className="block space-y-2">
-                    <span className="text-xs font-bold text-muted">
+                    <span className="text-xs font-bold tracking-wide text-muted">
                       ご相談内容 <span className="text-pink">*</span>
                     </span>
                     <textarea
@@ -261,7 +276,7 @@ export default function Contact() {
                   <Bounce>
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-rose to-pink px-6 py-3.5 text-sm font-bold text-white shadow-[0_14px_30px_rgba(236,72,153,0.35)] md:w-auto"
+                      className="btn-primary w-full justify-center md:w-auto"
                     >
                       <Send className="h-4 w-4" />
                       送信する

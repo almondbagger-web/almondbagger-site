@@ -358,7 +358,7 @@ export const heroSlides = [
 export type PricePlan = {
   id: string;
   name: string;
-  color: "pink" | "cyan" | "purple" | "lime";
+  color: "red" | "pink" | "cyan" | "purple" | "lime";
   badge?: string;
   priceLines: string[];
   description: string;
@@ -369,7 +369,7 @@ export const pricePlans: PricePlan[] = [
   {
     id: "p-short",
     name: "縦型ショート / TikTok / Reels",
-    color: "pink",
+    color: "red",
     badge: "人気",
     priceLines: ["参考価格：30万円〜 / 本", "月額運用プラン：50万円〜 / 月"],
     description:
@@ -488,11 +488,14 @@ export const companyInfo = {
 
 /** ナビ・フッター共通。セクション id と必ず一致させる */
 export const navLinks = [
-  { href: "#about", label: "Growth" },
+  { href: "#about", label: "強み" },
   { href: "#ai", label: "AI" },
-  { href: "#services", label: "Services" },
-  { href: "#works", label: "Works" },
-  { href: "#price", label: "Price" },
-  { href: "#company", label: "Company" },
-  { href: "#contact", label: "Contact" },
+  { href: "#services", label: "サービス" },
+  { href: "#works", label: "実績" },
+  { href: "#price", label: "料金" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#recruit", label: "採用" },
+  { href: "#company", label: "会社概要" },
+  { href: "#contact", label: "お問い合わせ" },
 ] as const;
+

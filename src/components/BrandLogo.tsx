@@ -11,38 +11,30 @@ type BrandLogoProps = {
   priority?: boolean;
 };
 
+const LOGO_SRC = "/会社LOGO.jpg";
+const LOGO_FALLBACK = "/logo.png";
+
 export default function BrandLogo({
   className,
   imageClassName,
   priority = false,
 }: BrandLogoProps) {
-  const [failed, setFailed] = useState(false);
-
-  if (failed) {
-    return (
-      <span className={cn("inline-flex flex-col leading-none", className)}>
-        <span className="font-display text-xs font-bold tracking-widest text-pink">
-          STUDIO
-        </span>
-        <span className="font-display text-lg font-bold tracking-tight text-foreground md:text-xl">
-          ALMOND<span className="text-pink">BAGGER</span>
-        </span>
-      </span>
-    );
-  }
+  const [src, setSrc] = useState(LOGO_SRC);
 
   return (
     <span className={cn("group relative inline-flex items-center", className)}>
-      <span className="absolute -inset-2 rounded-2xl bg-pink/0 blur-lg transition duration-300 group-hover:bg-pink/25" />
+      <span className="absolute -inset-2 rounded-2xl bg-brand/0 blur-lg transition duration-300 group-hover:bg-brand/10" />
       <Image
-        src="/logo.png"
-        alt={companyInfo.shortName}
-        width={280}
+        src={src}
+        alt={`${companyInfo.shortName} ロゴ`}
+        width={480}
         height={160}
         priority={priority}
-        onError={() => setFailed(true)}
+        onError={() => {
+          if (src !== LOGO_FALLBACK) setSrc(LOGO_FALLBACK);
+        }}
         className={cn(
-          "relative h-11 w-auto object-contain drop-shadow-sm transition duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_8px_20px_rgba(236,72,153,0.45)] md:h-12",
+          "relative h-10 w-auto max-w-[200px] object-contain object-left drop-shadow-sm transition duration-300 group-hover:scale-[1.02] md:h-12 md:max-w-[240px]",
           imageClassName,
         )}
       />
