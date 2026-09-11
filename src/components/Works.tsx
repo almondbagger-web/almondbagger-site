@@ -20,23 +20,9 @@ import { cn } from "@/lib/utils";
 
 type Filter = (typeof workCategories)[number];
 
-const WATERMAN_TIKTOK = "https://vt.tiktok.com/ZSVx84VPA/";
+const FEATURED_ID = "w-obanhurumai";
+const FLAGSHIP_YOUTUBE = "https://youtu.be/D2lvekhImOI";
 
-const credits = [
-  { label: "Artist", value: "AKBB（A.I. Kuchipaku Band Brothers）" },
-  { label: "Vocal", value: "TOSHI" },
-  { label: "Rap", value: "WaterMan (feat.)" },
-  { label: "Guitar", value: "KURO" },
-  { label: "Written & Composed by", value: "YUDAI" },
-] as const;
-
-const featuredRoleTags = [
-  "制作部 / 現場統括",
-  "ロケーション支援",
-  "実写 ✕ AI映像制作協力",
-] as const;
-
-/** 作品固有のシネマティック・ビジュアル（著作権フリーの純デザイン） */
 type CinemaTheme = {
   gradient: string;
   accent: string;
@@ -46,6 +32,34 @@ type CinemaTheme = {
 };
 
 const CINEMA_THEMES: Record<string, CinemaTheme> = {
+  "w-soulmate": {
+    gradient: "cinema-grad--soulmate",
+    accent: "#38bdf8",
+    platform: "Netflix",
+    timecode: "TC 01:48:22:06",
+    english: "SOULMATE",
+  },
+  "w-obanhurumai": {
+    gradient: "cinema-grad--oban",
+    accent: "#fbbf24",
+    platform: "ORIGINAL IP",
+    timecode: "TC 00:03:12:00",
+    english: "LIKES FOR ALL",
+  },
+  "w-aimote": {
+    gradient: "cinema-grad--aimote",
+    accent: "#ef4444",
+    platform: "AKBB MV",
+    timecode: "TC 00:02:58:14",
+    english: "HOLD THE AI / LOVE",
+  },
+  "w-waterman": {
+    gradient: "cinema-grad--waterman",
+    accent: "#22d3ee",
+    platform: "AKBB MV",
+    timecode: "TC 00:03:41:08",
+    english: "WATERMAN",
+  },
   "w-luvntcom": {
     gradient: "cinema-grad--luvntcom",
     accent: "#f43f5e",
@@ -167,15 +181,17 @@ function isShortDrama(work: Work) {
 function formatTagsOf(work: Work) {
   return work.tags.filter(
     (tag) =>
-      /ショート|劇場|Netflix|WOWOW|Amazon|地上波|配信|短編|大型特別|オリジナル/i.test(
+      /ショート|劇場|Netflix|WOWOW|Amazon|地上波|配信|短編|大型特別|オリジナル|アニメ|MV|クラフト|中華/i.test(
         tag,
-      ) && !/制作|ロケ|現場|バックオフィス|ロケーション/.test(tag),
+      ) && !/制作部|ロケ|現場|バックオフィス|ロケーション管理|ロケ統括|ロケ協力|ロケ支援|現場進行|現場統括|現場管理|制作部協力/.test(
+        tag,
+      ),
   );
 }
 
 function roleTagsOf(work: Work) {
   return work.tags.filter((tag) =>
-    /制作|ロケ|現場|バックオフィス|ロケーション/.test(tag),
+    /制作|ロケ|現場|バックオフィス|ロケーション|クラフト/.test(tag),
   );
 }
 
@@ -191,18 +207,37 @@ function CinemaFilmFrame({ work }: { work: Work }) {
     .replace(/^連続ドラマW 池井戸潤スペシャル/, "")
     .trim();
   const short = isShortDrama(work);
+  const hasJacket = Boolean(work.thumbnail?.startsWith("/mv-"));
 
   return (
     <div className={cn("cinema-frame group/frame", short && "cinema-frame--short")}>
       <div className="cinema-frame__sprocket cinema-frame__sprocket--left" aria-hidden />
       <div className="cinema-frame__sprocket cinema-frame__sprocket--right" aria-hidden />
 
-      <div className={cn("cinema-frame__stage", theme.gradient, short && "cinema-frame__stage--short")}>
+      <div
+        className={cn(
+          "cinema-frame__stage",
+          !hasJacket && theme.gradient,
+          short && "cinema-frame__stage--short",
+          hasJacket && "cinema-frame__stage--photo",
+        )}
+      >
+        {hasJacket && work.thumbnail ? (
+          <Image
+            src={work.thumbnail}
+            alt={work.title}
+            fill
+            sizes="(max-width:768px) 100vw, 33vw"
+            className="object-cover transition duration-700 group-hover/frame:scale-[1.04]"
+          />
+        ) : null}
         <div className="cinema-frame__grain" aria-hidden />
         <div className="cinema-frame__vignette" aria-hidden />
 
         <div className="cinema-frame__meta">
-          <span className="cinema-frame__ratio">{short ? "9:16 VERTICAL" : "2.39:1"}</span>
+          <span className="cinema-frame__ratio">
+            {short ? "9:16 VERTICAL" : hasJacket ? "JACKET" : "2.39:1"}
+          </span>
           <span className="cinema-frame__tc">{theme.timecode}</span>
         </div>
 
@@ -264,7 +299,8 @@ function CinemaWorkCard({ work, index }: { work: Work; index: number }) {
               key={tag}
               className={cn(
                 "cinema-format-tag",
-                tag.includes("ショート") && "cinema-format-tag--short",
+                (tag.includes("ショート") || tag.includes("オリジナル")) &&
+                  "cinema-format-tag--short",
               )}
             >
               {tag}
@@ -276,119 +312,105 @@ function CinemaWorkCard({ work, index }: { work: Work; index: number }) {
             </span>
           ))}
         </div>
+        {work.credit ? (
+          <p className="mt-3 text-xs leading-relaxed text-muted">{work.credit}</p>
+        ) : null}
         <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
           {work.description}
         </p>
-        {work.officialUrl ? (
-          <a
-            href={work.officialUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cinema-cta mt-5"
-          >
-            公式サイト / 配信で観る
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-        ) : null}
+        <div className="mt-5 flex flex-col gap-2">
+          {work.officialUrl ? (
+            <a
+              href={work.officialUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cinema-cta"
+            >
+              {work.ctaLabel ?? "公式サイト / 配信で観る"}
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
+          ) : null}
+          {work.secondaryUrl ? (
+            <a
+              href={work.secondaryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cinema-cta cinema-cta--ghost"
+            >
+              {work.secondaryCtaLabel ?? "公式TikTokへ"}
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
+          ) : null}
+        </div>
       </div>
     </motion.article>
   );
 }
 
-function FeaturedWaterman() {
+function FeaturedFlagship() {
   return (
     <Reveal direction="left" className="mb-12">
       <article className="prism-frame relative overflow-hidden p-1.5 md:p-2">
         <div className="pointer-events-none absolute -left-20 top-0 h-56 w-56 rounded-full bg-brand/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-48 w-48 rounded-full bg-lime/25 blur-3xl" />
 
-        <div className="relative grid gap-0 overflow-hidden rounded-[1.05rem] bg-white/90 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-          <div className="relative aspect-square overflow-hidden border-b border-border/60 lg:aspect-auto lg:min-h-[520px] lg:border-b-0 lg:border-r">
+        <div className="relative grid gap-0 overflow-hidden rounded-[1.05rem] bg-white/90 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <div className="relative aspect-video overflow-hidden border-b border-border/60 lg:aspect-auto lg:min-h-[480px] lg:border-b-0 lg:border-r">
             <Image
-              src="/mv-waterman.jpg"
-              alt="AKBB feat. Waterman『WATERMAN』メインビジュアル"
+              src="/mv-obanhurumai.jpg"
+              alt="オリジナルアニメMV『いいねの大盤振る舞い』"
               fill
               priority
-              sizes="(max-width:1024px) 100vw, 48vw"
+              sizes="(max-width:1024px) 100vw, 52vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-white/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
             <div className="absolute left-4 top-4 flex flex-wrap gap-2">
               <span className="tag-chip tag-chip--red font-extrabold">
-                FEATURED PROJECT
+                自社オリジナルIP
               </span>
               <span className="tag-chip tag-chip--lime font-extrabold">
-                NEW RELEASE
+                FLAGSHIP
               </span>
             </div>
             <a
-              href={WATERMAN_TIKTOK}
+              href={FLAGSHIP_YOUTUBE}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs font-extrabold text-brand shadow-lg backdrop-blur-sm transition hover:scale-[1.03]"
+              className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-xs font-extrabold text-brand shadow-lg transition hover:scale-[1.03]"
             >
               <Play className="h-3.5 w-3.5 fill-brand" />
-              TikTokで観る
+              YouTubeで観る
             </a>
           </div>
 
           <div className="relative flex flex-col justify-center p-6 md:p-8 lg:p-10">
-            <p className="eyebrow">FEATURED PROJECT · 最新注目作品</p>
+            <p className="eyebrow">FEATURED · 自社フラッグシップIP</p>
             <h3 className="mt-3 font-display text-2xl font-black tracking-tight md:text-3xl">
-              『WATERMAN』
+              『いいねの大盤振る舞い』
             </h3>
             <p className="mt-1 text-sm font-semibold text-muted md:text-base">
-              AKBB feat. Waterman
+              オリジナルアニメMV / YUMITA
             </p>
-
             <p className="mt-5 text-sm font-bold leading-relaxed text-foreground md:text-base">
-              AI ✖️ 口パク ✖️
-              エアーギターの最新型ロックバンド🔥
-              本気で目指すぜ武道館...いやMSG🇺🇸
+              「昔は槍で領地を奪取、今は親指で通知を連打ッシュ」
             </p>
-
-            <dl className="mt-6 grid gap-2.5 sm:grid-cols-2">
-              {credits.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl border border-border/70 bg-white/70 px-3 py-2.5"
-                >
-                  <dt className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-muted">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-1 text-sm font-semibold leading-snug text-foreground">
-                    {item.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-
-            <div className="mt-5">
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-muted">
-                担当領域
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {featuredRoleTags.map((tag) => (
-                  <span key={tag} className="tag-chip tag-chip--red">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <p className="mt-5 text-sm leading-relaxed text-muted">
-              夢を諦めないオジさんたちの熱い挑戦を見届けてくれ！現場の熱気と最先端AI・エアーパフォーマンスを融合したシネマティックな話題作。ロケーション手配から現場進行までワンストップで制作協力いたしました。
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              戦国侍が現代SNSの数字の戦いに切り込む、自社プロデュースの大型アニメーションMV。
             </p>
-
+            <p className="mt-4 text-xs leading-relaxed text-muted">
+              企画・作詞・作曲・アニメーション制作：YUMITA（Generated with Suno
+              & AI tools）
+            </p>
             <div className="mt-7">
               <Bounce>
                 <a
-                  href={WATERMAN_TIKTOK}
+                  href={FLAGSHIP_YOUTUBE}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-neon-release text-sm md:text-base"
                 >
-                  TikTokでMV・動画をチェック
+                  YouTubeで本編を観る
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </Bounce>
@@ -409,9 +431,9 @@ export default function Works() {
         ? works
         : works.filter((w) => w.category === (filter as WorkCategory));
     return list
-      .filter((w) => w.id !== "w-waterman")
+      .filter((w) => w.id !== FEATURED_ID)
       .slice()
-      .sort((a, b) => b.year - a.year);
+      .sort((a, b) => b.sortKey - a.sortKey);
   }, [filter]);
 
   return (
@@ -425,8 +447,8 @@ export default function Works() {
         <Reveal direction="left">
           <div className="flex flex-wrap gap-2">
             <span className="tag-chip tag-chip--red">Cinema Frame</span>
-            <span className="tag-chip tag-chip--cyan">2.39:1</span>
-            <span className="tag-chip tag-chip--purple">Production Credit</span>
+            <span className="tag-chip tag-chip--cyan">Original IP</span>
+            <span className="tag-chip tag-chip--purple">Latest First</span>
           </div>
           <p className="eyebrow mt-5">制作実績</p>
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -436,12 +458,12 @@ export default function Works() {
             <MiniGrowthSpark />
           </div>
           <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            劇場映画からNetflix・FODショートドラマまで、最新作を先頭に制作部実績を年代順で掲載しています。
+            Netflix『ソウルメイト』から自社フラッグシップIP・AKBB MVまで、最新公開順で制作部実績を掲載しています。
           </p>
         </Reveal>
 
         <div className="mt-10">
-          <FeaturedWaterman />
+          <FeaturedFlagship />
         </div>
 
         <Reveal delay={0.08} direction="left" className="mt-2 flex flex-wrap gap-2">

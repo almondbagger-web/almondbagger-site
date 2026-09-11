@@ -12,19 +12,74 @@ export type Work = {
   /** "/works/..." またはルート画像。未設定時はシネマプレースホルダー */
   thumbnail?: string;
   year: number;
+  /** YYYYMMDD。同年代内の並び替え用（大きいほど新しい） */
+  sortKey: number;
   description: string;
   aspect: WorkAspect;
   /** 公式サイト / 配信ページ */
   officialUrl?: string;
+  ctaLabel?: string;
+  secondaryUrl?: string;
+  secondaryCtaLabel?: string;
+  credit?: string;
 };
 
 const t = (n: number) => `/works/work-${String(n).padStart(2, "0")}.jpg`;
 
 /**
  * 制作実績：最新年代順（降順）
- * Featured WATERMAN は UI 側で別カード表示。
+ * Featured『いいねの大盤振る舞い』は UI 側で別カード表示。
  */
 export const works: Work[] = [
+  {
+    id: "w-soulmate",
+    title: "ソウルメイト",
+    client: "Netflix",
+    category: "映画",
+    tags: ["Netflix映画", "制作部", "クラフト（ケータリング・現場サポート）"],
+    year: 2026,
+    sortKey: 20260514,
+    description:
+      "Netflixにて世界独占配信中。弊社スタッフが制作部およびクラフト部門として撮影現場に参加・強力にバックアップ。",
+    aspect: "landscape",
+    officialUrl: "https://about.netflix.com/ja/news/soulmate-main-trailer",
+    ctaLabel: "公式サイト / 配信で観る",
+  },
+  {
+    id: "w-obanhurumai",
+    title: "いいねの大盤振る舞い",
+    client: "YUMITA / ALMONDBAGGER",
+    category: "MV・PR",
+    tags: ["自社オリジナルIP", "アニメMV", "AI音楽・映像"],
+    thumbnail: "/mv-obanhurumai.jpg",
+    year: 2026,
+    sortKey: 20260510,
+    description:
+      "「昔は槍で領地を奪取、今は親指で通知を連打ッシュ」。戦国侍が現代SNSの数字の戦いに切り込む、自社プロデュースの大型アニメーションMV。",
+    aspect: "landscape",
+    officialUrl: "https://youtu.be/D2lvekhImOI",
+    ctaLabel: "YouTubeで本編を観る",
+    credit:
+      "企画・作詞・作曲・アニメーション制作：YUMITA（Generated with Suno & AI tools）",
+  },
+  {
+    id: "w-aimote",
+    title: "aiを持て",
+    client: "AKBB",
+    category: "MV・PR",
+    tags: ["制作部協力", "MV", "中華ダンスロック / クラブEDM"],
+    thumbnail: "/mv-aimote.jpg",
+    year: 2026,
+    sortKey: 20260505,
+    description:
+      "AI（人工知能）の時代だからこそ、愛（AI）を持って泥臭く走る人間が一番強い。爆発的な熱量を誇る男声ツインボーカルと鋭い中国語ラップが炸裂する中華ダンスロック／クラブEDMアンセム。二胡や古筝の超高速リフと重低音四つ打ちビートが融合し、「始皇帝／思考停止」「人生のコード」といったSFワードを薙ぎ倒す熱い人間賛歌。キラーシャウトと中毒性MAXのドロップ「覇王！覇王！」が響く令和最強の爆上げキング・トラック。",
+    aspect: "portrait",
+    officialUrl: "https://youtu.be/3TjVEUCimZs",
+    ctaLabel: "YouTubeで観る",
+    secondaryUrl:
+      "https://www.tiktok.com/@akbb.a.i.kuchipak?is_from_webapp=1&sender_device=pc",
+    secondaryCtaLabel: "公式TikTokへ",
+  },
   {
     id: "w-waterman",
     title: "WATERMAN",
@@ -33,10 +88,12 @@ export const works: Work[] = [
     tags: ["制作部 / 現場統括", "ロケーション支援", "実写 ✕ AI映像制作協力"],
     thumbnail: "/mv-waterman.jpg",
     year: 2026,
+    sortKey: 20260501,
     description:
       "AI ✖️ 口パク ✖️ エアーギターの最新型ロックバンド。制作部・現場統括・ロケーション支援・実写✕AI映像制作協力として参加。",
     aspect: "portrait",
     officialUrl: "https://vt.tiktok.com/ZSVx84VPA/",
+    ctaLabel: "TikTokで観る",
   },
   {
     id: "w-luvntcom",
@@ -45,6 +102,7 @@ export const works: Work[] = [
     category: "映画",
     tags: ["劇場公開映画", "制作部 / 現場統括", "ロケーション管理"],
     year: 2025,
+    sortKey: 20251201,
     description:
       "Storm Labels配給の話題の劇場公開映画。確かな制作部体制で現場統括・ロケーション管理を完走。",
     aspect: "landscape",
@@ -57,6 +115,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["FODショートドラマ", "制作部 / 現場進行"],
     year: 2025,
+    sortKey: 20251101,
     description:
       "急速に需要が高まる縦型・ショートドラマの現場制作部として迅速かつ円滑な撮影オペレーションを遂行。",
     aspect: "portrait",
@@ -69,6 +128,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["FODショートドラマ", "制作部 / 現場進行"],
     year: 2025,
+    sortKey: 20251001,
     description:
       "スリリングな愛憎劇を描くFODショートドラマの現場進行・制作部業務を担当。",
     aspect: "portrait",
@@ -81,6 +141,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["Netflixシリーズ", "制作部 / 現場統括", "ロケーション支援"],
     year: 2024,
+    sortKey: 20240701,
     description:
       "社会現象となった話題作。大規模ロケ手配および撮影現場進行を統括。",
     aspect: "landscape",
@@ -93,6 +154,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["地上波連続ドラマ", "制作部 / 現場進行"],
     year: 2024,
+    sortKey: 20240401,
     description:
       "ハートフル・ミステリードラマの制作部現場統括およびロケーション調整。",
     aspect: "landscape",
@@ -105,6 +167,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["大型特別ドラマ", "制作部 / 現場統括"],
     year: 2023,
+    sortKey: 20231201,
     description:
       "豪華キャストが集結した開局記念大型ミステリー特番の現場進行・管理を完走。",
     aspect: "landscape",
@@ -117,6 +180,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["Netflixシリーズ", "制作部 / バックオフィス"],
     year: 2023,
+    sortKey: 20230701,
     description:
       "復讐とサスペンスを描く大ヒットドラマシリーズの現場オペレーションを担当。",
     aspect: "landscape",
@@ -130,6 +194,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["地上波連続ドラマ", "制作部 / ロケーション"],
     year: 2023,
+    sortKey: 20230401,
     description: "過激な恋愛やり直しラブストーリーの現場統括・撮影管理。",
     aspect: "landscape",
     officialUrl: "https://www.mbs.jp/oujougiwa_no_imioshire/",
@@ -141,6 +206,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["配信ドラマ", "制作部 / 現場管理"],
     year: 2023,
+    sortKey: 20230101,
     description: "独特な世界観を持つ話題作の制作部・現場進行を推進。",
     aspect: "landscape",
     officialUrl: "https://www.amazon.co.jp/gp/video/detail/B0GY2FX132",
@@ -152,6 +218,7 @@ export const works: Work[] = [
     category: "映画",
     tags: ["短編映画", "制作部 / ロケ協力"],
     year: 2022,
+    sortKey: 20221001,
     description:
       "個性豊かなショートフィルム作品のロケーションおよび制作部協力。",
     aspect: "landscape",
@@ -164,6 +231,7 @@ export const works: Work[] = [
     category: "映画",
     tags: ["劇場公開映画", "制作部 / ロケ支援"],
     year: 2022,
+    sortKey: 20220601,
     description:
       "「(NOT) HEROINE MOVIES」プロジェクト作品。丁寧なロケ地管理と現場統括。",
     aspect: "landscape",
@@ -176,6 +244,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["Netflixシリーズ", "制作部"],
     year: 2022,
+    sortKey: 20220101,
     description: "人気コミック実写化作品の現場制作支援・進行管理。",
     aspect: "landscape",
     officialUrl: "https://romakira-movie.toho.co.jp/",
@@ -187,6 +256,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["WOWOWオリジナル", "制作部"],
     year: 2021,
+    sortKey: 20211201,
     description:
       "池井戸潤原作の重厚なヒューマンドラマ。確かな制作管理体制で現場を支え抜く。",
     aspect: "landscape",
@@ -199,6 +269,7 @@ export const works: Work[] = [
     category: "映画",
     tags: ["劇場公開映画", "制作部 / ロケ統括"],
     year: 2021,
+    sortKey: 20210701,
     description:
       "大ヒットコミック実写映画。アクションシーンや大規模ロケーションの現場管理を完走。",
     aspect: "landscape",
@@ -211,6 +282,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["地上波連続ドラマ", "制作部"],
     year: 2021,
+    sortKey: 20210401,
     description: "大人の切ない恋愛・結婚生活を描いた連続ドラマの制作進行。",
     aspect: "landscape",
     officialUrl: "https://www.asahi.co.jp/soreai/",
@@ -222,6 +294,7 @@ export const works: Work[] = [
     category: "ドラマ・配信",
     tags: ["Amazon Original", "制作部"],
     year: 2020,
+    sortKey: 20200901,
     description: "三谷幸喜×香取慎吾のシチュエーションコメディ作品の制作部支援。",
     aspect: "landscape",
     officialUrl: "https://www.amazon.co.jp/dp/B08H4XGHNZ",

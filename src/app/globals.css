@@ -993,12 +993,40 @@ body {
     filter 0.25s ease;
 }
 
+.cinema-cta--ghost {
+  color: #be123c;
+  background: color-mix(in oklab, #ef4444 8%, white);
+  border: 1px solid color-mix(in oklab, #ef4444 25%, white);
+  box-shadow: none;
+}
+
 .cinema-card:hover .cinema-cta {
   transform: translateY(-1px) scale(1.02);
   box-shadow:
     0 12px 28px rgba(225, 29, 72, 0.35),
     0 0 20px rgba(163, 230, 53, 0.2);
   filter: saturate(1.15);
+}
+
+.cinema-frame__stage--photo {
+  background: #0a0a0a;
+}
+
+.cinema-frame__stage--photo .cinema-frame__title-block {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.75);
+}
+
+.cinema-grad--soulmate {
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 45%, #7dd3fc 100%);
+}
+.cinema-grad--oban {
+  background: linear-gradient(135deg, #422006 0%, #b45309 48%, #fde68a 100%);
+}
+.cinema-grad--aimote {
+  background: linear-gradient(135deg, #450a0a 0%, #b91c1c 50%, #fb7185 100%);
+}
+.cinema-grad--waterman {
+  background: linear-gradient(135deg, #083344 0%, #0e7490 50%, #67e8f9 100%);
 }
 
 /* Work-specific gradients */

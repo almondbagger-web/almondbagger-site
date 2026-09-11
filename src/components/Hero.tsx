@@ -1,33 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
 import { Bounce, Reveal } from "@/components/Motion";
-import {
-  GrowthGridBackground,
-  ImpactStatsStrip,
-} from "@/components/VelocityVisuals";
-import { companyInfo, heroSlides } from "@/data/works";
+import { GrowthGridBackground } from "@/components/VelocityVisuals";
+
+const FLAGSHIP_YOUTUBE = "https://youtu.be/D2lvekhImOI";
 
 export default function Hero() {
-  const [index, setIndex] = useState(0);
-  const [slideFailed, setSlideFailed] = useState(false);
-
-  useEffect(() => {
-    const id = window.setInterval(
-      () => setIndex((i) => (i + 1) % heroSlides.length),
-      5000,
-    );
-    return () => window.clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    setSlideFailed(false);
-  }, [index]);
-
   return (
     <section
       id="top"
@@ -104,43 +85,83 @@ export default function Hero() {
         </Reveal>
 
         <Reveal direction="right" delay={0.1}>
-          <div className="grid gap-4">
-            <div className="lux-card geo-frame glow-ring relative aspect-[4/5] overflow-hidden md:aspect-[5/6]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={heroSlides[index].id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute inset-0"
-                >
-                  {!slideFailed ? (
-                    <Image
-                      src={heroSlides[index].image}
-                      alt={heroSlides[index].label}
-                      fill
-                      priority={index === 0}
-                      sizes="(max-width:1024px) 100vw, 42vw"
-                      className="object-cover"
-                      onError={() => setSlideFailed(true)}
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-surface p-8">
-                      <p className="font-cinema text-2xl tracking-widest text-brand">
-                        ALMOND BAGGER
-                      </p>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/55 via-transparent to-transparent" />
-                  <span className="absolute left-4 top-4 lux-badge">
-                    {heroSlides[index].label}
+          <article className="flagship-card group relative overflow-hidden rounded-[1.35rem] border border-white/80 bg-white/90 p-2.5 shadow-[0_24px_60px_rgba(225,29,72,0.14)] backdrop-blur-sm">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-12 -left-8 h-36 w-36 rounded-full bg-lime/25 blur-3xl" />
+
+            <a
+              href={FLAGSHIP_YOUTUBE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative block overflow-hidden rounded-[1.05rem]"
+              aria-label="いいねの大盤振る舞いをYouTubeで観る"
+            >
+              <div className="relative aspect-[16/9] overflow-hidden md:aspect-[5/4]">
+                <Image
+                  src="/mv-obanhurumai.jpg"
+                  alt="オリジナルアニメMV『いいねの大盤振る舞い』ジャケット"
+                  fill
+                  priority
+                  sizes="(max-width:1024px) 100vw, 42vw"
+                  className="object-cover transition duration-700 group-hover:scale-[1.05]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+                  <span className="tag-chip tag-chip--red font-extrabold">
+                    自社オリジナルIP / フラッグシップ
                   </span>
-                </motion.div>
-              </AnimatePresence>
+                  <span className="tag-chip tag-chip--lime font-extrabold">
+                    YouTube公開中
+                  </span>
+                </div>
+                <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[0.65rem] font-extrabold tracking-wider text-brand shadow-sm">
+                  WATCH ON YOUTUBE ↗
+                </span>
+              </div>
+            </a>
+
+            <div className="relative px-3 pb-4 pt-5 md:px-4 md:pb-5">
+              <p className="eyebrow !mt-0 text-[0.62rem]">
+                FLAGSHIP ORIGINAL IP · ANIMATION MV
+              </p>
+              <h2 className="mt-2 font-hero-ja text-xl font-black leading-snug tracking-tight md:text-2xl">
+                オリジナルアニメMV
+                <br />
+                『いいねの大盤振る舞い』
+              </h2>
+              <p className="mt-1 text-sm font-semibold text-muted">YUMITA</p>
+
+              <p className="mt-4 text-sm font-black leading-relaxed text-foreground">
+                「昔は槍で領地を奪取、今は親指で通知を連打ッシュ」
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                戦国の世から現代へタイムスリップした侍が見た、スマホで「数字」と「言葉」を斬り合う現代人の姿――。
+              </p>
+
+              <p className="mt-4 text-xs leading-relaxed text-muted">
+                企画・作詞・作曲・アニメーション制作：YUMITA
+                <br />
+                （Generated with Suno & AI tools）
+              </p>
+              <p className="mt-2 text-xs font-bold text-brand">
+                劇中歌『いいねの大盤振る舞い』各ストリーミングにて近日サブスク解禁予定！
+              </p>
+
+              <div className="mt-5">
+                <Bounce>
+                  <a
+                    href={FLAGSHIP_YOUTUBE}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-neon-release w-full justify-center text-sm"
+                  >
+                    YouTubeで本編を観る
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </Bounce>
+              </div>
             </div>
-            <ImpactStatsStrip layout="panel" />
-          </div>
+          </article>
         </Reveal>
       </div>
     </section>
