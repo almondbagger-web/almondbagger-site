@@ -1,0 +1,453 @@
+/* Portfolio print deck — A4 landscape */
+
+.portfolio-root {
+  --pf-ink: #0f172a;
+  --pf-red: #dc2626;
+  --pf-muted: #64748b;
+  --pf-line: #e2e8f0;
+  --pf-paper: #f8fafc;
+  --pf-white: #ffffff;
+  background: #e2e8f0;
+  color: var(--pf-ink);
+  min-height: 100vh;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.portfolio-print-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+}
+
+.portfolio-print-bar__inner {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.portfolio-print-bar__eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pf-red);
+}
+
+.portfolio-print-bar__hint {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: var(--pf-muted);
+}
+
+.portfolio-print-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(120deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%);
+  box-shadow: 0 10px 24px rgba(220, 38, 38, 0.28);
+  cursor: pointer;
+}
+
+.portfolio-print-bar__btn:hover {
+  filter: brightness(1.05);
+}
+
+.portfolio-deck {
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.portfolio-slide {
+  width: 297mm;
+  height: 210mm;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: var(--pf-paper);
+  color: var(--pf-ink);
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  page-break-after: always;
+  break-after: page;
+}
+
+.portfolio-slide:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.portfolio-slide__inner {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 14mm 16mm;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.portfolio-slide__accent {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 8px;
+  background: linear-gradient(180deg, #dc2626 0%, #0f172a 100%);
+}
+
+.portfolio-slide__mark {
+  position: absolute;
+  right: -20mm;
+  bottom: -25mm;
+  font-size: 48mm;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: rgba(15, 23, 42, 0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.pf-kicker {
+  margin: 0;
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pf-red);
+}
+
+.pf-title {
+  margin: 0.35rem 0 0;
+  font-size: 28pt;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--pf-ink);
+}
+
+.pf-title--hero {
+  font-size: 42pt;
+  letter-spacing: -0.04em;
+}
+
+.pf-subtitle {
+  margin: 0.7rem 0 0;
+  font-size: 12pt;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #1e293b;
+  max-width: 220mm;
+}
+
+.pf-muted {
+  margin: 0;
+  color: var(--pf-muted);
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.pf-rule {
+  height: 2px;
+  width: 28mm;
+  margin: 0.9rem 0;
+  background: var(--pf-red);
+  border: 0;
+}
+
+.pf-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+
+.pf-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5mm;
+  margin-top: auto;
+}
+
+.pf-card {
+  background: var(--pf-white);
+  border: 1px solid var(--pf-line);
+  border-radius: 3mm;
+  padding: 4.5mm 5mm;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+}
+
+.pf-card h3 {
+  margin: 0;
+  font-size: 11pt;
+  font-weight: 900;
+  color: var(--pf-ink);
+}
+
+.pf-card p {
+  margin: 2mm 0 0;
+  font-size: 8.5pt;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.pf-card__num {
+  display: inline-block;
+  font-size: 8pt;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--pf-red);
+  margin-bottom: 1.5mm;
+}
+
+.pf-works {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2mm 5mm;
+  margin-top: 3mm;
+}
+
+.pf-work {
+  display: grid;
+  grid-template-columns: 18mm 1fr;
+  gap: 2.5mm;
+  align-items: start;
+  padding: 2mm 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.pf-work__year {
+  font-size: 8pt;
+  font-weight: 800;
+  color: var(--pf-red);
+  letter-spacing: 0.04em;
+  padding-top: 0.4mm;
+}
+
+.pf-work__title {
+  margin: 0;
+  font-size: 9pt;
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--pf-ink);
+}
+
+.pf-work__meta {
+  margin: 0.8mm 0 0;
+  font-size: 7.5pt;
+  color: var(--pf-muted);
+  line-height: 1.35;
+}
+
+.pf-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 4mm;
+  padding-top: 3mm;
+  border-top: 1px solid var(--pf-line);
+}
+
+.pf-footer__brand {
+  font-size: 8pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--pf-ink);
+}
+
+.pf-footer__page {
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--pf-muted);
+}
+
+.pf-contact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4mm;
+  margin-top: auto;
+}
+
+.pf-contact__item {
+  background: var(--pf-white);
+  border: 1px solid var(--pf-line);
+  border-left: 3px solid var(--pf-red);
+  border-radius: 2.5mm;
+  padding: 3.5mm 4mm;
+}
+
+.pf-contact__label {
+  margin: 0;
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pf-muted);
+}
+
+.pf-contact__value {
+  margin: 1.5mm 0 0;
+  font-size: 9.5pt;
+  font-weight: 800;
+  color: var(--pf-ink);
+  word-break: break-all;
+}
+
+.pf-concept {
+  margin-top: 5mm;
+  padding: 4.5mm 5mm;
+  background: linear-gradient(120deg, #0f172a 0%, #1e293b 60%, #7f1d1d 100%);
+  color: #fff;
+  border-radius: 3mm;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.pf-concept p {
+  margin: 0;
+  font-size: 11pt;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.pf-roles {
+  margin: 3mm 0 0;
+  font-size: 10pt;
+  font-weight: 700;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.pf-ip-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 5mm;
+  margin-top: 3mm;
+}
+
+.pf-ip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5mm;
+  margin-top: 4mm;
+}
+
+.pf-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 1mm 2.5mm;
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--pf-red);
+}
+
+.pf-policy {
+  margin-top: auto;
+  padding: 4mm 5mm;
+  border: 1px solid var(--pf-line);
+  border-radius: 3mm;
+  background: #fff;
+}
+
+.pf-policy h3 {
+  margin: 0;
+  font-size: 10pt;
+  font-weight: 900;
+  color: var(--pf-ink);
+}
+
+.pf-policy p {
+  margin: 2mm 0 0;
+  font-size: 9pt;
+  line-height: 1.5;
+  color: #475569;
+}
+
+@media screen and (max-width: 1100px) {
+  .portfolio-slide {
+    width: min(100%, 297mm);
+    height: auto;
+    aspect-ratio: 297 / 210;
+    min-height: 0;
+  }
+
+  .portfolio-slide__inner {
+    padding: 5vw;
+  }
+
+  .pf-title--hero {
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+  }
+
+  .pf-title {
+    font-size: clamp(1.35rem, 3.5vw, 2rem);
+  }
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .portfolio-root {
+    background: #fff !important;
+  }
+
+  .portfolio-deck {
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .portfolio-slide {
+    width: 297mm !important;
+    height: 210mm !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    break-after: page;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .portfolio-slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+}
