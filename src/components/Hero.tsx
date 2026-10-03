@@ -80,8 +80,17 @@ export default function Hero() {
                 <Sparkles className="h-4 w-4 text-brand" />
                 AI Previs / VFX
               </a>
-              <a href="https://map.almondbagger.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur transition-all shadow-md hover:scale-105">
-                <span>🗺️</span> AB式ロケ地図ツクール ↗
+              <a
+                href="https://map.almondbagger.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-extrabold bg-[#FACC15] hover:bg-[#EAB308] text-black border-2 border-amber-400 transition-all transform hover:scale-105 active:scale-95"
+                style={{
+                  boxShadow: "0 4px 14px 0 rgba(220, 38, 38, 0.45), 0 2px 4px 0 rgba(220, 38, 38, 0.3)"
+                }}
+              >
+                <span>🗺️</span>
+                <span>AB式ロケ地図ツクール ↗</span>
               </a>
             </Bounce>
           </div>
