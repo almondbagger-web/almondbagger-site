@@ -451,6 +451,7 @@ export const navLinks = [
   { href: "#news", label: "NEWS" },
   { href: "#about", label: "強み" },
   { href: "#services", label: "制作部" },
+  { href: "#map-tool", label: "地図ツクール" },
   { href: "#ai", label: "AI" },
   { href: "#works", label: "実績" },
   { href: "#price", label: "料金" },

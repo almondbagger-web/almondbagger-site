@@ -4,6 +4,7 @@ import News from "@/components/News";
 import About from "@/components/About";
 import AIFeature from "@/components/AIFeature";
 import Services from "@/components/Services";
+import MapToolSection from "@/components/MapToolSection";
 import Works from "@/components/Works";
 import Price from "@/components/Price";
 import FAQ from "@/components/FAQ";
@@ -29,6 +30,7 @@ export default function Home() {
         <News />
         <About />
         <Services />
+        <MapToolSection />
         <AIFeature />
         <Works />
         <Price />

@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { CheckCircle2, Clock, Mail, Phone, Send } from "lucide-react";
 import {
   AuroraLayer,
@@ -38,6 +38,7 @@ const planOptions = [
   "YouTube動画制作",
   "CM / プロモーション映像",
   "映画・ドラマ現場サポート",
+  "地図ツクール（デモ相談）",
   "その他",
 ] as const;
 
@@ -47,6 +48,17 @@ const fieldClass =
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initial);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const onPlan = (event: Event) => {
+      const detail = (event as CustomEvent<string>).detail;
+      if (!planOptions.includes(detail as (typeof planOptions)[number])) return;
+      setSubmitted(false);
+      setForm((current) => ({ ...current, plan: detail }));
+    };
+    window.addEventListener("almond:plan", onPlan);
+    return () => window.removeEventListener("almond:plan", onPlan);
+  }, []);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

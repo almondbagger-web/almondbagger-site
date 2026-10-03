@@ -42,6 +42,8 @@ const keywords = [
   "AI VFX",
   "PR動画 中小企業 八王子",
   "ロケ支援 許認可",
+  "地図ツクール",
+  "ロケマップ",
   "SNS 縦型ショート動画",
 ];
 
@@ -188,6 +190,30 @@ const jsonLd = {
         "動く絵コンテ（AI Previs）で企画承認と現場共有を光速化。ロケ撮影の電柱・看板などのAIバレ消しにより、ポスプロコストと納期を圧縮します。",
     },
     {
+      "@type": ["SoftwareApplication", "Service"],
+      "@id": "https://www.almondbagger.com/#map-tool",
+      name: "地図ツクール",
+      alternateName: [
+        "Location Map Studio",
+        "地図ツクール for Production",
+        "地図ツクール by ALMONDBAGGER",
+      ],
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: "https://map.almondbagger.com",
+      serviceType: "映画・ドラマ・CM向けロケーション＆許認可マップ",
+      provider: { "@id": "https://www.almondbagger.com/#organization" },
+      areaServed: { "@type": "City", name: "八王子市" },
+      featureList: [
+        "ロケ撮影許認可マップ",
+        "搬入・待機・電源レイアウト",
+        "フィルムコミッション連携データベース",
+        "共有＆書き出し（高解像度画像・PDF・URL）",
+      ],
+      description:
+        "映画・ドラマ向けロケマップ作成ツール『地図ツクール』。現場を知る制作部が、八王子フィルムコミッション公認連携と20年の統括ノウハウをもとに開発。ロケハン写真、控室、電源車、待機場所、駐車導線、道路使用許可エリアを地図上でピン留め・レイヤー化し、香盤表・台本と直結してチーム共有できます。",
+    },
+    {
       "@type": "FAQPage",
       "@id": "https://www.almondbagger.com/#faq",
       mainEntity: [
@@ -221,6 +247,14 @@ const jsonLd = {
           acceptedAnswer: {
             "@type": "Answer",
             text: "可能です。映画・ドラマ制作部の進行管理を基盤に、必要な範囲だけ制作部支援・AI Previs・PR映像制作を組み合わせ、予算規模に合わせた最適プランをご提案します。",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "映画・ドラマ向けロケマップ作成ツール「地図ツクール」とは何ですか？",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "現場を知る制作部が開発した、映画・ドラマ・CM特化型のロケーション＆許認可マップツールです。八王子フィルムコミッション公認連携と20年の現場統括ノウハウをもとに、ロケハン写真・控室・電源車・待機場所・駐車導線・道路使用許可エリアを地図上でピン留め・レイヤー化し、香盤表や台本と直結してチーム共有できます。デモ相談を受け付けています。",
           },
         },
       ],
