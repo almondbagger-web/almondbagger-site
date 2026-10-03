@@ -49,12 +49,10 @@ export default function Navbar() {
         >
           <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
             <a
-              href="#top"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNav("#top");
-              }}
-              aria-label={`${companyInfo.shortName} トップへ`}
+              href="https://map.almondbagger.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${companyInfo.shortName} マップを新しいタブで開く`}
               className="min-w-0 shrink-0"
             >
               <BrandLogo variant="header" priority />
@@ -121,7 +119,14 @@ export default function Navbar() {
           >
             <div className="flex h-full flex-col justify-center gap-1 px-6 pt-28 sm:px-10">
               <div className="mb-8">
-                <BrandLogo variant="header" />
+                <a
+                  href="https://map.almondbagger.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${companyInfo.shortName} マップを新しいタブで開く`}
+                >
+                  <BrandLogo variant="header" />
+                </a>
               </div>
               {navLinks.map((link, i) => (
                 <motion.a
