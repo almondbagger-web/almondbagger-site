@@ -80,6 +80,9 @@ export default function Hero() {
                 <Sparkles className="h-4 w-4 text-brand" />
                 AI Previs / VFX
               </a>
+              <a href="https://map.almondbagger.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur transition-all shadow-md hover:scale-105">
+                <span>🗺️</span> AB式ロケ地図ツクール ↗
+              </a>
             </Bounce>
           </div>
         </Reveal>
