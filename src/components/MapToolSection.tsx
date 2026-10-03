@@ -22,13 +22,13 @@ const features = [
   },
   {
     icon: Bus,
-    title: "搬入・待機・電源レイアウト",
+    title: "搬入・待機・電源\nレイアウト",
     body: "ロケバス・電源車・機材車の駐車位置と動線をその場でプロット。搬入順と待機場所の食い違いを防ぎます。",
     chip: "tag-chip--lime",
   },
   {
     icon: Database,
-    title: "フィルムコミッション連携データベース",
+    title: "フィルムコミッション\n連携データベース",
     body: "八王子エリアを中心に、撮影推奨ロケ地と控室情報を蓄積。公認連携の現場知を次回撮影へ引き継ぎます。",
     chip: "tag-chip--cyan",
   },
@@ -105,7 +105,7 @@ export default function MapToolSection() {
                   <span className="theme-icon mt-4">
                     <feature.icon className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-3 text-base font-semibold leading-snug">
+                  <h3 className="mt-3 whitespace-pre-line text-base font-semibold leading-snug">
                     {feature.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">
