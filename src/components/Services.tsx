@@ -3,6 +3,7 @@
 import {
   ArrowUpRight,
   Clapperboard,
+  Map,
   MapPinned,
   Sparkles,
   Video,
@@ -52,6 +53,20 @@ const pillars = [
     label: "PROMOTION & BRANDING",
     badge: "制作",
     question: "中小企業のPR・採用動画も相談できますか？",
+  },
+  {
+    icon: Map,
+    title: "ロケ地図自動作成",
+    body: "映画・ドラマ制作部向けのロケMAPを、現場の進行に合わせてすばやく作成。撮影地点の整理から共有まで、ロケ準備を短時間で整えます。",
+    theme: "theme-card--cyan",
+    chip: "tag-chip--cyan",
+    label: "LOCATION MAP",
+    badge: "ツール",
+    question: "ロケ地図はどこで作れますか？",
+    cta: {
+      href: "https://map.almondbagger.com",
+      label: "ロケ地図ツクールを開く",
+    },
   },
 ] as const;
 
@@ -114,6 +129,17 @@ export default function Services() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
                   {pillar.body}
                 </p>
+                {"cta" in pillar ? (
+                  <a
+                    href={pillar.cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary mt-5 w-fit"
+                  >
+                    {pillar.cta.label}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                ) : null}
               </article>
             </Reveal>
           ))}
