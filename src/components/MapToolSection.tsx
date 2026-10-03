@@ -84,12 +84,12 @@ export default function MapToolSection() {
             <span className="tag-chip tag-chip--red">地図ツクール for Production</span>
           </div>
           <p className="eyebrow mt-5">地図ツクール by ALMONDBAGGER</p>
-          <h2 className="mt-4 max-w-4xl font-display text-2xl font-bold leading-snug tracking-tight md:text-4xl">
-            現場を知る制作部だから作れた、
-            <span className="mesh-text">映画・ドラマ・CM特化型</span>
-            ロケーション＆許認可マップツール
+          <h2 className="mt-4 max-w-4xl font-display text-lg font-bold leading-snug tracking-tight min-[420px]:text-2xl md:text-4xl">
+            <span className="block">現場を知る制作部だから作れた、</span>
+            <span className="mesh-text block">映画・ドラマ・CM特化型</span>
+            <span className="block">ロケーション＆許認可マップツール</span>
           </h2>
-          <p className="mt-5 max-w-3xl leading-relaxed text-muted md:text-lg">
+          <p className="mt-5 max-w-3xl leading-relaxed text-muted md:text-lg [word-break:auto-phrase]">
             八王子フィルムコミッション公認連携と20年の現場統括ノウハウを凝縮。ロケハン写真、控室、電源車、待機場所、駐車導線、道路使用許可エリアを地図上にピン留め・レイヤー化し、チーム全体でリアルタイム共有します。香盤表・台本・地図が直結する、次世代の制作部DXです。
           </p>
         </Reveal>
