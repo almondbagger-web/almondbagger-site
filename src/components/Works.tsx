@@ -1,219 +1,203 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  getWorksSorted,
-  workCategories,
-  type Work,
-  type WorkCategory,
-} from "@/data/works";
-import { cn } from "@/lib/utils";
+import { getFeaturedWorks, getFilmography, type Work } from "@/data/works";
 
-type Filter = "すべて" | WorkCategory;
+const featured = getFeaturedWorks();
+const filmography = getFilmography();
 
-const allWorks = getWorksSorted();
-
-function aspectLabel(aspect: Work["aspect"]) {
-  return aspect === "portrait" ? "9:16 SOCIAL" : "2.39:1 CINEMA";
+function mediumLabel(work: Work) {
+  if (work.id === "w-luvntcom") return "Storm Labels配給 / 劇場公開映画";
+  if (work.id === "w-soulmate") return "Netflix世界独占配信";
+  if (work.id === "w-bl-drama" || work.id === "w-jikihai") return "FOD SHORT";
+  if (work.id === "w-kabanya") return "WOWOW";
+  if (work.id === "w-tokrev") return "ワーナー・ブラザース配給";
+  return work.client;
 }
 
-function WorkCard({ work, index }: { work: Work; index: number }) {
-  const isPortrait = work.aspect === "portrait";
+function FeaturedCard({ work }: { work: Work }) {
+  const isFlagship = work.id === "w-obanhurumai";
 
   return (
-    <motion.article
-      layout
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.98 }}
-      transition={{ duration: 0.35, delay: Math.min(index, 8) * 0.03 }}
-      className="cinema-card overflow-hidden bg-ink"
-    >
-      <div
-        className={cn(
-          "cinema-preview hud-frame",
-          isPortrait
-            ? "cinema-preview--portrait my-5"
-            : "cinema-preview--landscape",
-        )}
-      >
-        <div className="hud-corners absolute inset-0" aria-hidden>
-          <span className="tl" />
-          <span className="tr" />
-          <span className="bl" />
-          <span className="br" />
-        </div>
-
-        <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-3 py-2">
-          <span className="hud-meta">{aspectLabel(work.aspect)}</span>
-          <span className="hud-meta">{work.year}</span>
-        </div>
-
-        {work.thumbnail ? (
-          <Image
-            src={work.thumbnail}
-            alt={`${work.title} プレビュー`}
-            fill
-            sizes={
-              isPortrait
-                ? "(max-width:640px) 60vw, 220px"
-                : "(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-            }
-            className="cinema-preview-media object-cover"
+    <article className="cinema-card overflow-hidden border border-border bg-white">
+      {isFlagship ? (
+        <div className="cinema-player">
+          <iframe
+            src="https://www.youtube.com/embed/D2lvekhImOI"
+            title={`${work.title} — YouTube`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
-        ) : (
-          <div className="cinema-preview-media absolute inset-0 flex items-end bg-gradient-to-br from-[#0b0c0e] via-[#16181e] to-[#2c2618] p-5">
-            <div>
-              <p className="font-mono text-[0.58rem] tracking-[0.16em] text-gold/80">
-                {work.category}
-              </p>
-              <span className="mt-1 block font-serif text-lg tracking-wide text-white/92">
-                {work.title}
-              </span>
-            </div>
-          </div>
-        )}
-
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-      </div>
-
-      <div className="flex flex-1 flex-col border-t border-white/10 bg-[#0b0c0e] p-5 md:p-6">
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[0.65rem] tracking-[0.08em] text-white/45">
-          <span>{work.periodLabel}</span>
-          <span className="text-white/20">/</span>
-          <span>{work.client}</span>
         </div>
-        <h3 className="mt-2.5 font-serif text-lg font-medium tracking-wide text-white md:text-xl">
+      ) : (
+        <div className="relative mx-auto aspect-[9/16] max-h-[420px] w-full max-w-[280px] overflow-hidden bg-surface">
+          {work.thumbnail ? (
+            <Image
+              src={work.thumbnail}
+              alt={`${work.title} ジャケット`}
+              fill
+              sizes="(max-width:768px) 70vw, 280px"
+              className="object-cover"
+            />
+          ) : null}
+        </div>
+      )}
+
+      <div className="p-5 md:p-6">
+        <p className="font-mono text-[0.65rem] tracking-[0.12em] text-muted">
+          {work.year} / {work.category}
+        </p>
+        <h3 className="mt-2 font-serif text-lg font-medium tracking-wide text-foreground md:text-xl">
           {work.title}
         </h3>
-        <p className="mt-2 text-[0.78rem] font-medium tracking-wide text-gold">
+        <p className="mt-2 text-[0.78rem] font-medium text-gold-deep">
           {work.roleCredit}
         </p>
-        <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-white/55">
+        <p className="mt-3 text-sm leading-relaxed text-muted">
           {work.description}
         </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {work.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="border border-white/12 px-2 py-1 text-[0.65rem] tracking-wide text-white/50"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
         {work.officialUrl ? (
           <a
             href={work.officialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-1.5 text-[0.78rem] font-medium tracking-wide text-white/85 transition-colors hover:text-gold"
-            aria-label={`${work.title} の公式情報を見る`}
+            className="mt-5 inline-flex items-center gap-1.5 text-[0.78rem] font-medium tracking-wide text-foreground transition-colors hover:text-gold-deep"
+            aria-label={`${work.title} を見る`}
           >
-            公式情報を見る
+            {isFlagship ? "YouTubeで観る" : "公式を見る"}
             <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         ) : null}
       </div>
-    </motion.article>
+    </article>
   );
 }
 
 export default function Works() {
-  const [filter, setFilter] = useState<Filter>("すべて");
-
-  const filtered = useMemo(() => {
-    if (filter === "すべて") return allWorks;
-    return allWorks.filter((w) => w.category === filter);
-  }, [filter]);
-
-  const years = useMemo(() => {
-    const set = new Set(filtered.map((w) => w.year));
-    return Array.from(set).sort((a, b) => b - a);
-  }, [filtered]);
+  const years = Array.from(new Set(filmography.map((w) => w.year))).sort(
+    (a, b) => b - a,
+  );
 
   return (
     <section
       id="works"
       aria-labelledby="works-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-ink text-white section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-70" />
-      <div className="pointer-events-none absolute -right-20 top-20 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 tech-grid opacity-35" />
 
       <div className="relative mx-auto max-w-6xl section-pad">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-              WORKS / PORTFOLIO
-            </p>
-            <h2
-              id="works-heading"
-              className="mt-4 font-serif text-2xl font-medium tracking-wide md:text-3xl lg:text-4xl"
-            >
-              制作実績
-            </h2>
-            <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
-              2026年〜2020年。劇場公開・配信・地上波・自社IPまで、公開・配信の新しい順で掲載しています。
-            </p>
-          </div>
-          <p className="font-mono text-[0.65rem] tracking-[0.14em] text-white/40">
-            {filtered.length.toString().padStart(2, "0")} TITLES
+        <div>
+          <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
+            WORKS
+          </p>
+          <h2
+            id="works-heading"
+            className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
+          >
+            制作実績
+          </h2>
+          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
+            映像付きの代表作と、制作部・ロケーション統括のフィルモグラフィーを分けて掲載しています。
           </p>
         </div>
 
-        <div
-          className="mt-10 flex flex-wrap gap-2"
-          role="tablist"
-          aria-label="制作実績カテゴリー"
-        >
-          {workCategories.map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              role="tab"
-              aria-selected={filter === tab}
-              className={cn(
-                "border px-3.5 py-2 text-[0.75rem] font-medium tracking-wide transition-colors",
-                filter === tab
-                  ? "border-gold bg-gold/15 text-gold"
-                  : "border-white/15 text-white/55 hover:border-white/35 hover:text-white",
-              )}
-              onClick={() => setFilter(tab)}
-            >
-              {tab}
-            </button>
-          ))}
+        {/* Featured */}
+        <div className="mt-14">
+          <h3 className="font-serif text-xl tracking-wide text-foreground md:text-2xl">
+            Featured Works
+          </h3>
+          <p className="mt-2 text-sm text-muted">
+            ビジュアル・映像付きの代表作
+          </p>
+          <div className="mt-8 space-y-6">
+            {featured[0] ? <FeaturedCard work={featured[0]} /> : null}
+            <div className="grid gap-6 sm:grid-cols-2">
+              {featured.slice(1).map((work) => (
+                <FeaturedCard key={work.id} work={work} />
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="mt-12 space-y-14">
-          {years.map((year) => {
-            const yearWorks = filtered.filter((w) => w.year === year);
-            if (!yearWorks.length) return null;
-            return (
-              <div key={year}>
-                <div className="mb-6 flex items-center gap-4">
-                  <h3 className="font-serif text-xl tracking-wide text-gold md:text-2xl">
-                    {year}
-                  </h3>
-                  <div className="h-px flex-1 bg-white/10" />
+        {/* Filmography table */}
+        <div className="mt-20">
+          <h3 className="font-serif text-xl tracking-wide text-foreground md:text-2xl">
+            Filmography
+          </h3>
+          <p className="mt-2 text-sm text-muted">
+            制作部・ロケーション統括実績（2026年〜2020年）
+          </p>
+
+          <div className="mt-8 space-y-10">
+            {years.map((year) => {
+              const rows = filmography.filter((w) => w.year === year);
+              return (
+                <div key={year}>
+                  <div className="mb-4 flex items-baseline gap-4 border-b border-border pb-3">
+                    <span className="font-serif text-2xl tracking-wide text-gold">
+                      {year}
+                    </span>
+                    <span className="font-mono text-[0.65rem] tracking-[0.14em] text-muted">
+                      {rows.length.toString().padStart(2, "0")} TITLES
+                    </span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[640px] text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-[0.7rem] tracking-wide text-muted">
+                          <th className="py-3 pr-4 font-medium">作品</th>
+                          <th className="py-3 pr-4 font-medium">媒体 / 配給</th>
+                          <th className="py-3 pr-4 font-medium">担当</th>
+                          <th className="py-3 font-medium">リンク</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {rows.map((work) => (
+                          <tr
+                            key={work.id}
+                            className="border-b border-border/80 align-top last:border-b-0"
+                          >
+                            <td className="py-4 pr-4">
+                              <span className="font-serif text-[0.95rem] font-medium tracking-wide text-foreground">
+                                {work.title}
+                              </span>
+                            </td>
+                            <td className="py-4 pr-4 text-muted">
+                              {mediumLabel(work)}
+                            </td>
+                            <td className="py-4 pr-4 text-foreground/85">
+                              {work.roleCredit}
+                            </td>
+                            <td className="py-4">
+                              {work.officialUrl ? (
+                                <a
+                                  href={work.officialUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 font-medium text-gold-deep underline-offset-4 hover:underline"
+                                  aria-label={`${work.title} の公式ページ`}
+                                >
+                                  公式
+                                  <ArrowUpRight className="h-3.5 w-3.5" />
+                                </a>
+                              ) : (
+                                <span className="text-muted">—</span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <motion.div
-                  layout
-                  className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-                >
-                  <AnimatePresence mode="popLayout">
-                    {yearWorks.map((work, index) => (
-                      <WorkCard key={work.id} work={work} index={index} />
-                    ))}
-                  </AnimatePresence>
-                </motion.div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

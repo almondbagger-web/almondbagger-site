@@ -78,17 +78,17 @@ export const works: Work[] = [
     id: "w-soulmate",
     title: "ソウルメイト",
     client: "Netflix",
-    category: "ドラマ・配信",
-    tags: ["Netflixシリーズ", "世界独占配信"],
+    category: "映画",
+    tags: ["Netflix映画", "世界独占配信"],
     year: 2026,
     sortKey: 20260514,
     periodLabel: "2026年5月14日世界独占配信",
     description:
-      "Netflixシリーズ。制作部・クラフト部門として撮影現場に参加。",
+      "Netflix映画。制作部・クラフト部門として撮影現場に参加。",
     aspect: "landscape",
     officialUrl: "https://about.netflix.com/ja/news/soulmate-main-trailer",
     ctaLabel: "公式サイト / 配信で観る",
-    roleCredit: "制作部・クラフト部門参加",
+    roleCredit: "制作部・クラフト部門",
   },
   {
     id: "w-obanhurumai",
@@ -290,10 +290,10 @@ export const works: Work[] = [
     title: "連続ドラマW 池井戸潤スペシャル『かばん屋の相続』",
     client: "WOWOW",
     category: "ドラマ・配信",
-    tags: ["WOWOWオリジナル"],
-    year: 2021,
-    sortKey: 20211201,
-    periodLabel: "2021年放送",
+    tags: ["WOWOWオリジナル", "連続ドラマW"],
+    year: 2025,
+    sortKey: 20251201,
+    periodLabel: "2025年放送",
     description: "WOWOW連続ドラマWの制作部として参加。",
     aspect: "landscape",
     officialUrl: "https://www.wowow.co.jp/drama/original/kabanyano-souzoku/",
@@ -332,6 +332,49 @@ export const works: Work[] = [
 /** 新しい順にソート済み配列を返す */
 export function getWorksSorted(): Work[] {
   return [...works].sort((a, b) => b.sortKey - a.sortKey);
+}
+
+/** Featured：ビジュアル／映像付き代表作 */
+export const featuredWorkIds = [
+  "w-obanhurumai",
+  "w-aimote",
+  "w-waterman",
+] as const;
+
+/**
+ * Filmography：制作部・ロケーション統括実績（表示順＝新しい年順）
+ * MV・自社IPは Featured 側に分離
+ */
+export const filmographyIds = [
+  "w-luvntcom",
+  "w-bl-drama",
+  "w-jikihai",
+  "w-soulmate",
+  "w-kabanya",
+  "w-jimenshi",
+  "w-alice",
+  "w-mysteryday",
+  "w-mitarai",
+  "w-oujou",
+  "w-akogare",
+  "w-sobakasu",
+  "w-romakira",
+  "w-shikaku",
+  "w-tokrev",
+  "w-soreai",
+  "w-dareka",
+] as const;
+
+export function getFeaturedWorks(): Work[] {
+  return featuredWorkIds
+    .map((id) => works.find((w) => w.id === id))
+    .filter((w): w is Work => Boolean(w));
+}
+
+export function getFilmography(): Work[] {
+  return filmographyIds
+    .map((id) => works.find((w) => w.id === id))
+    .filter((w): w is Work => Boolean(w));
 }
 
 export const workCategories: Array<"すべて" | WorkCategory> = [
@@ -383,7 +426,6 @@ export const servicePillars = [
     ],
     href: "#contact",
     cta: "制作部のご相談",
-    tone: "cinema" as const,
   },
   {
     id: "corporate",
@@ -397,7 +439,6 @@ export const servicePillars = [
     ],
     href: "#contact",
     cta: "企業映像のご相談",
-    tone: "light" as const,
   },
   {
     id: "creators",
@@ -411,7 +452,6 @@ export const servicePillars = [
     href: "https://map.almondbagger.com/",
     cta: "地図ツクールを開く",
     external: true,
-    tone: "light" as const,
   },
 ] as const;
 
