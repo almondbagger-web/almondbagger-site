@@ -2,6 +2,13 @@ export type WorkCategory = "映画" | "ドラマ・配信" | "MV・PR";
 
 export type WorkAspect = "landscape" | "portrait";
 
+/** ポートフォリオUI用フィルター */
+export type PortfolioFilter =
+  | "all"
+  | "film-drama"
+  | "sns-mv-ai"
+  | "corp-multi";
+
 export type Work = {
   id: string;
   title: string;
@@ -22,6 +29,10 @@ export type Work = {
   secondaryUrl?: string;
   secondaryCtaLabel?: string;
   credit?: string;
+  /** カード用の短い役割クレジット */
+  roleCredit?: string;
+  /** ポートフォリオフィルター所属 */
+  filters?: PortfolioFilter[];
 };
 
 const t = (n: number) => `/works/work-${String(n).padStart(2, "0")}.jpg`;
@@ -36,64 +47,72 @@ export const works: Work[] = [
     title: "ソウルメイト",
     client: "Netflix",
     category: "映画",
-    tags: ["Netflix映画", "制作部", "クラフト（ケータリング・現場サポート）"],
+    tags: ["Netflix映画", "制作部", "クラフト統括"],
     year: 2026,
     sortKey: 20260514,
     description:
-      "Netflixにて世界独占配信中。弊社スタッフが制作部およびクラフト部門として撮影現場に参加・強力にバックアップ。",
+      "Netflix映画。制作部およびクラフト統括として撮影現場を支え、大規模配信作品の進行管理を担当。",
     aspect: "landscape",
     officialUrl: "https://about.netflix.com/ja/news/soulmate-main-trailer",
     ctaLabel: "公式サイト / 配信で観る",
+    roleCredit: "制作部・クラフト統括",
+    filters: ["film-drama"],
   },
   {
     id: "w-obanhurumai",
     title: "いいねの大盤振る舞い",
     client: "YUMITA / ALMONDBAGGER",
     category: "MV・PR",
-    tags: ["自社オリジナルIP", "アニメMV", "AI音楽・映像"],
+    tags: ["自社フラッグシップ", "AIアニメMV", "SNS展開"],
     thumbnail: "/mv-obanhurumai.jpg",
     year: 2026,
     sortKey: 20260510,
     description:
-      "「昔は槍で領地を奪取、今は親指で通知を連打ッシュ」。戦国侍が現代SNSの数字の戦いに切り込む、自社プロデュースの大型アニメーションMV。",
+      "自社フラッグシップAIアニメMV。企画・作詞・作曲・AIアニメーションまで一貫制作したオリジナルIP。",
     aspect: "landscape",
     officialUrl: "https://youtu.be/D2lvekhImOI",
     ctaLabel: "YouTubeで本編を観る",
     credit:
       "企画・作詞・作曲・アニメーション制作：YUMITA（Generated with Suno & AI tools）",
+    roleCredit: "企画・作詞・作曲・AIアニメーション / YUMITA",
+    filters: ["sns-mv-ai", "corp-multi"],
   },
   {
     id: "w-aimote",
     title: "aiを持て",
     client: "AKBB",
     category: "MV・PR",
-    tags: ["制作部協力", "MV", "中華ダンスロック / クラブEDM"],
+    tags: ["実写×AI", "制作部協力", "YouTube / TikTok"],
     thumbnail: "/mv-aimote.jpg",
     year: 2026,
     sortKey: 20260505,
     description:
-      "AI（人工知能）の時代だからこそ、愛（AI）を持って泥臭く走る人間が一番強い——中華ダンスロック／クラブEDMの楽曲MV。制作部協力として参加。",
+      "実写×AI映像のMV。制作部協力として参加し、YouTube / TikTokへ展開。",
     aspect: "portrait",
     officialUrl: "https://youtu.be/3TjVEUCimZs",
     ctaLabel: "YouTubeで観る",
     secondaryUrl:
       "https://www.tiktok.com/@akbb.a.i.kuchipak?is_from_webapp=1&sender_device=pc",
     secondaryCtaLabel: "公式TikTokへ",
+    roleCredit: "実写×AI映像・制作部協力",
+    filters: ["sns-mv-ai", "corp-multi"],
   },
   {
     id: "w-waterman",
     title: "WATERMAN",
     client: "AKBB feat. Waterman",
     category: "MV・PR",
-    tags: ["制作部 / 現場統括", "ロケーション支援", "実写 ✕ AI映像制作協力"],
+    tags: ["実写×AI", "制作部協力", "TikTok"],
     thumbnail: "/mv-waterman.jpg",
     year: 2026,
     sortKey: 20260501,
     description:
-      "AI ✖️ 口パク ✖️ エアーギターの最新型ロックバンド。制作部・現場統括・ロケーション支援・実写✕AI映像制作協力として参加。",
+      "実写×AI映像のMV。制作部・ロケーション支援・映像制作協力として参加。",
     aspect: "portrait",
     officialUrl: "https://vt.tiktok.com/ZSVx84VPA/",
     ctaLabel: "TikTokで観る",
+    roleCredit: "実写×AI映像・制作部協力",
+    filters: ["sns-mv-ai", "corp-multi"],
   },
   {
     id: "w-luvntcom",
@@ -104,35 +123,41 @@ export const works: Work[] = [
     year: 2025,
     sortKey: 20251201,
     description:
-      "Storm Labels配給の話題の劇場公開映画。確かな制作部体制で現場統括・ロケーション管理を完走。",
+      "Storm Labels配給の劇場公開映画。制作部・現場統括・ロケーション管理を担当。",
     aspect: "landscape",
     officialUrl: "https://movie.storm-labels.co.jp/s/luvntcom/?ima=5210",
+    roleCredit: "制作部・現場統括・ロケーション管理",
+    filters: ["film-drama"],
   },
   {
     id: "w-bl-drama",
     title: "BLドラマに女はいらない",
     client: "FOD（フジテレビ）",
     category: "ドラマ・配信",
-    tags: ["FODショートドラマ", "制作部 / 現場進行"],
+    tags: ["FODショートドラマ", "縦型ドラマ", "制作部統括"],
     year: 2025,
     sortKey: 20251101,
     description:
-      "急速に需要が高まる縦型・ショートドラマの現場制作部として迅速かつ円滑な撮影オペレーションを遂行。",
+      "FODショートドラマ。縦型ドラマ制作部として撮影オペレーションを統括。",
     aspect: "portrait",
     officialUrl: "https://short.fod.fujitv.co.jp/s80af/",
+    roleCredit: "縦型ドラマ制作部統括",
+    filters: ["film-drama", "sns-mv-ai", "corp-multi"],
   },
   {
     id: "w-jikihai",
     title: "ジキ／ハイ～愛した男には別の顔があった～",
     client: "FOD（フジテレビ）",
     category: "ドラマ・配信",
-    tags: ["FODショートドラマ", "制作部 / 現場進行"],
+    tags: ["FODショートドラマ", "縦型ドラマ", "制作部統括"],
     year: 2025,
     sortKey: 20251001,
     description:
-      "スリリングな愛憎劇を描くFODショートドラマの現場進行・制作部業務を担当。",
+      "FODショートドラマ。縦型ドラマ制作部として現場進行を担当。",
     aspect: "portrait",
     officialUrl: "https://short.fod.fujitv.co.jp/s17xo/",
+    roleCredit: "縦型ドラマ制作部統括",
+    filters: ["film-drama", "sns-mv-ai", "corp-multi"],
   },
   {
     id: "w-jimenshi",
@@ -451,17 +476,57 @@ export const companyInfo = {
 export const navLinks = [
   { href: "#strengths", label: "強み" },
   { href: "#works", label: "制作実績" },
-  { href: "#products", label: "自社ツール" },
+  { href: "#strategy", label: "戦略・DX" },
+  { href: "#faq", label: "FAQ" },
   { href: "#company", label: "会社概要" },
 ] as const;
 
-/** トップ「制作実績」に掲載する代表作品 ID */
-export const featuredWorkIds = [
+/** トップ「制作実績」ポートフォリオ掲載 ID */
+export const portfolioWorkIds = [
   "w-soulmate",
   "w-luvntcom",
   "w-bl-drama",
   "w-jikihai",
-  "w-jimenshi",
-  "w-alice",
+  "w-obanhurumai",
+  "w-aimote",
+  "w-waterman",
+] as const;
+
+export const portfolioFilters: Array<{
+  id: PortfolioFilter;
+  label: string;
+}> = [
+  { id: "all", label: "ALL" },
+  { id: "film-drama", label: "映画・ドラマ・配信" },
+  { id: "sns-mv-ai", label: "SNS・MV・AIクリエイティブ" },
+  { id: "corp-multi", label: "企業PR・縦横同時制作" },
+];
+
+export const faqItems = [
+  {
+    question: "映画・ドラマの制作部やロケ手配のみ依頼できますか？",
+    answer:
+      "はい。商業映画・地上波ドラマ・配信作品など、制作部統括・ロケハン・許認可・現場進行のみのご依頼にも対応します。規模に応じて柔軟に編成します。",
+  },
+  {
+    question: "企業向けに横動画と縦型ショート動画を同時に制作できますか？",
+    answer:
+      "可能です。オープンゲート撮影により、フルサイズセンサー全面記録から Web・YouTube用16:9 と TikTok・Reels用9:16 を同時生成。現場拘束時間と人件費の圧縮につなげます。",
+  },
+  {
+    question: "AIを使った映像制作やバレ消しに対応していますか？",
+    answer:
+      "対応しています。動く絵コンテ（AI Previs）による合意形成の高速化と、ロケ映り込みのAIバレ消し（AI VFX）によるポスプロ圧縮を、制作部の進行管理と直結して提供します。",
+  },
+  {
+    question: "八王子エリアでのロケやフィルムコミッション連携は可能ですか？",
+    answer:
+      "はい。八王子フィルムコミッション公認連携のもと、ロケ地選定から許認可申請、地元施設との撮影調整まで制作部として支援します。",
+  },
+  {
+    question: "AB式ロケ地図ツクールとは何ですか？",
+    answer:
+      "現場の制作部が開発したロケーション＆許認可マップツールです。ロケハン情報・控室・待機場所・道路使用許可エリアを地図上で共有し、香盤表・台本と連動した現場準備を支えます。",
+  },
 ] as const;
 

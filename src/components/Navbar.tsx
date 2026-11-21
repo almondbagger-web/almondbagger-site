@@ -35,8 +35,8 @@ export default function Navbar() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
           scrolled
-            ? "border-border bg-white/95 shadow-[0_1px_0_rgba(17,19,21,0.03)] backdrop-blur-md"
-            : "border-transparent bg-white/90 backdrop-blur-sm",
+            ? "border-border/80 bg-white/80 shadow-[0_1px_0_rgba(9,10,13,0.04)] backdrop-blur-md"
+            : "border-transparent bg-white/70 backdrop-blur-sm",
         )}
       >
         <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-4 section-pad md:h-[4.75rem]">
@@ -52,7 +52,10 @@ export default function Navbar() {
             <BrandLogo variant="header" priority />
           </a>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav
+            className="hidden items-center gap-0.5 xl:flex"
+            aria-label="メインナビゲーション"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -61,7 +64,7 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNav(link.href);
                 }}
-                className="px-3 py-2 text-[0.8125rem] font-medium tracking-[0.06em] text-muted transition-colors hover:text-foreground"
+                className="px-2.5 py-2 text-[0.78rem] font-medium tracking-[0.06em] text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -83,7 +86,7 @@ export default function Navbar() {
             aria-label={open ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center border border-border text-foreground lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center border border-border text-foreground xl:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -91,9 +94,9 @@ export default function Navbar() {
       </header>
 
       {open ? (
-        <div className="fixed inset-0 z-40 bg-white lg:hidden">
+        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-md xl:hidden">
           <div className="flex h-full flex-col px-6 pb-10 pt-24">
-            <nav className="flex flex-col gap-1">
+            <nav className="flex flex-col gap-1" aria-label="モバイルナビゲーション">
               {navLinks.map((link) => (
                 <a
                   key={link.href}

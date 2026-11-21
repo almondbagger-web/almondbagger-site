@@ -2,28 +2,36 @@
 
 :root {
   --background: #ffffff;
-  --surface: #f8f8fa;
+  --surface: #f5f6f8;
+  --ink: #090a0d;
   --foreground: #111315;
-  --muted: #525866;
-  --border: #e6e8ec;
-  --gold: #a68a56;
-  --gold-soft: #f4efe6;
-  --gold-deep: #8a7044;
+  --muted: #5a6170;
+  --border: #e4e6eb;
+  --gold: #b89650;
+  --gold-soft: #f3ecdf;
+  --gold-deep: #96783c;
+  --cyan: #0ea5e9;
+  --cyan-soft: rgba(14, 165, 233, 0.12);
+  --cyan-glow: rgba(14, 165, 233, 0.35);
+  --grid-line: rgba(9, 10, 13, 0.045);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-ink: var(--ink);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
+  --color-cyan: var(--cyan);
   --font-sans: var(--font-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
     "Noto Sans JP", "Segoe UI", system-ui, sans-serif;
   --font-serif: var(--font-serif-jp), "Noto Serif JP", "Hiragino Mincho ProN",
     "Yu Mincho", serif;
+  --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
 }
 
 * {
@@ -44,8 +52,8 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--gold) 28%, white);
-  color: var(--foreground);
+  background: color-mix(in oklab, var(--gold) 30%, white);
+  color: var(--ink);
 }
 
 .font-serif {
@@ -53,21 +61,122 @@ body {
   letter-spacing: 0.04em;
 }
 
+.font-mono {
+  font-family: var(--font-mono);
+}
+
 .section-pad {
   padding-inline: clamp(1.25rem, 4vw, 4.5rem);
 }
 
 .section-y {
-  padding-block: clamp(6rem, 10vw, 8rem);
+  padding-block: clamp(5.5rem, 9vw, 8rem);
 }
 
-.lux-rule {
-  height: 1px;
-  background: var(--border);
+/* ─── Technical grid ─── */
+.tech-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.tech-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Glass ─── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(228, 230, 235, 0.9);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+}
+
+.glass-dark {
+  background: rgba(9, 10, 13, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+}
+
+/* ─── Camera HUD / finder frame ─── */
+.hud-frame {
+  position: relative;
+}
+
+.hud-frame::before,
+.hud-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--gold);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.85;
+}
+
+.hud-frame::before {
+  top: 10px;
+  left: 10px;
+  border-width: 1px 0 0 1px;
+}
+
+.hud-frame::after {
+  right: 10px;
+  bottom: 10px;
+  border-width: 0 1px 1px 0;
+}
+
+.hud-corners {
+  pointer-events: none;
+}
+
+.hud-corners span {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: color-mix(in oklab, var(--gold) 80%, white);
+  border-style: solid;
+  z-index: 4;
+}
+
+.hud-corners .tl {
+  top: 8px;
+  left: 8px;
+  border-width: 1px 0 0 1px;
+}
+.hud-corners .tr {
+  top: 8px;
+  right: 8px;
+  border-width: 1px 1px 0 0;
+}
+.hud-corners .bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 1px 1px;
+}
+.hud-corners .br {
+  right: 8px;
+  bottom: 8px;
+  border-width: 0 1px 1px 0;
+}
+
+.hud-meta {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .gold-frame {
-  border: 1px solid color-mix(in oklab, var(--gold) 55%, white);
+  border: 1px solid color-mix(in oklab, var(--gold) 60%, white);
   background: #fff;
 }
 
@@ -81,17 +190,18 @@ body {
   font-weight: 600;
   letter-spacing: 0.08em;
   color: #fff;
-  background: var(--foreground);
-  border: 1px solid var(--foreground);
+  background: var(--ink);
+  border: 1px solid var(--ink);
   transition:
     background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .btn-dark:hover {
-  background: var(--gold-deep);
-  border-color: var(--gold-deep);
+  background: #1a1c22;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--gold) 40%, transparent);
 }
 
 .btn-gold-outline {
@@ -108,12 +218,38 @@ body {
   border: 1px solid var(--gold);
   transition:
     background-color 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .btn-gold-outline:hover {
   background: var(--gold-soft);
   color: var(--gold-deep);
+  box-shadow: 0 0 20px color-mix(in oklab, var(--gold) 18%, transparent);
+}
+
+.btn-cyan-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid color-mix(in oklab, var(--cyan) 45%, var(--border));
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.btn-cyan-ghost:hover {
+  background: var(--cyan-soft);
+  border-color: var(--cyan);
+  box-shadow: 0 0 18px var(--cyan-glow);
 }
 
 .field-lux {
@@ -130,12 +266,103 @@ body {
 }
 
 .field-lux:focus {
-  border-color: color-mix(in oklab, var(--gold) 70%, var(--border));
+  border-color: color-mix(in oklab, var(--gold) 65%, var(--border));
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold) 14%, transparent);
 }
 
 .field-lux::placeholder {
   color: color-mix(in oklab, var(--muted) 70%, white);
+}
+
+/* ─── Cinema portfolio card ─── */
+.cinema-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--border);
+  background: #fff;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cinema-card:hover {
+  border-color: color-mix(in oklab, var(--gold) 55%, var(--border));
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--gold) 25%, transparent),
+    0 18px 40px rgba(9, 10, 13, 0.08),
+    0 0 28px color-mix(in oklab, var(--gold) 12%, transparent);
+  transform: translateY(-3px);
+}
+
+.cinema-card:hover .cinema-preview-media {
+  transform: scale(1.045);
+}
+
+.cinema-preview {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.cinema-preview--landscape {
+  aspect-ratio: 2.39 / 1;
+}
+
+.cinema-preview--portrait {
+  aspect-ratio: 9 / 16;
+  max-height: 320px;
+  margin-inline: auto;
+  width: min(100%, 220px);
+}
+
+.cinema-preview-media {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.filter-tab {
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.filter-tab:hover {
+  color: var(--foreground);
+  border-color: color-mix(in oklab, var(--gold) 40%, var(--border));
+}
+
+.filter-tab[aria-selected="true"] {
+  color: var(--ink);
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  box-shadow: 0 0 16px color-mix(in oklab, var(--gold) 16%, transparent);
+}
+
+/* ─── Analytics bars ─── */
+.bar-track {
+  height: 10px;
+  overflow: hidden;
+  background: rgba(9, 10, 13, 0.06);
+}
+
+.bar-fill {
+  height: 100%;
+  transform-origin: left center;
+}
+
+.cyan-dot {
+  box-shadow: 0 0 10px var(--cyan-glow);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -149,5 +376,13 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .cinema-card:hover {
+    transform: none;
+  }
+
+  .cinema-card:hover .cinema-preview-media {
+    transform: none;
   }
 }

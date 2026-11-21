@@ -14,7 +14,7 @@ export default function Footer() {
               <BrandLogo variant="footer" />
             </a>
             <p className="mt-6 text-sm leading-relaxed text-muted">
-              商業映画・ドラマの制作部統括とロケーション支援。八王子を拠点に、作品の現場を静かに支えます。
+              映画・ドラマ制作部統括 × 最先端AIクリエイティブ × SNS・アナリティクス戦略。八王子を拠点に、作品の現場と拡散を支えます。
             </p>
             <p className="mt-5 text-sm leading-relaxed text-muted">
               {companyInfo.postal}
@@ -38,7 +38,10 @@ export default function Footer() {
             </p>
           </div>
 
-          <nav className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3">
+          <nav
+            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3"
+            aria-label="フッターナビゲーション"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}

@@ -28,7 +28,8 @@ const initial: FormState = {
 const subjectOptions = [
   "制作部・ロケ支援のご相談",
   "AI Previs / VFXのご相談",
-  "企業PR映像のご相談",
+  "オープンゲート縦横同時制作のご相談",
+  "企業PR映像・SNS展開のご相談",
   "地図ツクールについて",
   "その他",
 ] as const;
@@ -63,29 +64,29 @@ export default function CompanyContact() {
     <>
       <section
         id="company"
-        className="relative scroll-mt-24 bg-background section-y md:scroll-mt-28"
+        aria-labelledby="company-heading"
+        className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
       >
-        <div className="mx-auto max-w-6xl section-pad">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          >
+        <div className="pointer-events-none absolute inset-0 tech-grid opacity-35" />
+        <div className="relative mx-auto max-w-6xl section-pad">
+          <div>
             <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
               COMPANY
             </p>
-            <h2 className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl">
+            <h2
+              id="company-heading"
+              className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
+            >
               会社概要
             </h2>
-          </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-12 overflow-hidden border border-border bg-white"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="glass-panel mt-12 overflow-hidden"
           >
             <table className="w-full text-left text-sm">
               <tbody>
@@ -128,33 +129,32 @@ export default function CompanyContact() {
 
       <section
         id="contact"
-        className="relative scroll-mt-24 bg-surface section-y md:scroll-mt-28"
+        aria-labelledby="contact-heading"
+        className="relative scroll-mt-24 overflow-hidden bg-surface section-y md:scroll-mt-28"
       >
-        <div className="mx-auto max-w-2xl section-pad">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center"
-          >
+        <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
+        <div className="relative mx-auto max-w-2xl section-pad">
+          <div className="text-center">
             <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
               CONTACT
             </p>
-            <h2 className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl">
+            <h2
+              id="contact-heading"
+              className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
+            >
               お問い合わせ
             </h2>
             <p className="mt-5 text-[0.95rem] leading-relaxed text-muted">
-              制作部支援、ロケーション、映像制作に関するご相談を承ります。内容を確認のうえ、担当よりご連絡いたします。
+              制作部支援、ロケーション、AI映像、縦横同時制作に関するご相談を承ります。内容を確認のうえ、担当よりご連絡いたします。
             </p>
-          </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-12 border border-border bg-white p-6 md:p-10"
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="glass-panel mt-12 p-6 md:p-10"
           >
             {submitted ? (
               <div className="flex min-h-[280px] flex-col items-center justify-center text-center">
