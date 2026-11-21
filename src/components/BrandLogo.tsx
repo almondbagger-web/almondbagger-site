@@ -16,7 +16,8 @@ const LOGO_SRC = "/会社LOGO-trim.png";
 const LOGO_FALLBACK = "/会社LOGO.png";
 
 const VARIANT_CLASS: Record<NonNullable<BrandLogoProps["variant"]>, string> = {
-  header: "h-10 w-auto max-w-[200px] sm:h-11 sm:max-w-[220px] md:h-12 md:max-w-[240px]",
+  header:
+    "h-8 w-auto max-w-[72px] sm:h-9 sm:max-w-[88px] md:h-10 md:max-w-[104px]",
   footer: "h-12 w-auto max-w-[220px] md:h-14 md:max-w-[260px]",
   hero: "h-10 w-auto max-w-[200px]",
   default: "h-12 w-auto max-w-[220px]",

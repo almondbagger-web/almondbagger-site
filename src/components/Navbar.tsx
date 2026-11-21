@@ -41,13 +41,14 @@ export default function Navbar() {
             : "border-white/10 bg-cinema/70 backdrop-blur-md",
         )}
       >
-        <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-4 section-pad md:h-[4.75rem]">
+        <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-2 section-pad sm:gap-4 md:h-[4.75rem]">
           <a
-            href="#top"
-            aria-label={`${companyInfo.shortName} トップへ`}
+            href="/"
+            title="株式会社ALMONDBAGGER | 八王子フィルムコミッション × 制作部 × AIクリエイター"
+            aria-label="株式会社ALMONDBAGGER | 八王子フィルムコミッション × 制作部 × AIクリエイター"
             className={cn(
-              "min-w-0 shrink-0",
-              !lightBar && "rounded-sm bg-white/95 px-2 py-1",
+              "flex min-w-0 max-w-[min(100%,18.5rem)] items-center gap-2 sm:max-w-none sm:gap-3",
+              !lightBar && "rounded-sm bg-white/95 px-1.5 py-1 sm:px-2",
             )}
             onClick={(e) => {
               e.preventDefault();
@@ -55,6 +56,14 @@ export default function Navbar() {
             }}
           >
             <BrandLogo variant="header" priority />
+            <span className="min-w-0 leading-tight">
+              <span className="block font-display text-base font-extrabold tracking-widest text-foreground sm:text-lg md:text-xl">
+                ALMONDBAGGER
+              </span>
+              <span className="mt-0.5 block truncate text-[9px] tracking-wide text-[#A68A56] sm:text-[10px] md:text-xs">
+                八王子フィルムコミッション × 制作部 × AIクリエイター
+              </span>
+            </span>
           </a>
 
           <nav
