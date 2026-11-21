@@ -1,8 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Strengths from "@/components/Strengths";
+import Services from "@/components/Services";
 import Works from "@/components/Works";
-import Strategy from "@/components/Strategy";
 import FAQ from "@/components/FAQ";
 import CompanyContact from "@/components/CompanyContact";
 import Footer from "@/components/Footer";
@@ -13,9 +12,8 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Strengths />
+        <Services />
         <Works />
-        <Strategy />
         <FAQ />
         <CompanyContact />
       </main>

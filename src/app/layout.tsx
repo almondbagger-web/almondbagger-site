@@ -18,10 +18,10 @@ const fontSerif = Noto_Serif_JP({
 });
 
 const siteTitle =
-  "ALMONDBAGGER | 日本の映画・ドラマ制作部統括 × AI映像・SNS戦略プロダクション";
+  "ALMONDBAGGER | 映画・ドラマ制作部統括 × AI映像制作プロダクション";
 
 const siteDescription =
-  "商業映画・地上波ドラマの制作部統括20年超と、八王子フィルムコミッション公認連携。最先端AI Previs/VFX、オープンゲート縦横同時制作、SNS・アナリティクス戦略まで、一流クリエイティブプロダクションとして現場を支えます。";
+  "株式会社ALMONDBAGGER（東京都八王子市）。商業映画・地上波ドラマの制作部統括20年超、八王子フィルムコミッション公認連携。オープンゲート縦横同時制作、AI Previs / VFX、AB式ロケ地図ツクールを提供する映像制作プロダクションです。";
 
 const keywords = [
   "映画 制作部 統括",
@@ -30,14 +30,12 @@ const keywords = [
   "ロケーションコーディネート",
   "AI Previs",
   "AI VFX",
-  "AIバレ消し",
   "オープンゲート撮影",
   "縦型ショート動画 制作",
   "企業PR映像",
-  "SNS動画 アナリティクス",
   "地図ツクール",
-  "八王子 映像制作",
   "ALMONDBAGGER",
+  "弓田悠太",
 ];
 
 export const metadata: Metadata = {
@@ -133,13 +131,8 @@ const jsonLd = {
         { "@type": "AdministrativeArea", name: "東京都" },
         { "@type": "Country", name: "日本" },
       ],
-      knowsAbout: [
-        ...keywords,
-        "20年超の映画・ドラマ制作部統括",
-        "八王子フィルムコミッション公認連携",
-      ],
-      slogan:
-        "日本一の映画・ドラマ制作部統括力 × 最先端AIクリエイター × SNS・アナリティクス戦略",
+      knowsAbout: keywords,
+      slogan: "現場を動かす、確かな統括力。",
       sameAs: [companyInfo.partnerUrl, companyInfo.mapToolUrl],
       contactPoint: {
         "@type": "ContactPoint",
@@ -165,9 +158,17 @@ const jsonLd = {
       name: "映画・ドラマ制作部統括",
       serviceType: "制作部統括・現場進行・許認可・予算・権利処理",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
-      areaServed: "JP",
       description:
-        "商業映画・地上波連続ドラマ・配信作品の制作部統括。ロケハン、香盤表、道路使用許可、予算管理、権利処理まで一貫対応。",
+        "商業映画・連続ドラマの制作部およびバックオフィス統括。現場統括20年超、ロケハン、香盤管理、道路使用許可、予算・権利管理、八王子フィルムコミッション公認連携。",
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.almondbagger.com/#service-corporate",
+      name: "次世代映像制作（オープンゲート縦横同時制作）",
+      serviceType: "オープンゲート撮影・ドローン空撮・AI Previs / AI VFX",
+      provider: { "@id": "https://www.almondbagger.com/#organization" },
+      description:
+        "オープンゲート撮影による横型16:9と縦型9:16の同時納品、DJIプロ仕様ドローン空撮、AI Previs、AI VFXバレ消しによるポスプロ短縮。",
     },
     {
       "@type": "Service",
@@ -177,37 +178,18 @@ const jsonLd = {
       provider: { "@id": "https://www.almondbagger.com/#organization" },
       areaServed: { "@type": "City", name: "八王子市" },
       description:
-        "八王子フィルムコミッション公認連携のもと、ロケ地選定から許認可申請、地元施設との撮影調整まで支援。",
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.almondbagger.com/#service-opengate",
-      name: "オープンゲート縦横同時動画制作",
-      serviceType: "オープンゲート撮影・16:9 / 9:16 同時生成",
-      provider: { "@id": "https://www.almondbagger.com/#organization" },
-      description:
-        "フルサイズ3:2センサー全面記録により、1回の撮影からWeb・YouTube用16:9とTikTok・Reels用9:16を同時生成。現場拘束時間・人件費の圧縮を実現。",
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.almondbagger.com/#service-ai",
-      name: "AI Previs / AI VFX",
-      serviceType: "AI Previs・AIバレ消し・ポスプロ最適化",
-      provider: { "@id": "https://www.almondbagger.com/#organization" },
-      description:
-        "動く絵コンテ（AI Previs）による合意形成の高速化と、AIバレ消しによるポスプロ圧縮を制作部進行と直結して提供。",
+        "八王子フィルムコミッション公認連携のもと、ロケ地選定から許認可申請まで支援。",
     },
     {
       "@type": ["SoftwareApplication", "Service"],
       "@id": "https://www.almondbagger.com/#map-tool",
       name: "AB式ロケ地図ツクール",
-      alternateName: ["地図ツクール", "Location Map Studio"],
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       url: "https://map.almondbagger.com",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
       description:
-        "現場の制作部向けロケーション＆許認可マップツール。ロケハン情報・待機導線・許可エリアを地図上で共有。",
+        "制作現場向けロケーション＆許認可マップツール。ロケハン情報・待機導線・許可エリアを地図上で共有。",
     },
     {
       "@type": "FAQPage",

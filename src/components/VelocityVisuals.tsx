@@ -187,83 +187,16 @@ export function CountUp({
   );
 }
 
-const STATS = [
-  {
-    label: "総再生 / インプレッション",
-    to: 1.2,
-    dec: 1,
-    suffix: "億+",
-    note: "累計リーチ実績",
-  },
-  {
-    label: "平均エンゲージメント改善率",
-    to: 380,
-    dec: 0,
-    suffix: "%",
-    prefix: "+",
-    note: "運用前後の比較平均",
-  },
-  {
-    label: "アルゴリズム最適化率",
-    to: 94.8,
-    dec: 1,
-    suffix: "%",
-    note: "分析に基づく改善適用率",
-  },
-] as const;
-
-export function ImpactStatsStrip({
-  className,
-  layout = "horizontal",
-}: {
-  className?: string;
-  layout?: "horizontal" | "vertical" | "panel";
-}) {
-  const items = STATS.map((s, i) => (
-    <motion.div
-      key={s.label}
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        layout === "panel" ? "py-4 first:pt-0 last:pb-0" : "metric-card geo-frame",
-      )}
-    >
-      <p className="text-xs font-medium text-muted">{s.label}</p>
-      <p className="metric-value mt-2">
-        {"prefix" in s ? s.prefix : ""}
-        <CountUp to={s.to} decimals={s.dec} suffix={s.suffix} />
-      </p>
-      <p className="mt-1.5 text-[11px] text-muted">{s.note}</p>
-    </motion.div>
-  ));
-
-  if (layout === "panel") {
-    return (
-      <div className={cn("lux-card geo-frame glow-ring p-6 md:p-7", className)}>
-        <div className="flex flex-wrap items-center gap-2">
-          <p className="eyebrow">実績データ</p>
-          <span className="tag-chip tag-chip--red">Verified</span>
-          <span className="tag-chip tag-chip--purple">AI × Data</span>
-        </div>
-        <p className="mt-2 text-sm font-semibold text-foreground">
-          数字に基づく制作・運用の成果
-        </p>
-        <div className="mt-5 divide-y divide-border">{items}</div>
-      </div>
-    );
-  }
-
+/** ダミー数値バッジは廃止。実績は Works セクションの作品情報で示す。 */
+export function ImpactStatsStrip({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "grid gap-4",
-        layout === "vertical" ? "grid-cols-1" : "sm:grid-cols-3",
+        "border border-border bg-white/80 px-5 py-4 text-sm leading-relaxed text-muted",
         className,
       )}
     >
-      {items}
+      Netflix・地上波・劇場公開など、制作部として支えた作品実績は「制作実績」をご覧ください。
     </div>
   );
 }
@@ -297,7 +230,7 @@ export function ProductionFlowPanel({ className }: { className?: string }) {
 export const RapidDeliveryPanel = ProductionFlowPanel;
 
 export function MiniGrowthSpark({ className }: { className?: string }) {
-  return <span className={cn("lux-badge", className)}>数値改善実績あり</span>;
+  return null;
 }
 
 export const RisingNeonGraph = InsightChart;
@@ -311,17 +244,17 @@ export const RisingArrowsDecor = () => null;
 
 const growthCards = [
   {
-    title: "視聴維持率の改善",
-    body: "冒頭の訴求設計とテンポ管理により、離脱を抑え再生完了率を高めます。",
-    metric: "再生完了率 +48%",
+    title: "視聴維持を意識した編集設計",
+    body: "冒頭の訴求設計とテンポ管理により、離脱を抑え最後まで見られる構成を設計します。",
+    metric: "編集設計",
     chip: "tag-chip--red",
     chart: [28, 36, 42, 55, 68, 82],
     bar: "bg-brand/75",
   },
   {
-    title: "リーチの拡大",
-    body: "アルゴリズムの動向を踏まえ、露出を最大化するフォーマットで制作します。",
-    metric: "インプレッション +320%",
+    title: "マルチアスペクト展開",
+    body: "オープンゲート撮影により、16:9と9:16を同時に設計・納品します。",
+    metric: "16:9 + 9:16",
     chip: "tag-chip--cyan",
     chart: [18, 24, 33, 49, 71, 96],
     bar: "bg-cyan/75",

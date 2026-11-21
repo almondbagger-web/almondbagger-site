@@ -1,181 +1,119 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  Clapperboard,
-  Map,
-  MapPinned,
-  Sparkles,
-  Video,
-} from "lucide-react";
-import { GeometricGridLayer } from "@/components/VelocityVisuals";
-import { Bounce, Reveal } from "@/components/Motion";
-import { companyInfo } from "@/data/works";
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { servicePillars } from "@/data/works";
 import { cn } from "@/lib/utils";
-
-const pillars = [
-  {
-    icon: Clapperboard,
-    title: "映画・ドラマ制作部 & バックオフィス統括",
-    body: "商業映画、地上波ドラマ、大型CMの現場統括。ロケハン、香盤表作成、道路使用・撮影許認可申請、エキストラ管理、安全管理から、予算配分・出演契約・権利処理まで、プロの規律でスムーズな現場環境を構築します。",
-    theme: "theme-card--red",
-    chip: "tag-chip--red",
-    label: "PRODUCTION DIVISION",
-    badge: "主力",
-    question: "制作部・バックオフィスのみの依頼も可能ですか？",
-  },
-  {
-    icon: MapPinned,
-    title: "八王子フィルムコミッション連携・ロケーション支援",
-    body: "八王子エリアのロケ誘致・撮影支援。地域との深い信頼関係を活かし、自然・都市・歴史施設等の最適なロケ地選定から地元調整まで強力にバックアップします。",
-    theme: "theme-card--cyan",
-    chip: "tag-chip--cyan",
-    label: "LOCATION SUPPORT",
-    badge: "主力",
-    question: "八王子でのロケや許認可は相談できますか？",
-  },
-  {
-    icon: Sparkles,
-    title: "制作部直結型 AI Previs & AI VFX",
-    body: "ハリウッドでも導入が進む「動く絵コンテ（AI Previs）」で企画承認と現場共有を光速化。さらにロケ撮影で映り込んだ電柱・看板等の「AIバレ消し（不要物消去）」により、ポスプロコストと納期を劇的に圧縮します。",
-    theme: "theme-card--purple",
-    chip: "tag-chip--purple",
-    label: "CINEMATIC AI PIPELINE",
-    badge: "武器",
-    question: "AIは制作部の現場とどう連携しますか？",
-  },
-  {
-    icon: Video,
-    title: "地場企業・PR動画制作",
-    body: "映画・ドラマのクオリティを身近な企業へ。実写の熱量と最新AIの表現力を融合した、高コストパフォーマンスな採用・ブランディング映像を制作します。",
-    theme: "theme-card--lime",
-    chip: "tag-chip--lime",
-    label: "PROMOTION & BRANDING",
-    badge: "制作",
-    question: "中小企業のPR・採用動画も相談できますか？",
-  },
-  {
-    icon: Map,
-    title: "ロケ地図自動作成",
-    body: "映画・ドラマ制作部向けのロケMAPを、現場の進行に合わせてすばやく作成。撮影地点の整理から共有まで、ロケ準備を短時間で整えます。",
-    theme: "theme-card--cyan",
-    chip: "tag-chip--cyan",
-    label: "LOCATION MAP",
-    badge: "ツール",
-    question: "ロケ地図はどこで作れますか？",
-    cta: {
-      href: "https://map.almondbagger.com",
-      label: "ロケ地図ツクールを開く",
-    },
-  },
-] as const;
 
 export default function Services() {
   return (
     <section
       id="services"
-      className="relative scroll-mt-44 md:scroll-mt-48 overflow-hidden bg-transparent section-y"
+      aria-labelledby="services-heading"
+      className="relative scroll-mt-24 overflow-hidden bg-surface section-y md:scroll-mt-28"
     >
-      <GeometricGridLayer className="opacity-45" />
+      <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
 
-      <div className="relative z-10 mx-auto max-w-6xl section-pad">
-        <Reveal direction="left">
-          <div className="flex flex-wrap gap-2">
-            <span className="tag-chip tag-chip--red">制作部統括</span>
-            <span className="tag-chip tag-chip--cyan">バックオフィス</span>
-            <span className="tag-chip tag-chip--lime">八王子FC連携</span>
-            <span className="tag-chip tag-chip--purple">AI Previs / VFX</span>
-          </div>
-          <p className="eyebrow mt-5">事業内容 · 制作部ファースト</p>
-          <h2 className="mt-4 font-display text-2xl font-bold tracking-tight md:text-4xl">
-            現場力・バックオフィス統括を
-            <span className="mesh-text">最大の主力</span>
-            に
-          </h2>
-          <p className="mt-5 max-w-2xl leading-relaxed text-muted">
-            20年以上の映画・ドラマ制作部実績と八王子フィルムコミッション公認連携が信頼の柱。AI
-            Previs / AI VFXは、その現場力をブーストする最新の武器です。
+      <div className="relative mx-auto max-w-6xl section-pad">
+        <div>
+          <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
+            SERVICES / SOLUTIONS
           </p>
-        </Reveal>
-
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {pillars.map((pillar, i) => (
-            <Reveal key={pillar.title} delay={i * 0.06} direction="left">
-              <article
-                className={cn(
-                  "lux-card card-lift geo-frame flex h-full flex-col p-6 md:p-7",
-                  pillar.theme,
-                )}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="theme-icon">
-                    <pillar.icon className="h-5 w-5" />
-                  </span>
-                  <div className="flex flex-wrap items-center justify-end gap-2">
-                    <span className={cn("tag-chip", pillar.chip)}>
-                      {pillar.badge}
-                    </span>
-                    <span className={cn("tag-chip", pillar.chip)}>
-                      {pillar.label}
-                    </span>
-                  </div>
-                </div>
-                <p className="mt-4 text-xs font-semibold tracking-wide text-muted">
-                  Q. {pillar.question}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold leading-snug">
-                  {pillar.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                  {pillar.body}
-                </p>
-                {"cta" in pillar ? (
-                  <a
-                    href={pillar.cta.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary mt-5 w-fit"
-                  >
-                    {pillar.cta.label}
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                ) : null}
-              </article>
-            </Reveal>
-          ))}
+          <h2
+            id="services-heading"
+            className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
+          >
+            訪問者別・三つの事業領域
+          </h2>
+          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
+            プロデューサー、企業・広告主、制作現場——それぞれに最適な入り口を用意しています。
+          </p>
         </div>
 
-        <Reveal delay={0.1} direction="left" className="mt-12">
-          <Bounce>
-            <article className="prism-panel relative overflow-hidden p-7 md:p-10">
-              <div className="relative z-[1]">
-                <div className="relative flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center gap-2 lux-badge">
-                    <MapPinned className="h-3.5 w-3.5" />
-                    八王子フィルムコミッション公認連携
-                  </span>
-                  <span className="tag-chip tag-chip--red">制作部・ロケ支援</span>
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {servicePillars.map((pillar, index) => {
+            const isCinema = pillar.tone === "cinema";
+            return (
+              <motion.article
+                key={pillar.id}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={cn(
+                  "relative flex h-full flex-col p-7 md:p-8",
+                  isCinema
+                    ? "bg-ink text-white"
+                    : "glass-panel text-foreground",
+                )}
+              >
+                <div className="hud-corners absolute inset-0" aria-hidden>
+                  <span className="tl" />
+                  <span className="tr" />
+                  <span className="bl" />
+                  <span className="br" />
                 </div>
-                <h3 className="relative mt-5 text-xl font-semibold md:text-2xl">
-                  ロケハンから許認可・香盤・安全管理まで、制作部が現場を支え切る
-                </h3>
-                <p className="relative mt-4 max-w-3xl text-sm leading-relaxed text-muted md:text-base">
-                  {companyInfo.partner}
-                  との公認連携を活かし、映画・ドラマ・CM撮影のロケーション提案、道路使用等の許可申請、制作部としての現場進行までを一気通貫でサポート。制作部・ロケ手配のみのご依頼にも柔軟に対応します。
-                </p>
-                <a
-                  href={companyInfo.partnerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline"
+
+                <p
+                  className={cn(
+                    "relative z-10 font-mono text-[0.62rem] tracking-[0.16em]",
+                    isCinema ? "text-gold" : "text-gold-deep",
+                  )}
                 >
-                  {companyInfo.partner} 公式サイト
-                  <ArrowUpRight className="h-4 w-4" />
+                  0{index + 1}
+                </p>
+                <p
+                  className={cn(
+                    "relative z-10 mt-4 text-[0.78rem] font-medium leading-relaxed tracking-wide",
+                    isCinema ? "text-white/70" : "text-muted",
+                  )}
+                >
+                  {pillar.audience}
+                </p>
+                <h3 className="relative z-10 mt-3 font-serif text-lg font-medium leading-snug tracking-wide md:text-xl">
+                  {pillar.title}
+                </h3>
+                <ul
+                  className={cn(
+                    "relative z-10 mt-6 flex-1 space-y-2.5 text-sm leading-relaxed",
+                    isCinema ? "text-white/70" : "text-muted",
+                  )}
+                >
+                  {pillar.points.map((point) => (
+                    <li key={point} className="flex gap-2.5">
+                      <span
+                        className={cn(
+                          "mt-2 h-1 w-1 shrink-0 rounded-full",
+                          isCinema ? "bg-gold" : "bg-gold-deep",
+                        )}
+                      />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={pillar.href}
+                  {...("external" in pillar && pillar.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className={cn(
+                    "relative z-10 mt-8 inline-flex items-center gap-1.5 text-[0.78rem] font-medium tracking-wide transition-colors",
+                    isCinema
+                      ? "text-gold hover:text-white"
+                      : "text-foreground hover:text-gold-deep",
+                  )}
+                >
+                  {pillar.cta}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
-              </div>
-            </article>
-          </Bounce>
-        </Reveal>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

@@ -1,455 +1,345 @@
-export type WorkCategory = "映画" | "ドラマ・配信" | "MV・PR";
+export type WorkCategory = "映画" | "ドラマ・配信" | "MV・オリジナルIP";
 
 export type WorkAspect = "landscape" | "portrait";
-
-/** ポートフォリオUI用フィルター */
-export type PortfolioFilter =
-  | "all"
-  | "film-drama"
-  | "sns-mv-ai"
-  | "corp-multi";
 
 export type Work = {
   id: string;
   title: string;
   client: string;
   category: WorkCategory;
-  /** 画面表示用の担当領域・作品属性バッジ */
   tags: string[];
-  /** "/works/..." またはルート画像。未設定時はシネマプレースホルダー */
   thumbnail?: string;
   year: number;
-  /** YYYYMMDD。同年代内の並び替え用（大きいほど新しい） */
+  /** YYYYMMDD。新しい順ソート用 */
   sortKey: number;
+  /** 画面表示用の公開・配信時期 */
+  periodLabel: string;
   description: string;
   aspect: WorkAspect;
-  /** 公式サイト / 配信ページ */
   officialUrl?: string;
   ctaLabel?: string;
   secondaryUrl?: string;
   secondaryCtaLabel?: string;
   credit?: string;
-  /** カード用の短い役割クレジット */
-  roleCredit?: string;
-  /** ポートフォリオフィルター所属 */
-  filters?: PortfolioFilter[];
+  roleCredit: string;
 };
 
-const t = (n: number) => `/works/work-${String(n).padStart(2, "0")}.jpg`;
-
 /**
- * 制作実績：最新年代順（降順）
- * Featured『いいねの大盤振る舞い』は UI 側で別カード表示。
+ * 制作実績：公開・配信の新しい順（2026→2020）
+ * 日付は公式情報に準拠
  */
 export const works: Work[] = [
   {
-    id: "w-soulmate",
-    title: "ソウルメイト",
-    client: "Netflix",
-    category: "映画",
-    tags: ["Netflix映画", "制作部", "クラフト統括"],
+    id: "w-bl-drama",
+    title: "BLドラマに女はいらない",
+    client: "FOD（フジテレビ）",
+    category: "ドラマ・配信",
+    tags: ["FOD SHORT", "縦型ショートドラマ"],
     year: 2026,
-    sortKey: 20260514,
+    sortKey: 20260710,
+    periodLabel: "2026年7月10日配信",
     description:
-      "Netflix映画。制作部およびクラフト統括として撮影現場を支え、大規模配信作品の進行管理を担当。",
-    aspect: "landscape",
-    officialUrl: "https://about.netflix.com/ja/news/soulmate-main-trailer",
-    ctaLabel: "公式サイト / 配信で観る",
-    roleCredit: "制作部・クラフト統括",
-    filters: ["film-drama"],
-  },
-  {
-    id: "w-obanhurumai",
-    title: "いいねの大盤振る舞い",
-    client: "YUMITA / ALMONDBAGGER",
-    category: "MV・PR",
-    tags: ["自社フラッグシップ", "AIアニメMV", "SNS展開"],
-    thumbnail: "/mv-obanhurumai.jpg",
-    year: 2026,
-    sortKey: 20260510,
-    description:
-      "自社フラッグシップAIアニメMV。企画・作詞・作曲・AIアニメーションまで一貫制作したオリジナルIP。",
-    aspect: "landscape",
-    officialUrl: "https://youtu.be/D2lvekhImOI",
-    ctaLabel: "YouTubeで本編を観る",
-    credit:
-      "企画・作詞・作曲・アニメーション制作：YUMITA（Generated with Suno & AI tools）",
-    roleCredit: "企画・作詞・作曲・AIアニメーション / YUMITA",
-    filters: ["sns-mv-ai", "corp-multi"],
-  },
-  {
-    id: "w-aimote",
-    title: "aiを持て",
-    client: "AKBB",
-    category: "MV・PR",
-    tags: ["実写×AI", "制作部協力", "YouTube / TikTok"],
-    thumbnail: "/mv-aimote.jpg",
-    year: 2026,
-    sortKey: 20260505,
-    description:
-      "実写×AI映像のMV。制作部協力として参加し、YouTube / TikTokへ展開。",
+      "FOD縦型ショートドラマ。制作部・現場進行として撮影オペレーションを担当。",
     aspect: "portrait",
-    officialUrl: "https://youtu.be/3TjVEUCimZs",
-    ctaLabel: "YouTubeで観る",
-    secondaryUrl:
-      "https://www.tiktok.com/@akbb.a.i.kuchipak?is_from_webapp=1&sender_device=pc",
-    secondaryCtaLabel: "公式TikTokへ",
-    roleCredit: "実写×AI映像・制作部協力",
-    filters: ["sns-mv-ai", "corp-multi"],
-  },
-  {
-    id: "w-waterman",
-    title: "WATERMAN",
-    client: "AKBB feat. Waterman",
-    category: "MV・PR",
-    tags: ["実写×AI", "制作部協力", "TikTok"],
-    thumbnail: "/mv-waterman.jpg",
-    year: 2026,
-    sortKey: 20260501,
-    description:
-      "実写×AI映像のMV。制作部・ロケーション支援・映像制作協力として参加。",
-    aspect: "portrait",
-    officialUrl: "https://vt.tiktok.com/ZSVx84VPA/",
-    ctaLabel: "TikTokで観る",
-    roleCredit: "実写×AI映像・制作部協力",
-    filters: ["sns-mv-ai", "corp-multi"],
+    officialUrl: "https://short.fod.fujitv.co.jp/s80af/",
+    roleCredit: "制作部・現場進行",
   },
   {
     id: "w-luvntcom",
     title: "ラブ≠コメディ",
     client: "Storm Labels",
     category: "映画",
-    tags: ["劇場公開映画", "制作部 / 現場統括", "ロケーション管理"],
-    year: 2025,
-    sortKey: 20251201,
+    tags: ["劇場公開映画", "Storm Labels配給"],
+    year: 2026,
+    sortKey: 20260703,
+    periodLabel: "2026年7月3日公開",
     description:
       "Storm Labels配給の劇場公開映画。制作部・現場統括・ロケーション管理を担当。",
     aspect: "landscape",
-    officialUrl: "https://movie.storm-labels.co.jp/s/luvntcom/?ima=5210",
+    officialUrl: "https://movie.storm-labels.co.jp/s/luvntcom/",
     roleCredit: "制作部・現場統括・ロケーション管理",
-    filters: ["film-drama"],
-  },
-  {
-    id: "w-bl-drama",
-    title: "BLドラマに女はいらない",
-    client: "FOD（フジテレビ）",
-    category: "ドラマ・配信",
-    tags: ["FODショートドラマ", "縦型ドラマ", "制作部統括"],
-    year: 2025,
-    sortKey: 20251101,
-    description:
-      "FODショートドラマ。縦型ドラマ制作部として撮影オペレーションを統括。",
-    aspect: "portrait",
-    officialUrl: "https://short.fod.fujitv.co.jp/s80af/",
-    roleCredit: "縦型ドラマ制作部統括",
-    filters: ["film-drama", "sns-mv-ai", "corp-multi"],
   },
   {
     id: "w-jikihai",
     title: "ジキ／ハイ～愛した男には別の顔があった～",
     client: "FOD（フジテレビ）",
     category: "ドラマ・配信",
-    tags: ["FODショートドラマ", "縦型ドラマ", "制作部統括"],
-    year: 2025,
-    sortKey: 20251001,
+    tags: ["FOD SHORT", "縦型ショートドラマ"],
+    year: 2026,
+    sortKey: 20260615,
+    periodLabel: "2026年配信",
     description:
-      "FODショートドラマ。縦型ドラマ制作部として現場進行を担当。",
+      "FOD縦型ショートドラマ。制作部・現場進行として撮影を支えた。",
     aspect: "portrait",
     officialUrl: "https://short.fod.fujitv.co.jp/s17xo/",
-    roleCredit: "縦型ドラマ制作部統括",
-    filters: ["film-drama", "sns-mv-ai", "corp-multi"],
+    roleCredit: "制作部・現場進行",
+  },
+  {
+    id: "w-soulmate",
+    title: "ソウルメイト",
+    client: "Netflix",
+    category: "ドラマ・配信",
+    tags: ["Netflixシリーズ", "世界独占配信"],
+    year: 2026,
+    sortKey: 20260514,
+    periodLabel: "2026年5月14日世界独占配信",
+    description:
+      "Netflixシリーズ。制作部・クラフト部門として撮影現場に参加。",
+    aspect: "landscape",
+    officialUrl: "https://about.netflix.com/ja/news/soulmate-main-trailer",
+    ctaLabel: "公式サイト / 配信で観る",
+    roleCredit: "制作部・クラフト部門参加",
+  },
+  {
+    id: "w-obanhurumai",
+    title: "いいねの大盤振る舞い",
+    client: "YUMITA / ALMONDBAGGER",
+    category: "MV・オリジナルIP",
+    tags: ["自社フラッグシップIP", "オリジナルアニメMV"],
+    thumbnail: "/mv-obanhurumai.jpg",
+    year: 2026,
+    sortKey: 20260510,
+    periodLabel: "2026年公開",
+    description:
+      "自社フラッグシップのオリジナルアニメMV。企画から映像まで一貫制作。",
+    aspect: "landscape",
+    officialUrl: "https://youtu.be/D2lvekhImOI",
+    ctaLabel: "YouTubeで本編を観る",
+    credit: "企画・作詞・作曲・アニメーション制作：YUMITA",
+    roleCredit: "企画・作詞・作曲・アニメーション制作：YUMITA",
+  },
+  {
+    id: "w-aimote",
+    title: "aiを持て",
+    client: "AKBB",
+    category: "MV・オリジナルIP",
+    tags: ["MV", "制作部協力"],
+    thumbnail: "/mv-aimote.jpg",
+    year: 2026,
+    sortKey: 20260505,
+    periodLabel: "2026年公開",
+    description: "AKBBのミュージックビデオ。制作部協力として参加。",
+    aspect: "portrait",
+    officialUrl: "https://youtu.be/3TjVEUCimZs",
+    ctaLabel: "YouTubeで観る",
+    secondaryUrl:
+      "https://www.tiktok.com/@akbb.a.i.kuchipak?is_from_webapp=1&sender_device=pc",
+    secondaryCtaLabel: "公式TikTokへ",
+    roleCredit: "制作部協力",
+  },
+  {
+    id: "w-waterman",
+    title: "WATERMAN",
+    client: "AKBB feat. Waterman",
+    category: "MV・オリジナルIP",
+    tags: ["MV", "実写×AI"],
+    thumbnail: "/mv-waterman.jpg",
+    year: 2026,
+    sortKey: 20260501,
+    periodLabel: "2026年公開",
+    description:
+      "制作部・現場統括・ロケーション支援・実写×AI映像制作協力として参加。",
+    aspect: "portrait",
+    officialUrl: "https://vt.tiktok.com/ZSVx84VPA/",
+    ctaLabel: "TikTokで観る",
+    roleCredit: "制作部・現場統括・ロケーション支援・実写×AI映像制作協力",
   },
   {
     id: "w-jimenshi",
     title: "地面師たち",
     client: "Netflix",
     category: "ドラマ・配信",
-    tags: ["Netflixシリーズ", "制作部 / 現場統括", "ロケーション支援"],
+    tags: ["Netflixシリーズ"],
     year: 2024,
     sortKey: 20240701,
-    description:
-      "社会現象となった話題作。大規模ロケ手配および撮影現場進行を統括。",
+    periodLabel: "2024年配信",
+    description: "大規模ロケ手配および撮影現場進行を統括。",
     aspect: "landscape",
     officialUrl: "https://www.netflix.com/jp/title/81574118",
+    roleCredit: "制作部・現場統括・ロケーション支援",
   },
   {
     id: "w-alice",
     title: "厨房のありす",
     client: "日本テレビ",
     category: "ドラマ・配信",
-    tags: ["地上波連続ドラマ", "制作部 / 現場進行"],
+    tags: ["日曜ドラマ", "地上波連続ドラマ"],
     year: 2024,
     sortKey: 20240401,
-    description:
-      "ハートフル・ミステリードラマの制作部現場統括およびロケーション調整。",
+    periodLabel: "2024年放送",
+    description: "日本テレビ系日曜ドラマ。制作部・現場進行を担当。",
     aspect: "landscape",
     officialUrl: "https://www.ntv.co.jp/alice/",
+    roleCredit: "制作部・現場進行",
   },
   {
     id: "w-mysteryday",
     title: "THE MYSTERY DAY",
-    client: "日本テレビ（開局70年特別番組）",
+    client: "日本テレビ",
     category: "ドラマ・配信",
-    tags: ["大型特別ドラマ", "制作部 / 現場統括"],
+    tags: ["開局70年特別番組"],
     year: 2023,
     sortKey: 20231201,
-    description:
-      "豪華キャストが集結した開局記念大型ミステリー特番の現場進行・管理を完走。",
+    periodLabel: "2023年放送",
+    description: "開局70年特別番組の制作部・現場統括を担当。",
     aspect: "landscape",
     officialUrl: "https://www.ntv.co.jp/mysteryday/",
+    roleCredit: "制作部・現場統括",
   },
   {
     id: "w-mitarai",
     title: "御手洗家、炎上する",
     client: "Netflix",
     category: "ドラマ・配信",
-    tags: ["Netflixシリーズ", "制作部 / バックオフィス"],
+    tags: ["Netflixシリーズ"],
     year: 2023,
     sortKey: 20230701,
-    description:
-      "復讐とサスペンスを描く大ヒットドラマシリーズの現場オペレーションを担当。",
+    periodLabel: "2023年配信",
+    description: "Netflixシリーズの制作部・バックオフィスを担当。",
     aspect: "landscape",
     officialUrl:
       "https://about.netflix.com/ja/news/burn-the-house-down-main-trailer-and-main-key-art-debut",
+    roleCredit: "制作部・バックオフィス",
   },
   {
     id: "w-oujou",
     title: "往生際の意味を知れ！",
     client: "MBS / TBS ドラマイズム",
     category: "ドラマ・配信",
-    tags: ["地上波連続ドラマ", "制作部 / ロケーション"],
+    tags: ["ドラマイズム", "地上波連続ドラマ"],
     year: 2023,
     sortKey: 20230401,
-    description: "過激な恋愛やり直しラブストーリーの現場統括・撮影管理。",
+    periodLabel: "2023年放送",
+    description: "MBS・TBSドラマイズム作品の制作部・ロケーションを担当。",
     aspect: "landscape",
     officialUrl: "https://www.mbs.jp/oujougiwa_no_imioshire/",
+    roleCredit: "制作部・ロケーション",
   },
   {
     id: "w-akogare",
     title: "憧れの作家は人間じゃありませんでした",
     client: "配信ドラマ",
     category: "ドラマ・配信",
-    tags: ["配信ドラマ", "制作部 / 現場管理"],
+    tags: ["配信ドラマ"],
     year: 2023,
     sortKey: 20230101,
-    description: "独特な世界観を持つ話題作の制作部・現場進行を推進。",
+    periodLabel: "2023年配信",
+    description: "配信ドラマの制作部・現場管理を担当。",
     aspect: "landscape",
     officialUrl: "https://www.amazon.co.jp/gp/video/detail/B0GY2FX132",
-  },
-  {
-    id: "w-shikaku",
-    title: "四角の人たち",
-    client: "短編映画",
-    category: "映画",
-    tags: ["短編映画", "制作部 / ロケ協力"],
-    year: 2022,
-    sortKey: 20221001,
-    description:
-      "個性豊かなショートフィルム作品のロケーションおよび制作部協力。",
-    aspect: "landscape",
-    officialUrl: "https://373kaze.com/2022/10/27/post-22303/",
+    roleCredit: "制作部・現場管理",
   },
   {
     id: "w-sobakasu",
     title: "そばかす",
     client: "(NOT) HEROINE MOVIES",
     category: "映画",
-    tags: ["劇場公開映画", "制作部 / ロケ支援"],
+    tags: ["劇場公開映画"],
     year: 2022,
     sortKey: 20220601,
-    description:
-      "「(NOT) HEROINE MOVIES」プロジェクト作品。丁寧なロケ地管理と現場統括。",
+    periodLabel: "2022年公開",
+    description: "劇場公開映画の制作部・ロケ支援を担当。",
     aspect: "landscape",
     officialUrl: "https://notheroinemovies.com/sobakasu/",
+    roleCredit: "制作部・ロケ支援",
   },
   {
     id: "w-romakira",
     title: "ロマンティック・キラー",
     client: "Netflix / 東宝",
     category: "ドラマ・配信",
-    tags: ["Netflixシリーズ", "制作部"],
+    tags: ["Netflixシリーズ"],
     year: 2022,
     sortKey: 20220101,
-    description: "人気コミック実写化作品の現場制作支援・進行管理。",
+    periodLabel: "2022年配信",
+    description: "Netflix配信作品の制作部として参加。",
     aspect: "landscape",
     officialUrl: "https://romakira-movie.toho.co.jp/",
+    roleCredit: "制作部",
   },
   {
-    id: "w-kabanya",
-    title: "連続ドラマW 池井戸潤スペシャル『かばん屋の相続』",
-    client: "WOWOW",
-    category: "ドラマ・配信",
-    tags: ["WOWOWオリジナル", "制作部"],
-    year: 2021,
-    sortKey: 20211201,
-    description:
-      "池井戸潤原作の重厚なヒューマンドラマ。確かな制作管理体制で現場を支え抜く。",
+    id: "w-shikaku",
+    title: "四角の人たち",
+    client: "短編映画",
+    category: "映画",
+    tags: ["短編映画"],
+    year: 2022,
+    sortKey: 20221001,
+    periodLabel: "2022年公開",
+    description: "短編映画の制作部・ロケ協力を担当。",
     aspect: "landscape",
-    officialUrl: "https://www.wowow.co.jp/drama/original/kabanyano-souzoku/",
+    officialUrl: "https://373kaze.com/2022/10/27/post-22303/",
+    roleCredit: "制作部・ロケ協力",
   },
   {
     id: "w-tokrev",
     title: "東京リベンジャーズ",
     client: "ワーナー ブラザース ジャパン",
     category: "映画",
-    tags: ["劇場公開映画", "制作部 / ロケ統括"],
+    tags: ["劇場公開映画"],
     year: 2021,
     sortKey: 20210701,
-    description:
-      "大ヒットコミック実写映画。アクションシーンや大規模ロケーションの現場管理を完走。",
+    periodLabel: "2021年公開",
+    description: "劇場公開映画の制作部・ロケ統括を担当。",
     aspect: "landscape",
     officialUrl: "https://wwws.warnerbros.co.jp/tokyo-revengersjp/",
+    roleCredit: "制作部・ロケ統括",
+  },
+  {
+    id: "w-kabanya",
+    title: "連続ドラマW 池井戸潤スペシャル『かばん屋の相続』",
+    client: "WOWOW",
+    category: "ドラマ・配信",
+    tags: ["WOWOWオリジナル"],
+    year: 2021,
+    sortKey: 20211201,
+    periodLabel: "2021年放送",
+    description: "WOWOW連続ドラマWの制作部として参加。",
+    aspect: "landscape",
+    officialUrl: "https://www.wowow.co.jp/drama/original/kabanyano-souzoku/",
+    roleCredit: "制作部",
   },
   {
     id: "w-soreai",
     title: "それでも愛を誓いますか？",
     client: "ABCテレビ・テレビ朝日",
     category: "ドラマ・配信",
-    tags: ["地上波連続ドラマ", "制作部"],
+    tags: ["地上波連続ドラマ"],
     year: 2021,
     sortKey: 20210401,
-    description: "大人の切ない恋愛・結婚生活を描いた連続ドラマの制作進行。",
+    periodLabel: "2021年放送",
+    description: "地上波連続ドラマの制作部として参加。",
     aspect: "landscape",
     officialUrl: "https://www.asahi.co.jp/soreai/",
+    roleCredit: "制作部",
   },
   {
     id: "w-dareka",
     title: "誰かが、見ている",
     client: "Amazon Original",
     category: "ドラマ・配信",
-    tags: ["Amazon Original", "制作部"],
+    tags: ["Amazon Prime Video"],
     year: 2020,
     sortKey: 20200901,
-    description: "三谷幸喜×香取慎吾のシチュエーションコメディ作品の制作部支援。",
+    periodLabel: "2020年配信",
+    description: "Amazon Originalドラマの制作部として参加。",
     aspect: "landscape",
     officialUrl: "https://www.amazon.co.jp/dp/B08H4XGHNZ",
+    roleCredit: "制作部",
   },
 ];
+
+/** 新しい順にソート済み配列を返す */
+export function getWorksSorted(): Work[] {
+  return [...works].sort((a, b) => b.sortKey - a.sortKey);
+}
 
 export const workCategories: Array<"すべて" | WorkCategory> = [
   "すべて",
   "映画",
   "ドラマ・配信",
-  "MV・PR",
+  "MV・オリジナルIP",
 ];
-
-export const heroSlides = [
-  { id: "hs-01", image: t(2), label: "Drama" },
-  { id: "hs-02", image: t(10), label: "Movie" },
-  { id: "hs-03", image: t(3), label: "Streaming" },
-  { id: "hs-04", image: t(9), label: "SNS" },
-];
-
-export type PricePlan = {
-  id: string;
-  name: string;
-  color: "red" | "pink" | "cyan" | "purple" | "lime";
-  badge?: string;
-  priceLines: string[];
-  description: string;
-  features: string[];
-};
-
-export const pricePlans: PricePlan[] = [
-  {
-    id: "p-short",
-    name: "縦型ショート / TikTok / Reels",
-    color: "red",
-    badge: "人気",
-    priceLines: ["参考価格：30万円〜 / 本", "月額運用プラン：50万円〜 / 月"],
-    description:
-      "企画・構成・縦型撮影・テンポ編集・テロップ・音効まで。止まりにくいショートを制作します。",
-    features: ["企画・構成", "縦型撮影", "テンポ編集", "テロップ", "音効"],
-  },
-  {
-    id: "p-youtube",
-    name: "YouTube動画制作",
-    color: "cyan",
-    badge: "成長支援",
-    priceLines: ["参考価格：25万円〜 / 本"],
-    description:
-      "企画・台本・撮影・編集・サムネイル制作まで。継続制作にも対応します。",
-    features: ["企画・台本", "撮影", "編集", "サムネイル制作"],
-  },
-  {
-    id: "p-cm",
-    name: "CM / プロモーション映像",
-    color: "purple",
-    badge: "オーダーメイド",
-    priceLines: ["参考価格：内容・規模により個別お見積もり"],
-    description:
-      "企画提案・キャストオーディション・本格撮影・カラーグレーディング・MA音響まで完全オーダーメイド対応。",
-    features: [
-      "企画提案",
-      "キャストオーディション",
-      "本格撮影",
-      "カラーグレーディング",
-      "MA音響",
-    ],
-  },
-];
-
-export type StaffRate = {
-  role: string;
-  rate: string;
-};
-
-export const staffRates: StaffRate[] = [
-  { role: "制作担当", rate: "月額 80万円〜" },
-  { role: "制作主任", rate: "月額 60万円〜" },
-  { role: "制作進行", rate: "月額 35万円〜" },
-];
-
-export const staffRateNote =
-  "その他：制作部助手、ドライバー、ロケハン専門スタッフ等もご相談ください。";
-
-export const priceDisclaimer =
-  "※上記は標準的な参考価格です。低予算（低バジェット）案件から大規模制作までご予算に応じた柔軟なプランニングが可能です。まずはお気軽にご相談（応相談）ください。";
-
-export const serviceCards = [
-  {
-    title: "映画",
-    en: "MOVIE",
-    body: "長編・短編の制作進行、ロケ地、許可申請まで。",
-    color: "bg-rose text-white",
-    accent: "#f43f5e",
-  },
-  {
-    title: "ドラマ",
-    en: "DRAMA",
-    body: "連続撮影の進行管理と多拠点オペレーション。",
-    color: "bg-purple text-white",
-    accent: "#a855f7",
-  },
-  {
-    title: "MV",
-    en: "MUSIC VIDEO",
-    body: "アーティストの世界観に合う特異ロケ地を手配。",
-    color: "bg-cyan text-white",
-    accent: "#06b6d4",
-  },
-  {
-    title: "CM",
-    en: "COMMERCIAL",
-    body: "ブランド映像の撮影支援と車両・進行を一括対応。",
-    color: "bg-lime text-white",
-    accent: "#10b981",
-  },
-  {
-    title: "YouTube",
-    en: "YOUTUBE",
-    body: "チャンネル運営に効く企画・撮影・編集サポート。",
-    color: "bg-yellow text-foreground",
-    accent: "#facc15",
-  },
-  {
-    title: "TikTok縦型",
-    en: "SHORTS",
-    body: "9:16ショートを高速で量産。トレンドに即応。",
-    color: "bg-pink text-white",
-    accent: "#ec4899",
-  },
-] as const;
 
 export const companyInfo = {
   name: "株式会社ALMONDBAGGER",
@@ -472,35 +362,93 @@ export const companyInfo = {
     "https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E6%9D%B1%E7%94%BA1%E7%95%AA10%E5%8F%B7&t=&z=16&ie=UTF8&iwloc=&output=embed",
 } as const;
 
-/** ナビ・フッター共通。セクション id と必ず一致させる */
 export const navLinks = [
-  { href: "#strengths", label: "強み" },
+  { href: "#services", label: "事業領域" },
   { href: "#works", label: "制作実績" },
-  { href: "#strategy", label: "戦略・DX" },
   { href: "#faq", label: "FAQ" },
   { href: "#company", label: "会社概要" },
 ] as const;
 
-/** トップ「制作実績」ポートフォリオ掲載 ID */
-export const portfolioWorkIds = [
-  "w-soulmate",
-  "w-luvntcom",
-  "w-bl-drama",
-  "w-jikihai",
-  "w-obanhurumai",
-  "w-aimote",
-  "w-waterman",
+export const servicePillars = [
+  {
+    id: "producers",
+    audience: "映画・ドラマ・配信作品のプロデューサー様へ",
+    title: "商業映画・連続ドラマ制作部 ＆ バックオフィス統括",
+    points: [
+      "現場統括20年超の制作部体制",
+      "ロケハン・香盤管理",
+      "道路使用許可・各種許認可申請",
+      "予算・権利管理",
+      "八王子フィルムコミッション公認連携",
+    ],
+    href: "#contact",
+    cta: "制作部のご相談",
+    tone: "cinema" as const,
+  },
+  {
+    id: "corporate",
+    audience: "企業・自治体・広告主様へ",
+    title: "次世代映像制作パッケージ",
+    points: [
+      "オープンゲート撮影による横型16:9＋縦型9:16同時納品",
+      "DJIプロ仕様ドローン空撮",
+      "AI Previs（動く絵コンテ）",
+      "AI VFXバレ消しによるポスプロ短縮",
+    ],
+    href: "#contact",
+    cta: "企業映像のご相談",
+    tone: "light" as const,
+  },
+  {
+    id: "creators",
+    audience: "制作現場・クリエイター様へ",
+    title: "プロダクションDX『AB式ロケ地図ツクール』",
+    points: [
+      "ロケハン・控室・待機・許可エリアを地図上で共有",
+      "香盤表・台本と連動した現場準備",
+      "制作部が現場知をもとに開発・運営",
+    ],
+    href: "https://map.almondbagger.com/",
+    cta: "地図ツクールを開く",
+    external: true,
+    tone: "light" as const,
+  },
 ] as const;
 
-export const portfolioFilters: Array<{
-  id: PortfolioFilter;
-  label: string;
-}> = [
-  { id: "all", label: "ALL" },
-  { id: "film-drama", label: "映画・ドラマ・配信" },
-  { id: "sns-mv-ai", label: "SNS・MV・AIクリエイティブ" },
-  { id: "corp-multi", label: "企業PR・縦横同時制作" },
+/** 旧料金ページ互換（トップでは非表示） */
+export const priceDisclaimer =
+  "ご予算・規模に応じて個別にお見積もりいたします。まずはお気軽にご相談ください。";
+
+export type PricePlan = {
+  id: string;
+  name: string;
+  color: "red" | "pink" | "cyan" | "purple" | "lime";
+  badge?: string;
+  priceLines: string[];
+  description: string;
+  features: string[];
+};
+
+export const pricePlans: PricePlan[] = [
+  {
+    id: "p-consult",
+    name: "制作部・映像制作のご相談",
+    color: "cyan",
+    priceLines: ["内容・規模により個別お見積もり"],
+    description:
+      "制作部統括、企業映像、オープンゲート縦横同時制作など、案件に合わせてご提案します。",
+    features: ["ヒアリング", "体制提案", "お見積もり"],
+  },
 ];
+
+export const staffRates = [
+  { role: "制作担当", rate: "月額応相談" },
+  { role: "制作主任", rate: "月額応相談" },
+  { role: "制作進行", rate: "月額応相談" },
+];
+
+export const staffRateNote =
+  "体制・期間に応じてご相談ください。";
 
 export const faqItems = [
   {
@@ -511,7 +459,7 @@ export const faqItems = [
   {
     question: "企業向けに横動画と縦型ショート動画を同時に制作できますか？",
     answer:
-      "可能です。オープンゲート撮影により、フルサイズセンサー全面記録から Web・YouTube用16:9 と TikTok・Reels用9:16 を同時生成。現場拘束時間と人件費の圧縮につなげます。",
+      "可能です。オープンゲート撮影により、フルサイズセンサー全面記録から Web・YouTube用16:9 と TikTok・Reels用9:16 を同時生成。現場拘束時間と再撮コストの圧縮につなげます。",
   },
   {
     question: "AIを使った映像制作やバレ消しに対応していますか？",
@@ -529,4 +477,3 @@ export const faqItems = [
       "現場の制作部が開発したロケーション＆許認可マップツールです。ロケハン情報・控室・待機場所・道路使用許可エリアを地図上で共有し、香盤表・台本と連動した現場準備を支えます。",
   },
 ] as const;
-
