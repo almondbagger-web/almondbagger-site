@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Philosophy from "@/components/Philosophy";
 import Services from "@/components/Services";
+import OpportunityBanners from "@/components/OpportunityBanners";
 import Marquee from "@/components/Marquee";
 import Analytics from "@/components/Analytics";
 import Works from "@/components/Works";
@@ -19,6 +20,7 @@ export default function Home() {
         <Hero />
         <Philosophy />
         <Services />
+        <OpportunityBanners />
         <Marquee />
         <Analytics />
         <Works />

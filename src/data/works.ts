@@ -407,10 +407,10 @@ export const companyInfo = {
 } as const;
 
 export const navLinks = [
-  { href: "#philosophy", label: "理念" },
   { href: "#services", label: "事業内容" },
   { href: "#works", label: "制作実績" },
-  { href: "#news", label: "お知らせ" },
+  { href: "/location-partner", label: "ロケ地募集" },
+  { href: "/recruit", label: "採用情報" },
   { href: "#company", label: "会社概要" },
 ] as const;
 

@@ -10,13 +10,13 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl section-pad py-16 md:py-20">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-md">
-            <a
-              href="#top"
+            <Link
+              href="/"
               aria-label={`${companyInfo.shortName} トップへ`}
               className="inline-block rounded-sm bg-white px-2 py-1"
             >
               <BrandLogo variant="footer" />
-            </a>
+            </Link>
             <p className="mt-6 font-display text-[clamp(1.75rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tighter text-white/90">
               PRODUCTION
               <br />
@@ -37,17 +37,27 @@ export default function Footer() {
               className="flex flex-col gap-3"
               aria-label="フッターナビゲーション"
             >
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={`/${link.href}`}
+                    className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                ),
+              )}
               <a
-                href="#contact"
+                href="/#contact"
                 className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
               >
                 お問い合わせ
@@ -60,12 +70,12 @@ export default function Footer() {
               </Link>
             </nav>
 
-            <a
-              href="#top"
+            <Link
+              href="/"
               className="inline-flex items-center gap-2 self-start font-display text-sm font-extrabold tracking-[0.16em] text-gold transition-colors hover:text-white"
             >
               BACK TO TOP ↑
-            </a>
+            </Link>
           </div>
         </div>
 
