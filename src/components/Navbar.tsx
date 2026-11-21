@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
-import { Bounce } from "@/components/Motion";
 import { companyInfo, navLinks } from "@/data/works";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -33,64 +31,28 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-x-0 top-0 z-50 section-pad pt-2 md:pt-3"
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
+          scrolled
+            ? "border-border bg-white/95 shadow-[0_1px_0_rgba(17,19,21,0.03)] backdrop-blur-md"
+            : "border-transparent bg-white/90 backdrop-blur-sm",
+        )}
       >
-        <div
-          className={cn(
-            "mx-auto flex max-w-[92rem] flex-col gap-1 rounded-2xl px-3 py-2.5 transition-all duration-300 sm:px-4 md:px-5 md:py-3",
-            scrolled
-              ? "lux-glass border border-white/80 shadow-sm"
-              : "border border-transparent bg-white/90 backdrop-blur-sm",
-          )}
-        >
-          <div className="flex items-center gap-3 sm:gap-4 lg:gap-6">
-            <a
-              href="https://map.almondbagger.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${companyInfo.shortName} マップを新しいタブで開く`}
-              className="min-w-0 shrink-0"
-            >
-              <BrandLogo variant="header" priority />
-            </a>
-
-            <div className="ml-auto flex shrink-0 items-center gap-2 md:gap-3">
-              <Bounce>
-                <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNav("#contact");
-                  }}
-                  className="btn-primary nav-cta-btn hidden sm:inline-flex"
-                >
-                  <Phone className="h-4 w-4 md:h-5 md:w-5" />
-                  お問い合わせ
-                </a>
-              </Bounce>
-              <button
-                type="button"
-                aria-label="メニュー"
-                onClick={() => setOpen((v) => !v)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-white/80 xl:hidden"
-              >
-                {open ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          <nav
-            aria-label="メインナビゲーション"
-            className="hidden items-center justify-center gap-x-1 gap-y-1 border-t border-border/50 pt-2 xl:flex 2xl:gap-x-2"
+        <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-4 section-pad md:h-[4.75rem]">
+          <a
+            href="#top"
+            aria-label={`${companyInfo.shortName} トップへ`}
+            className="min-w-0 shrink-0"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
           >
+            <BrandLogo variant="header" priority />
+          </a>
+
+          <nav className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -99,50 +61,51 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNav(link.href);
                 }}
-                className="nav-impact-link"
+                className="px-3 py-2 text-[0.8125rem] font-medium tracking-[0.06em] text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
             ))}
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNav("#contact");
+              }}
+              className="btn-dark ml-3"
+            >
+              お問い合わせ
+            </a>
           </nav>
-        </div>
-      </motion.header>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 32 }}
-            transition={{ ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white/97 backdrop-blur-sm xl:hidden"
+          <button
+            type="button"
+            aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-11 w-11 items-center justify-center border border-border text-foreground lg:hidden"
           >
-            <div className="flex h-full flex-col justify-center gap-1 px-6 pt-28 sm:px-10">
-              <div className="mb-8">
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </header>
+
+      {open ? (
+        <div className="fixed inset-0 z-40 bg-white lg:hidden">
+          <div className="flex h-full flex-col px-6 pb-10 pt-24">
+            <nav className="flex flex-col gap-1">
+              {navLinks.map((link) => (
                 <a
-                  href="https://map.almondbagger.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${companyInfo.shortName} マップを新しいタブで開く`}
-                >
-                  <BrandLogo variant="header" />
-                </a>
-              </div>
-              {navLinks.map((link, i) => (
-                <motion.a
                   key={link.href}
                   href={link.href}
-                  initial={{ opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.04 * i, ease: [0.16, 1, 0.3, 1] }}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNav(link.href);
                   }}
-                  className="nav-impact-link nav-impact-link--mobile"
+                  className="border-b border-border py-4 font-serif text-xl tracking-wide text-foreground"
                 >
                   {link.label}
-                </motion.a>
+                </a>
               ))}
               <a
                 href="#contact"
@@ -150,15 +113,14 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNav("#contact");
                 }}
-                className="btn-primary nav-cta-btn mt-8 w-fit"
+                className="btn-dark mt-8 w-full"
               >
-                <Phone className="h-5 w-5" />
                 お問い合わせ
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </nav>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }

@@ -72,7 +72,7 @@ export const works: Work[] = [
     year: 2026,
     sortKey: 20260505,
     description:
-      "AI（人工知能）の時代だからこそ、愛（AI）を持って泥臭く走る人間が一番強い。爆発的な熱量を誇る男声ツインボーカルと鋭い中国語ラップが炸裂する中華ダンスロック／クラブEDMアンセム。二胡や古筝の超高速リフと重低音四つ打ちビートが融合し、「始皇帝／思考停止」「人生のコード」といったSFワードを薙ぎ倒す熱い人間賛歌。キラーシャウトと中毒性MAXのドロップ「覇王！覇王！」が響く令和最強の爆上げキング・トラック。",
+      "AI（人工知能）の時代だからこそ、愛（AI）を持って泥臭く走る人間が一番強い——中華ダンスロック／クラブEDMの楽曲MV。制作部協力として参加。",
     aspect: "portrait",
     officialUrl: "https://youtu.be/3TjVEUCimZs",
     ctaLabel: "YouTubeで観る",
@@ -427,37 +427,41 @@ export const serviceCards = [
 ] as const;
 
 export const companyInfo = {
-  name: "株式会社ALMONDBAGGER（アーモンドバガー）",
+  name: "株式会社ALMONDBAGGER",
   shortName: "ALMONDBAGGER",
-  representative: "弓田 悠太",
+  representative: "代表取締役 弓田 悠太",
   postal: "〒192-0082",
-  address: "東京都八王子市東町1番10号 グランデハイツ八王子801",
+  address: "東京都八王子市東町1-10 グランデハイツ八王子801",
   founded: "令和3年（2021年）8月3日",
   business:
-    "映像制作サポート事業（制作部 / 演出部 / 現場進行 / ロケーション / 許可申請 / 車両管理）、SNS・縦型ショート動画制作",
+    "映画・ドラマ・CM・企業映像の制作及び制作部統括、ロケーションコーディネート、AI映像技術開発・DXツール運営",
   phone: "090-8200-3640",
   phoneHref: "tel:09082003640",
   email: "almondbagger@gmail.com",
   emailHref: "mailto:almondbagger@gmail.com",
-  area: "東京都・八王子市・関東圏・全国対応可（八王子FC連携）",
-  partner: "八王子フィルムコミッション",
+  area: "東京都・八王子市・関東圏・全国対応可",
+  partner: "八王子フィルムコミッション公認連携",
   partnerUrl: "https://www.hkc.or.jp/fc/",
+  mapToolUrl: "https://map.almondbagger.com/",
   mapEmbed:
     "https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E6%9D%B1%E7%94%BA1%E7%95%AA10%E5%8F%B7&t=&z=16&ie=UTF8&iwloc=&output=embed",
 } as const;
 
 /** ナビ・フッター共通。セクション id と必ず一致させる */
 export const navLinks = [
-  { href: "#news", label: "NEWS" },
-  { href: "#about", label: "強み" },
-  { href: "#services", label: "制作部" },
-  { href: "#map-tool", label: "地図ツクール" },
-  { href: "#ai", label: "AI" },
-  { href: "#works", label: "実績" },
-  { href: "#price", label: "料金" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#recruit", label: "採用" },
+  { href: "#strengths", label: "強み" },
+  { href: "#works", label: "制作実績" },
+  { href: "#products", label: "自社ツール" },
   { href: "#company", label: "会社概要" },
-  { href: "#contact", label: "お問い合わせ" },
+] as const;
+
+/** トップ「制作実績」に掲載する代表作品 ID */
+export const featuredWorkIds = [
+  "w-soulmate",
+  "w-luvntcom",
+  "w-bl-drama",
+  "w-jikihai",
+  "w-jimenshi",
+  "w-alice",
 ] as const;
 

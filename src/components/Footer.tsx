@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import { companyInfo, navLinks } from "@/data/works";
 
@@ -6,75 +6,68 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative z-[2] overflow-hidden border-t border-border/80 bg-surface/70 backdrop-blur-sm">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px mesh-bg opacity-50" />
-      <div className="pointer-events-none absolute -left-20 bottom-0 h-40 w-40 rounded-full bg-brand/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 top-10 h-36 w-36 rounded-full bg-cyan/10 blur-3xl" />
-
-      <div className="relative mx-auto max-w-6xl section-pad py-14">
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-          <div>
+    <footer className="relative z-[2] border-t border-border bg-background">
+      <div className="mx-auto max-w-6xl section-pad py-16 md:py-20">
+        <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
+          <div className="max-w-md">
             <a href="#top" aria-label={`${companyInfo.shortName} トップへ`}>
               <BrandLogo variant="footer" />
             </a>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              20年の映画・ドラマ制作部統括力 × 次世代AIパイプライン。
-              現場の確固たる進行管理と最新技術で、映像制作を支え抜きます。
+            <p className="mt-6 text-sm leading-relaxed text-muted">
+              商業映画・ドラマの制作部統括とロケーション支援。八王子を拠点に、作品の現場を静かに支えます。
             </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <span className="tag-chip tag-chip--red">制作部</span>
-              <span className="tag-chip tag-chip--cyan">バックオフィス</span>
-              <span className="tag-chip tag-chip--purple">AI Previs</span>
-            </div>
-            <p className="mt-4 text-sm font-medium text-foreground/80">
+            <p className="mt-5 text-sm leading-relaxed text-muted">
               {companyInfo.postal}
               <br />
               {companyInfo.address}
             </p>
-            <p className="mt-3 text-sm font-bold">
-              <a href={companyInfo.phoneHref} className="mesh-text hover:opacity-80">
+            <p className="mt-4 text-sm">
+              <a
+                href={companyInfo.phoneHref}
+                className="text-foreground transition-colors hover:text-gold-deep"
+              >
                 {companyInfo.phone}
               </a>
-              <span className="text-muted"> · </span>
+              <span className="mx-2 text-border">·</span>
               <a
                 href={companyInfo.emailHref}
-                className="text-foreground/75 transition hover:text-brand"
+                className="text-foreground transition-colors hover:text-gold-deep"
               >
                 {companyInfo.email}
               </a>
             </p>
-            <p className="mt-4 text-sm text-foreground/75">
-              提携・協力機関：
-              <a
-                href={companyInfo.partnerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-1 inline-flex items-center gap-1 font-bold text-brand hover:underline"
-              >
-                {companyInfo.partner}
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            </p>
           </div>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+
+          <nav className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-bold tracking-wide text-foreground/50 transition hover:text-brand"
+                className="text-sm tracking-wide text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
             ))}
+            <a
+              href="#contact"
+              className="text-sm tracking-wide text-muted transition-colors hover:text-foreground"
+            >
+              お問い合わせ
+            </a>
+            <Link
+              href="/privacy"
+              className="text-sm tracking-wide text-muted transition-colors hover:text-foreground"
+            >
+              プライバシーポリシー
+            </Link>
           </nav>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-border/70 pt-6 text-xs text-muted md:flex-row md:justify-between">
+
+        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted md:flex-row md:justify-between">
           <p>
             © {year} {companyInfo.name}
           </p>
-          <p>
-            代表 {companyInfo.representative} · {companyInfo.partner}連携
-          </p>
+          <p>{companyInfo.partner}</p>
         </div>
       </div>
     </footer>

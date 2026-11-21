@@ -1,2 +1,2 @@
-/** Header は Navbar のエイリアス。ナビの「地図ツクール」は #map-tool（navLinks） */
+/** Header は Navbar のエイリアス */
 export { default } from "@/components/Navbar";

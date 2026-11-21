@@ -1,43 +1,19 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import News from "@/components/News";
-import About from "@/components/About";
-import AIFeature from "@/components/AIFeature";
-import Services from "@/components/Services";
-import MapToolSection from "@/components/MapToolSection";
+import Strengths from "@/components/Strengths";
 import Works from "@/components/Works";
-import Price from "@/components/Price";
-import FAQ from "@/components/FAQ";
-import Recruit from "@/components/Recruit";
-import Company from "@/components/Company";
-import Contact from "@/components/Contact";
+import CompanyContact from "@/components/CompanyContact";
 import Footer from "@/components/Footer";
-import FastArrowGraphBackground from "@/components/FastArrowGraphBackground";
-import { SiteAtmosphere } from "@/components/VelocityVisuals";
 
 export default function Home() {
   return (
     <>
-      <SiteAtmosphere />
-      <FastArrowGraphBackground
-        mode="fixed"
-        intensity="subtle"
-        className="z-[1]"
-      />
       <Navbar />
-      <main className="relative z-[2]">
+      <main>
         <Hero />
-        <News />
-        <About />
-        <Services />
-        <MapToolSection />
-        <AIFeature />
+        <Strengths />
         <Works />
-        <Price />
-        <FAQ />
-        <Recruit />
-        <Company />
-        <Contact />
+        <CompanyContact />
       </main>
       <Footer />
     </>

@@ -1,50 +1,40 @@
 import type { Metadata } from "next";
-import { Anton, Noto_Sans_JP, Syne } from "next/font/google";
+import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import { companyInfo } from "@/data/works";
 import "./globals.css";
 
-const fontCinema = Anton({
-  weight: "400",
+const fontSans = Noto_Sans_JP({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-cinema",
+  variable: "--font-sans-jp",
   display: "swap",
 });
 
-const fontHeroJa = Noto_Sans_JP({
-  weight: ["700", "900"],
+const fontSerif = Noto_Serif_JP({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-hero-ja",
-  display: "swap",
-});
-
-const fontSyne = Syne({
-  weight: ["700", "800"],
-  subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-serif-jp",
   display: "swap",
 });
 
 const siteTitle =
-  "ALMONDBAGGER | 八王子の映画・ドラマ制作部 × 最先端AI動画制作・フィルムコミッション連携";
+  "ALMONDBAGGER | 商業映画・ドラマ制作部統括・ロケーション支援";
 
 const siteDescription =
-  "八王子を拠点に20年の現場統括実績を持つ映画・ドラマ制作部と最先端AIクリエイティブが融合。八王子フィルムコミッション連携によるロケ支援から、中小企業向けPR動画、AI Previs・VFXまでワンストップ対応。";
+  "商業映画・地上波ドラマの制作部統括20年の実績と、八王子フィルムコミッション公認連携。企画設計から許認可・ロケーション管理・最新AI映像技術まで、作品の現場を一貫して支えます。";
 
 const keywords = [
   "八王子 制作部",
   "映画 制作部",
   "ドラマ 制作進行",
   "八王子 フィルムコミッション",
-  "八王子 動画制作",
   "八王子 映像制作",
-  "AI動画 制作",
+  "ロケーションコーディネート",
   "AI Previs",
   "AI VFX",
-  "PR動画 中小企業 八王子",
-  "ロケ支援 許認可",
+  "企業PR映像",
   "地図ツクール",
   "ロケマップ",
-  "SNS 縦型ショート動画",
 ];
 
 export const metadata: Metadata = {
@@ -120,10 +110,10 @@ const jsonLd = {
       foundingDate: "2021-08-03",
       address: {
         "@type": "PostalAddress",
-        streetAddress: companyInfo.address.replace(/^東京都八王子市/, ""),
+        streetAddress: "東町1-10 グランデハイツ八王子801",
         addressLocality: "八王子市",
         addressRegion: "東京都",
-        postalCode: companyInfo.postal.replace("〒", ""),
+        postalCode: "192-0082",
         addressCountry: "JP",
       },
       geo: {
@@ -137,8 +127,7 @@ const jsonLd = {
         { "@type": "Country", name: "日本" },
       ],
       knowsAbout: keywords,
-      slogan:
-        "20年の映画・ドラマ制作部統括力 × 次世代AIパイプライン。現場の確固たる進行管理と最新技術で、映像制作を支え抜く。",
+      slogan: "現場を動かす、確かな統括力。",
       sameAs: [companyInfo.partnerUrl],
       contactPoint: {
         "@type": "ContactPoint",
@@ -155,109 +144,39 @@ const jsonLd = {
       serviceType: "制作進行・現場統括・許認可・予算・権利処理",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
       description:
-        "商業映画・地上波連続ドラマ・大型CMの現場統括。ロケハン、香盤表作成、道路使用・撮影許認可、エキストラ管理、安全管理、予算配分・出演契約・権利処理までプロの規律で現場環境を構築します。",
+        "商業映画・地上波連続ドラマの制作部統括。ロケハン、香盤表、道路使用許可、予算管理、権利処理まで一貫して支えます。",
     },
     {
       "@type": "Service",
       "@id": "https://www.almondbagger.com/#service-fc",
-      name: "八王子フィルムコミッション連携・ロケーション支援",
+      name: "八王子フィルムコミッション公認連携・ロケーション支援",
       serviceType: "ロケーションコーディネート・許認可サポート",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
       areaServed: { "@type": "City", name: "八王子市" },
       description:
-        "八王子フィルムコミッション公認連携のもと、映画・ドラマ・CM・MVのロケ地選定、道路使用等の許認可、地元施設との撮影調整を制作部として支援します。",
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.almondbagger.com/#service-video",
-      name: "企業向けPR・採用動画 / SNS縦型ショート制作",
-      serviceType: "PR動画・採用映像・CM・SNS縦型ショート制作",
-      provider: { "@id": "https://www.almondbagger.com/#organization" },
-      areaServed: [
-        { "@type": "City", name: "八王子市" },
-        { "@type": "AdministrativeArea", name: "多摩地域" },
-      ],
-      description:
-        "八王子・多摩エリアの中小企業・メーカー・商業施設向けに、企業PR・採用動画・SNS縦型ショート動画を企画から撮影・編集・配信までワンストップで制作します。",
+        "八王子フィルムコミッション公認連携のもと、ロケ地選定から許認可・撮影調整まで制作部として支援します。",
     },
     {
       "@type": "Service",
       "@id": "https://www.almondbagger.com/#service-ai",
-      name: "制作部直結型 AI Previs & AI VFX",
-      serviceType: "AI Previs・AIバレ消し・ポスプロ最適化",
+      name: "制作部直結型 AI Previs / VFX ＆ 企業PR映像制作",
+      serviceType: "AI Previs・AI VFX・企業PR映像",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
       description:
-        "動く絵コンテ（AI Previs）で企画承認と現場共有を光速化。ロケ撮影の電柱・看板などのAIバレ消しにより、ポスプロコストと納期を圧縮します。",
+        "企画段階のAI Previsから現場連携のVFX、企業向けPR映像まで、制作部の進行管理と直結して提供します。",
     },
     {
       "@type": ["SoftwareApplication", "Service"],
       "@id": "https://www.almondbagger.com/#map-tool",
-      name: "地図ツクール",
-      alternateName: [
-        "Location Map Studio",
-        "地図ツクール for Production",
-        "地図ツクール by ALMONDBAGGER",
-      ],
+      name: "AB式ロケ地図ツクール",
+      alternateName: ["地図ツクール", "Location Map Studio"],
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       url: "https://map.almondbagger.com",
       serviceType: "映画・ドラマ・CM向けロケーション＆許認可マップ",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
-      areaServed: { "@type": "City", name: "八王子市" },
-      featureList: [
-        "ロケ撮影許認可マップ",
-        "搬入・待機・電源レイアウト",
-        "フィルムコミッション連携データベース",
-        "共有＆書き出し（高解像度画像・PDF・URL）",
-      ],
       description:
-        "映画・ドラマ向けロケマップ作成ツール『地図ツクール』。現場を知る制作部が、八王子フィルムコミッション公認連携と20年の統括ノウハウをもとに開発。ロケハン写真、控室、電源車、待機場所、駐車導線、道路使用許可エリアを地図上でピン留め・レイヤー化し、香盤表・台本と直結してチーム共有できます。",
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://www.almondbagger.com/#faq",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "制作部・ロケ手配のみの依頼も可能ですか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "もちろん可能です。映画・ドラマ・CM・MVなど、規模を問わずロケ地選定・許認可申請から撮影当日の現場オペレーション、バックオフィス業務まで柔軟に対応いたします。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "AI PrevisやAIバレ消しは、制作部業務とどのように連携できますか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "企画段階での動くコンテ作成や、ロケ撮影時にどうしても映り込んでしまう不要物のAI消去など、現場の判断とポスプロを直結させることで制作期間と予算を大幅に最適化できます。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "八王子エリアでのロケ撮影やフィルムコミッションの相談は可能ですか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "はい。八王子フィルムコミッション公認連携のもと、ロケ地提案、許認可申請、制作部としての現場進行まで一気通貫でサポートします。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "動画制作の予算が限られている中小企業でも相談できますか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "可能です。映画・ドラマ制作部の進行管理を基盤に、必要な範囲だけ制作部支援・AI Previs・PR映像制作を組み合わせ、予算規模に合わせた最適プランをご提案します。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "映画・ドラマ向けロケマップ作成ツール「地図ツクール」とは何ですか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "現場を知る制作部が開発した、映画・ドラマ・CM特化型のロケーション＆許認可マップツールです。八王子フィルムコミッション公認連携と20年の現場統括ノウハウをもとに、ロケハン写真・控室・電源車・待機場所・駐車導線・道路使用許可エリアを地図上でピン留め・レイヤー化し、香盤表や台本と直結してチーム共有できます。デモ相談を受け付けています。",
-          },
-        },
-      ],
+        "現場の制作部向けに開発したロケ地図作成ツール。ロケハン情報・許認可エリア・待機導線を地図上で共有できます。",
     },
   ],
 };
@@ -266,18 +185,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ja"
-      className={`${fontCinema.variable} ${fontHeroJa.variable} ${fontSyne.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontSerif.variable} h-full antialiased`}
     >
       <head>
         <link rel="icon" href="/icon.png" type="image/png" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/icon.png" />
+        {/* Google AdSense — keep verification assets (public/ads.txt) intact */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="relative min-h-full bg-background text-foreground font-sans">
+      <body className="relative min-h-full bg-background font-sans text-foreground">
         {children}
       </body>
     </html>

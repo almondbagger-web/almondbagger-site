@@ -50,12 +50,12 @@ const layers = [
 type LayerId = (typeof layers)[number]["id"];
 
 const pins: { id: LayerId; label: string; top: string; left: string }[] = [
-  { id: "location", label: "高尾山口", top: "40%", left: "20%" },
-  { id: "location", label: "甲州街道", top: "50%", left: "56%" },
-  { id: "room", label: "控室A", top: "72%", left: "28%" },
-  { id: "route", label: "ロケバス", top: "62%", left: "36%" },
-  { id: "route", label: "電源車", top: "46%", left: "48%" },
-  { id: "permit", label: "道路使用", top: "34%", left: "74%" },
+  { id: "location", label: "高尾山口", top: "34%", left: "22%" },
+  { id: "location", label: "甲州街道", top: "48%", left: "58%" },
+  { id: "room", label: "控室A", top: "68%", left: "26%" },
+  { id: "route", label: "ロケバス", top: "60%", left: "38%" },
+  { id: "route", label: "電源車", top: "42%", left: "50%" },
+  { id: "permit", label: "道路使用", top: "30%", left: "68%" },
 ];
 
 export default function MapToolSection() {
@@ -124,16 +124,55 @@ export default function MapToolSection() {
             >
               <span className="cinema-frame__sprocket cinema-frame__sprocket--left" aria-hidden />
               <span className="cinema-frame__sprocket cinema-frame__sprocket--right" aria-hidden />
-              <div className="relative mx-3 my-3 min-h-[32rem] overflow-hidden rounded-md border border-white/10 bg-[#070b14]">
+              <div className="relative mx-3 my-3 overflow-hidden rounded-md border border-white/10 bg-[#070b14]">
                 <div
-                  className="absolute inset-0 opacity-70"
+                  className="pointer-events-none absolute inset-0 opacity-70"
                   style={{
                     backgroundImage:
                       "linear-gradient(rgba(148,163,184,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.14) 1px, transparent 1px)",
                     backgroundSize: "42px 42px",
                   }}
                 />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_38%,rgba(6,182,212,0.2),transparent_42%),radial-gradient(circle_at_74%_34%,rgba(251,191,36,0.12),transparent_32%),radial-gradient(circle_at_68%_70%,rgba(225,29,72,0.18),transparent_36%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_24%_38%,rgba(6,182,212,0.2),transparent_42%),radial-gradient(circle_at_74%_34%,rgba(251,191,36,0.12),transparent_32%),radial-gradient(circle_at_68%_70%,rgba(225,29,72,0.18),transparent_36%)]" />
+
+                <div className="relative z-[2] flex items-start justify-between gap-3 p-4">
+                  <div>
+                    <p className="font-mono text-[10px] tracking-[0.22em] text-lime-300">
+                      REC · HACHIOJI UNIT
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-white">
+                      Location Map Studio
+                    </p>
+                  </div>
+                  <p className="font-mono text-xs tabular-nums text-white/70">
+                    01:14:22:08
+                  </p>
+                </div>
+
+                <div className="relative z-[2] flex flex-wrap gap-2 px-4 pb-3">
+                  {layers.map((layer) => {
+                    const on = active.includes(layer.id);
+                    return (
+                      <button
+                        key={layer.id}
+                        type="button"
+                        aria-pressed={on}
+                        onClick={() => toggle(layer.id)}
+                        className={cn(
+                          "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold transition",
+                          on
+                            ? "border-white/30 bg-white/10 text-white"
+                            : "border-white/10 bg-black/30 text-white/40",
+                        )}
+                      >
+                        <span className={cn("h-1.5 w-1.5 rounded-full", layer.dot)} />
+                        {layer.label}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="relative z-[1] mx-3 mb-3 min-h-[22rem] overflow-hidden rounded-md border border-white/10 sm:min-h-[24rem]">
                 <svg
                   className="absolute inset-0 h-full w-full"
                   viewBox="0 0 100 100"
@@ -183,46 +222,9 @@ export default function MapToolSection() {
                 <p className="pointer-events-none absolute left-[6%] top-[45%] z-[1] font-mono text-[10px] tracking-[0.18em] text-white/35">
                   甲州街道
                 </p>
-                <p className="pointer-events-none absolute bottom-[10%] left-[8%] z-[1] font-mono text-[10px] tracking-[0.16em] text-cyan-200/45">
+                <p className="pointer-events-none absolute bottom-[22%] left-[8%] z-[1] font-mono text-[10px] tracking-[0.16em] text-cyan-200/45">
                   浅川
                 </p>
-
-                <div className="relative z-[2] flex items-start justify-between gap-3 p-4">
-                  <div>
-                    <p className="font-mono text-[10px] tracking-[0.22em] text-lime-300">
-                      REC · HACHIOJI UNIT
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-white">
-                      Location Map Studio
-                    </p>
-                  </div>
-                  <p className="font-mono text-xs tabular-nums text-white/70">
-                    01:14:22:08
-                  </p>
-                </div>
-
-                <div className="relative z-[2] flex flex-wrap gap-2 px-4">
-                  {layers.map((layer) => {
-                    const on = active.includes(layer.id);
-                    return (
-                      <button
-                        key={layer.id}
-                        type="button"
-                        aria-pressed={on}
-                        onClick={() => toggle(layer.id)}
-                        className={cn(
-                          "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold transition",
-                          on
-                            ? "border-white/30 bg-white/10 text-white"
-                            : "border-white/10 bg-black/30 text-white/40",
-                        )}
-                      >
-                        <span className={cn("h-1.5 w-1.5 rounded-full", layer.dot)} />
-                        {layer.label}
-                      </button>
-                    );
-                  })}
-                </div>
 
                 {pins.map((pin) => {
                   const layer = layers.find((item) => item.id === pin.id);
@@ -252,20 +254,22 @@ export default function MapToolSection() {
                   );
                 })}
 
-                <div className="absolute right-4 bottom-14 z-[3] max-w-[11rem] rounded-lg border border-white/10 bg-black/65 px-3 py-2.5 text-[10px] leading-relaxed text-white/75 backdrop-blur-sm">
-                  <p className="font-mono tracking-[0.16em] text-lime-300">CALL SHEET · 12</p>
-                  <p className="mt-1 font-semibold text-white">SCENE 12 / DAY EXT</p>
-                  <p className="mt-1">入 07:30 · 香盤 3-A</p>
-                  <p>{layerOn("permit") ? "道路使用 · 申請済" : "許認可レイヤー OFF"}</p>
-                </div>
+                <p className="pointer-events-none absolute inset-x-3 bottom-3 z-[3] rounded-lg border border-white/10 bg-black/70 px-3 py-2 text-[10px] leading-relaxed text-white/80 backdrop-blur-sm">
+                  <span className="font-mono tracking-[0.14em] text-lime-300">CALL SHEET 12</span>
+                  <span className="text-white/35"> · </span>
+                  SCENE 12 / DAY EXT · 入 07:30 · 香盤 3-A
+                  <span className="text-white/35"> · </span>
+                  {layerOn("permit") ? "道路使用 申請済" : "許認可 OFF"}
+                </p>
 
                 {active.length === 0 ? (
                   <p className="absolute inset-x-8 top-1/2 z-[2] -translate-y-1/2 text-center text-xs text-white/55">
                     レイヤーを選ぶと、ピン・動線・許可エリアが表示されます。
                   </p>
                 ) : null}
+                </div>
 
-                <div className="absolute inset-x-0 bottom-0 z-[2] flex items-center justify-between border-t border-white/10 bg-black/55 px-4 py-3 text-[11px] text-white/75 backdrop-blur-sm">
+                <div className="relative z-[2] flex items-center justify-between border-t border-white/10 bg-black/55 px-4 py-3 text-[11px] text-white/75 backdrop-blur-sm">
                   <span>LAYERS {active.length}/4 · LIVE SHARE</span>
                   <span className="font-mono tracking-wider">PDF / URL READY</span>
                 </div>
@@ -277,7 +281,7 @@ export default function MapToolSection() {
         <Reveal delay={0.12} className="mt-8 flex flex-wrap gap-3">
           <a
             href="#contact"
-            className="btn-primary"
+            className="btn-primary max-w-full whitespace-normal text-left leading-snug sm:whitespace-nowrap"
             onClick={() => {
               window.dispatchEvent(
                 new CustomEvent("almond:plan", {
@@ -286,8 +290,13 @@ export default function MapToolSection() {
               );
             }}
           >
-            地図ツクールについて問い合わせる / デモ相談
-            <ArrowUpRight className="h-4 w-4" />
+            <span>
+              地図ツクールについて問い合わせる
+              <span className="hidden sm:inline"> / </span>
+              <br className="sm:hidden" />
+              デモ相談
+            </span>
+            <ArrowUpRight className="h-4 w-4 shrink-0" />
           </a>
           <a
             href="https://map.almondbagger.com"
