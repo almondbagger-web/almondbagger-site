@@ -21,11 +21,10 @@ export default function Hero() {
       <div className="aurora-layer" aria-hidden>
         <div className="aurora-blob left-[-10%] top-[-10%] h-[28rem] w-[28rem] bg-gold/20" />
         <div className="aurora-blob right-[-8%] top-[20%] h-[22rem] w-[22rem] bg-cyan/20" />
-        <div className="aurora-blob bottom-[-10%] left-[30%] h-[18rem] w-[18rem] bg-gold/10" />
       </div>
 
       <div className="relative mx-auto max-w-6xl section-pad">
-        <div className="grid items-center gap-10 py-16 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-24">
+        <div className="grid items-center gap-10 py-14 md:py-18 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:py-20">
           <div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem] tracking-[0.14em] text-white/50">
               <span className="inline-flex items-center gap-2 text-cyan">
@@ -35,26 +34,32 @@ export default function Hero() {
               <span className="text-gold">TC 01:00:00:00</span>
             </div>
 
-            <p className="mt-8 text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-              CINEMATIC · AI · ANALYTICS
+            <p
+              aria-hidden
+              className="mt-6 font-display text-[clamp(2.8rem,10vw,5.5rem)] font-black leading-[0.85] tracking-tighter text-white/[0.07]"
+            >
+              PRODUCTION
             </p>
 
-            <h1 className="mt-5 max-w-xl font-serif text-[1.85rem] font-medium leading-[1.35] tracking-wide sm:text-4xl md:text-[2.75rem]">
+            <h1 className="relative mt-[-0.35em] max-w-xl font-serif text-[1.9rem] font-bold leading-[1.3] tracking-wide sm:text-4xl md:text-[2.85rem] lg:text-[3.2rem]">
               現場を動かす、
               <br />
               確かな統括力。
             </h1>
 
+            <p className="mt-6 font-display text-[0.72rem] font-extrabold tracking-[0.14em] text-gold sm:text-[0.78rem]">
+              20 YEARS OF FILM PRODUCTION × NEXT-GEN AI PIPELINE
+            </p>
+
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-              className="mt-7 h-px w-28 origin-left bg-gradient-to-r from-gold via-gold to-cyan/60"
+              className="mt-6 h-px w-28 origin-left bg-gradient-to-r from-gold via-gold to-cyan/60"
             />
 
-            <p className="mt-7 max-w-xl text-[0.95rem] leading-relaxed text-white/70 md:text-base">
-              20年の商業映画・ドラマ制作部統括 ×
-              最先端AIクリエイティブパイプライン。オープンゲート縦横同時制作、SNSインプレッション設計、プロダクションDXまで一貫して支えます。
+            <p className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-white/70 md:text-base">
+              商業映画・地上波ドラマの制作部統括と、最先端AIクリエイティブ。オープンゲート縦横同時制作からプロダクションDXまで、一流の現場を支えます。
             </p>
 
             <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
@@ -69,14 +74,11 @@ export default function Hero() {
             </div>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              <a href="#analytics" className="btn-on-dark">
-                戦略・アナリティクス
+              <a href="#services" className="btn-on-dark">
+                事業内容を見る
               </a>
               <a href="#works" className="btn-on-dark-outline">
                 制作実績を見る
-              </a>
-              <a href="#ecosystem" className="btn-on-dark-outline border-cyan/50 hover:bg-cyan/15">
-                制作部DX
               </a>
             </div>
           </div>
@@ -109,6 +111,13 @@ export default function Hero() {
               </span>
             </p>
           </div>
+        </div>
+
+        <div className="flex justify-center pb-10 pt-2 md:pb-14">
+          <a href="#philosophy" className="scroll-cue" aria-label="下へスクロール">
+            SCROLL
+            <span className="scroll-cue__line" />
+          </a>
         </div>
       </div>
     </section>

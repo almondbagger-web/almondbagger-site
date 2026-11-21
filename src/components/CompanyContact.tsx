@@ -4,6 +4,7 @@ import { type FormEvent, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
 import { companyInfo } from "@/data/works";
 import { cn } from "@/lib/utils";
 
@@ -36,11 +37,12 @@ const subjectOptions = [
 
 const rows = [
   { label: "会社名", value: companyInfo.name },
+  { label: "設立", value: companyInfo.founded },
   {
     label: "所在地",
     value: `${companyInfo.postal} ${companyInfo.address}`,
   },
-  { label: "代表者", value: companyInfo.representative },
+  { label: "代表取締役", value: companyInfo.representative },
   { label: "事業内容", value: companyInfo.business },
   {
     label: "公認連携",
@@ -69,17 +71,12 @@ export default function CompanyContact() {
       >
         <div className="pointer-events-none absolute inset-0 tech-grid opacity-35" />
         <div className="relative mx-auto max-w-6xl section-pad">
-          <div>
-            <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-              COMPANY
-            </p>
-            <h2
-              id="company-heading"
-              className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
-            >
-              会社概要
-            </h2>
-          </div>
+          <SectionHeading
+            english="COMPANY"
+            japanese="会社概要"
+            id="company-heading"
+            tone="gold"
+          />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -135,15 +132,12 @@ export default function CompanyContact() {
         <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
         <div className="relative mx-auto max-w-2xl section-pad">
           <div className="text-center">
-            <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-              CONTACT
-            </p>
-            <h2
+            <SectionHeading
+              english="CONTACT"
+              japanese="お問い合わせ"
               id="contact-heading"
-              className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
-            >
-              お問い合わせ
-            </h2>
+              className="[&_.section-heading__bg]:mx-auto [&_.section-heading__title]:text-center"
+            />
             <p className="mt-5 text-[0.95rem] leading-relaxed text-muted">
               制作部支援、ロケーション、AI映像、縦横同時制作に関するご相談を承ります。内容を確認のうえ、担当よりご連絡いたします。
             </p>

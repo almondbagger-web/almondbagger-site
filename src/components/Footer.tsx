@@ -6,67 +6,70 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative z-[2] border-t border-border bg-background">
+    <footer className="relative z-[2] border-t border-border bg-cinema text-white">
       <div className="mx-auto max-w-6xl section-pad py-16 md:py-20">
-        <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-md">
-            <a href="#top" aria-label={`${companyInfo.shortName} トップへ`}>
+            <a
+              href="#top"
+              aria-label={`${companyInfo.shortName} トップへ`}
+              className="inline-block rounded-sm bg-white px-2 py-1"
+            >
               <BrandLogo variant="footer" />
             </a>
-            <p className="mt-6 text-sm leading-relaxed text-muted">
-              映画・ドラマ制作部統括 × 最先端AIクリエイティブ × SNS・アナリティクス戦略。八王子を拠点に、作品の現場と拡散を支えます。
+            <p className="mt-6 font-display text-[clamp(1.75rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tighter text-white/90">
+              PRODUCTION
+              <br />
+              DIVISION
             </p>
-            <p className="mt-5 text-sm leading-relaxed text-muted">
+            <p className="mt-5 text-sm leading-relaxed text-white/55">
+              映画・ドラマ制作部統括 × 最先端AIクリエイティブ × SNS戦略。八王子を拠点に、作品の現場を支えます。
+            </p>
+            <p className="mt-5 text-sm leading-relaxed text-white/55">
               {companyInfo.postal}
               <br />
               {companyInfo.address}
             </p>
-            <p className="mt-4 text-sm">
-              <a
-                href={companyInfo.phoneHref}
-                className="text-foreground transition-colors hover:text-gold-deep"
-              >
-                {companyInfo.phone}
-              </a>
-              <span className="mx-2 text-border">·</span>
-              <a
-                href={companyInfo.emailHref}
-                className="text-foreground transition-colors hover:text-gold-deep"
-              >
-                {companyInfo.email}
-              </a>
-            </p>
           </div>
 
-          <nav
-            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3"
-            aria-label="フッターナビゲーション"
-          >
-            {navLinks.map((link) => (
+          <div className="flex flex-col gap-10 sm:flex-row sm:gap-16">
+            <nav
+              className="flex flex-col gap-3"
+              aria-label="フッターナビゲーション"
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                href={link.href}
-                className="text-sm tracking-wide text-muted transition-colors hover:text-foreground"
+                href="#contact"
+                className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
               >
-                {link.label}
+                お問い合わせ
               </a>
-            ))}
+              <Link
+                href="/privacy"
+                className="text-sm tracking-wide text-white/60 transition-colors hover:text-white"
+              >
+                プライバシーポリシー
+              </Link>
+            </nav>
+
             <a
-              href="#contact"
-              className="text-sm tracking-wide text-muted transition-colors hover:text-foreground"
+              href="#top"
+              className="inline-flex items-center gap-2 self-start font-display text-sm font-extrabold tracking-[0.16em] text-gold transition-colors hover:text-white"
             >
-              お問い合わせ
+              BACK TO TOP ↑
             </a>
-            <Link
-              href="/privacy"
-              className="text-sm tracking-wide text-muted transition-colors hover:text-foreground"
-            >
-              プライバシーポリシー
-            </Link>
-          </nav>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted md:flex-row md:justify-between">
+        <div className="mt-14 flex flex-col gap-2 border-t border-white/12 pt-6 text-xs text-white/40 md:flex-row md:justify-between">
           <p>
             © {year} {companyInfo.name}
           </p>

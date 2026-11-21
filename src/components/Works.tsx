@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 import { getFeaturedWorks, getFilmography, type Work } from "@/data/works";
 
 const featured = getFeaturedWorks();
@@ -20,7 +21,7 @@ function FeaturedCard({ work }: { work: Work }) {
   const isFlagship = work.id === "w-obanhurumai";
 
   return (
-    <article className="cinema-card overflow-hidden border border-border bg-white">
+    <article className="overflow-hidden border border-white/12 bg-white/[0.03]">
       {isFlagship ? (
         <div className="cinema-player">
           <iframe
@@ -47,16 +48,16 @@ function FeaturedCard({ work }: { work: Work }) {
       )}
 
       <div className="p-5 md:p-6">
-        <p className="font-mono text-[0.65rem] tracking-[0.12em] text-muted">
+        <p className="font-mono text-[0.65rem] tracking-[0.12em] text-white/45">
           {work.year} / {work.category}
         </p>
-        <h3 className="mt-2 font-serif text-lg font-medium tracking-wide text-foreground md:text-xl">
+        <h3 className="mt-2 font-serif text-lg font-medium tracking-wide text-white md:text-xl">
           {work.title}
         </h3>
-        <p className="mt-2 text-[0.78rem] font-medium text-gold-deep">
+        <p className="mt-2 text-[0.78rem] font-medium text-gold">
           {work.roleCredit}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-muted">
+        <p className="mt-3 text-sm leading-relaxed text-white/60">
           {work.description}
         </p>
         {work.officialUrl ? (
@@ -64,7 +65,7 @@ function FeaturedCard({ work }: { work: Work }) {
             href={work.officialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-1.5 text-[0.78rem] font-medium tracking-wide text-foreground transition-colors hover:text-gold-deep"
+            className="mt-5 inline-flex items-center gap-1.5 text-[0.78rem] font-medium tracking-wide text-white transition-colors hover:text-gold"
             aria-label={`${work.title} を見る`}
           >
             {isFlagship ? "YouTubeで観る" : "公式を見る"}
@@ -85,32 +86,27 @@ export default function Works() {
     <section
       id="works"
       aria-labelledby="works-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-[#0B0C0E] text-white section-y md:scroll-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid opacity-35" />
+      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-60" />
 
       <div className="relative mx-auto max-w-6xl section-pad">
-        <div>
-          <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-            WORKS
-          </p>
-          <h2
-            id="works-heading"
-            className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
-          >
-            制作実績
-          </h2>
-          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
-            映像付きの代表作と、制作部・ロケーション統括のフィルモグラフィーを分けて掲載しています。
-          </p>
-        </div>
+        <SectionHeading
+          english="WORKS"
+          japanese="制作実績"
+          id="works-heading"
+          tone="dark"
+        />
+        <p className="mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
+          映像付きの代表作と、制作部・ロケーション統括のフィルモグラフィーを分けて掲載しています。
+        </p>
 
         {/* Featured */}
         <div className="mt-14">
-          <h3 className="font-serif text-xl tracking-wide text-foreground md:text-2xl">
-            Featured Works
+          <h3 className="font-display text-sm font-extrabold tracking-[0.18em] text-gold">
+            FEATURED WORKS
           </h3>
-          <p className="mt-2 text-sm text-muted">
+          <p className="mt-2 text-sm text-white/55">
             ビジュアル・映像付きの代表作
           </p>
           <div className="mt-8 space-y-6">
@@ -125,10 +121,10 @@ export default function Works() {
 
         {/* Filmography table */}
         <div className="mt-20">
-          <h3 className="font-serif text-xl tracking-wide text-foreground md:text-2xl">
-            Filmography
+          <h3 className="font-display text-sm font-extrabold tracking-[0.18em] text-gold">
+            FILMOGRAPHY
           </h3>
-          <p className="mt-2 text-sm text-muted">
+          <p className="mt-2 text-sm text-white/55">
             制作部・ロケーション統括実績（2026年〜2020年）
           </p>
 
@@ -137,11 +133,11 @@ export default function Works() {
               const rows = filmography.filter((w) => w.year === year);
               return (
                 <div key={year}>
-                  <div className="mb-4 flex items-baseline gap-4 border-b border-border pb-3">
-                    <span className="font-serif text-2xl tracking-wide text-gold">
+                  <div className="mb-4 flex items-baseline gap-4 border-b border-white/15 pb-3">
+                    <span className="font-display text-4xl font-black tracking-tighter text-gold md:text-5xl">
                       {year}
                     </span>
-                    <span className="font-mono text-[0.65rem] tracking-[0.14em] text-muted">
+                    <span className="font-mono text-[0.65rem] tracking-[0.14em] text-white/40">
                       {rows.length.toString().padStart(2, "0")} TITLES
                     </span>
                   </div>
@@ -149,7 +145,7 @@ export default function Works() {
                   <div className="overflow-x-auto">
                     <table className="w-full min-w-[640px] text-left text-sm">
                       <thead>
-                        <tr className="border-b border-border text-[0.7rem] tracking-wide text-muted">
+                        <tr className="border-b border-white/12 text-[0.7rem] tracking-wide text-white/40">
                           <th className="py-3 pr-4 font-medium">作品</th>
                           <th className="py-3 pr-4 font-medium">媒体 / 配給</th>
                           <th className="py-3 pr-4 font-medium">担当</th>
@@ -160,17 +156,17 @@ export default function Works() {
                         {rows.map((work) => (
                           <tr
                             key={work.id}
-                            className="border-b border-border/80 align-top last:border-b-0"
+                            className="border-b border-white/10 align-top last:border-b-0"
                           >
                             <td className="py-4 pr-4">
-                              <span className="font-serif text-[0.95rem] font-medium tracking-wide text-foreground">
+                              <span className="font-serif text-[0.95rem] font-medium tracking-wide text-white">
                                 {work.title}
                               </span>
                             </td>
-                            <td className="py-4 pr-4 text-muted">
+                            <td className="py-4 pr-4 text-white/55">
                               {mediumLabel(work)}
                             </td>
-                            <td className="py-4 pr-4 text-foreground/85">
+                            <td className="py-4 pr-4 text-white/80">
                               {work.roleCredit}
                             </td>
                             <td className="py-4">
@@ -179,14 +175,14 @@ export default function Works() {
                                   href={work.officialUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 font-medium text-gold-deep underline-offset-4 hover:underline"
+                                  className="inline-flex items-center gap-1 font-medium text-gold underline-offset-4 hover:underline"
                                   aria-label={`${work.title} の公式ページ`}
                                 >
                                   公式
                                   <ArrowUpRight className="h-3.5 w-3.5" />
                                 </a>
                               ) : (
-                                <span className="text-muted">—</span>
+                                <span className="text-white/35">—</span>
                               )}
                             </td>
                           </tr>

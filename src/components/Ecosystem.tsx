@@ -2,6 +2,7 @@
 
 import { ArrowUpRight, BrainCircuit, Map } from "lucide-react";
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
 import { companyInfo } from "@/data/works";
 
 const tools = [
@@ -39,20 +40,15 @@ export default function Ecosystem() {
       <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
 
       <div className="relative mx-auto max-w-6xl section-pad">
-        <div>
-          <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-            PRODUCTION ECOSYSTEM
-          </p>
-          <h2
-            id="ecosystem-heading"
-            className="mt-4 font-serif text-2xl font-medium tracking-wide text-foreground md:text-3xl lg:text-4xl"
-          >
-            制作部を支える、自社開発OS
-          </h2>
-          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
-            現場知をツールとAIに落とし込み、制作部の判断速度と再現性を高めます。
-          </p>
-        </div>
+        <SectionHeading
+          english="ECOSYSTEM"
+          japanese="制作部DX"
+          id="ecosystem-heading"
+          tone="gold"
+        />
+        <p className="mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-muted">
+          現場知をツールとAIに落とし込み、制作部の判断速度と再現性を高めます。
+        </p>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           {tools.map((tool, index) => {

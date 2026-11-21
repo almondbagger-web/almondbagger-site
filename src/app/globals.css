@@ -33,6 +33,8 @@
     "Noto Sans JP", "Segoe UI", system-ui, sans-serif;
   --font-serif: var(--font-serif-jp), "Noto Serif JP", "Hiragino Mincho ProN",
     "Yu Mincho", serif;
+  --font-display: var(--font-display), "Montserrat", "Helvetica Neue",
+    system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
 }
 
@@ -63,8 +65,135 @@ body {
   letter-spacing: 0.04em;
 }
 
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  font-weight: 900;
+}
+
 .font-mono {
   font-family: var(--font-mono);
+}
+
+/* Editorial overlap heading */
+.section-heading {
+  position: relative;
+  padding-top: clamp(1.5rem, 4vw, 3rem);
+}
+
+.section-heading__bg {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  font-size: clamp(3.5rem, 14vw, 7.5rem);
+  color: color-mix(in oklab, var(--foreground) 6%, transparent);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.section-heading__bg--on-dark {
+  color: color-mix(in oklab, #ffffff 8%, transparent);
+}
+
+.section-heading__bg--gold {
+  color: color-mix(in oklab, var(--gold) 22%, transparent);
+}
+
+.section-heading__title {
+  position: relative;
+  margin-top: -0.55em;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.65rem, 4vw, 2.5rem);
+  color: var(--foreground);
+}
+
+.section-heading__title--on-dark {
+  color: #ffffff;
+}
+
+/* Marquee */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--border);
+  background: var(--cinema);
+  color: #fff;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+}
+
+.marquee__item {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  letter-spacing: -0.05em;
+  line-height: 1.15;
+  padding-block: 1.25rem;
+  padding-inline: 2rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: color-mix(in oklab, #ffffff 88%, transparent);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-cue {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: color-mix(in oklab, #ffffff 55%, transparent);
+}
+
+.scroll-cue__line {
+  width: 1px;
+  height: 3rem;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--gold) 80%, transparent),
+    transparent
+  );
+  animation: scroll-line 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleY(0.7);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track,
+  .scroll-cue__line {
+    animation: none !important;
+  }
 }
 
 .section-pad {

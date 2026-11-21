@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
 
 const openGateRows = [
   {
@@ -68,22 +69,15 @@ export default function Analytics() {
       </div>
 
       <div className="relative mx-auto max-w-6xl section-pad">
-        <div>
-          <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
-            LOGIC · ANALYTICS · SNS
-          </p>
-          <h2
-            id="analytics-heading"
-            className="mt-4 max-w-3xl font-serif text-2xl font-medium tracking-wide md:text-3xl lg:text-4xl"
-          >
-            制作効率とSNS展開を、
-            <br className="hidden sm:block" />
-            ロジックで可視化する。
-          </h2>
-          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
-            ダミー指標ではなく、現場とマーケが共有できる設計思想を図解します。オープンゲート撮影、SNSインプレッション設計、AIパイプライン。
-          </p>
-        </div>
+        <SectionHeading
+          english="ANALYTICS"
+          japanese="戦略・ロジック"
+          id="analytics-heading"
+          tone="dark"
+        />
+        <p className="mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
+          ダミー指標ではなく、現場とマーケが共有できる設計思想を図解します。オープンゲート撮影、SNSインプレッション設計、AIパイプライン。
+        </p>
 
         {/* Open Gate */}
         <article className="glass-dark relative mt-14 overflow-hidden p-6 md:p-8">

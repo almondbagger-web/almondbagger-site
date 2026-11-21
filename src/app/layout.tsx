@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import { Montserrat, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import { companyInfo, faqItems } from "@/data/works";
 import "./globals.css";
 
@@ -14,6 +14,13 @@ const fontSerif = Noto_Serif_JP({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-serif-jp",
+  display: "swap",
+});
+
+const fontDisplay = Montserrat({
+  weight: ["700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -225,7 +232,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ja"
-      className={`${fontSans.variable} ${fontSerif.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontSerif.variable} ${fontDisplay.variable} h-full antialiased`}
     >
       <head>
         <link rel="icon" href="/icon.png" type="image/png" />
