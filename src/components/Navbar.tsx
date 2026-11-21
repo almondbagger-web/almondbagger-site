@@ -29,21 +29,26 @@ export default function Navbar() {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const lightBar = scrolled || open;
+
   return (
     <>
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
-          scrolled || open
+          lightBar
             ? "border-border bg-white/95 shadow-[0_1px_0_rgba(17,19,21,0.04)] backdrop-blur-md"
-            : "border-transparent bg-white/90 backdrop-blur-sm",
+            : "border-white/10 bg-cinema/70 backdrop-blur-md",
         )}
       >
         <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-4 section-pad md:h-[4.75rem]">
           <a
             href="#top"
             aria-label={`${companyInfo.shortName} トップへ`}
-            className="min-w-0 shrink-0"
+            className={cn(
+              "min-w-0 shrink-0",
+              !lightBar && "rounded-sm bg-white/95 px-2 py-1",
+            )}
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
@@ -64,7 +69,12 @@ export default function Navbar() {
                   e.preventDefault();
                   handleNav(link.href);
                 }}
-                className="px-2.5 py-2 text-[0.78rem] font-medium tracking-[0.06em] text-muted transition-colors hover:text-foreground"
+                className={cn(
+                  "px-2.5 py-2 text-[0.78rem] font-medium tracking-[0.06em] transition-colors",
+                  lightBar
+                    ? "text-muted hover:text-foreground"
+                    : "text-white/70 hover:text-white",
+                )}
               >
                 {link.label}
               </a>
@@ -75,7 +85,7 @@ export default function Navbar() {
                 e.preventDefault();
                 handleNav("#contact");
               }}
-              className="btn-dark ml-3"
+              className={cn("ml-3", lightBar ? "btn-dark" : "btn-on-dark")}
             >
               お問い合わせ
             </a>
@@ -86,7 +96,12 @@ export default function Navbar() {
             aria-label={open ? "メニューを閉じる" : "メニューを開く"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-11 w-11 items-center justify-center border border-border text-foreground xl:hidden"
+            className={cn(
+              "inline-flex h-11 w-11 items-center justify-center border xl:hidden",
+              lightBar
+                ? "border-border text-foreground"
+                : "border-white/25 text-white",
+            )}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

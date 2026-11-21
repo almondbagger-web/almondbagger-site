@@ -401,13 +401,16 @@ export const companyInfo = {
   partner: "八王子フィルムコミッション公認連携",
   partnerUrl: "https://www.hkc.or.jp/fc/",
   mapToolUrl: "https://map.almondbagger.com/",
+  yumiChaUrl: "https://yumi-cha.streamlit.app/",
   mapEmbed:
     "https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E6%9D%B1%E7%94%BA1%E7%95%AA10%E5%8F%B7&t=&z=16&ie=UTF8&iwloc=&output=embed",
 } as const;
 
 export const navLinks = [
   { href: "#services", label: "事業領域" },
+  { href: "#analytics", label: "戦略" },
   { href: "#works", label: "制作実績" },
+  { href: "#ecosystem", label: "制作部DX" },
   { href: "#faq", label: "FAQ" },
   { href: "#company", label: "会社概要" },
 ] as const;

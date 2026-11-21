@@ -133,7 +133,11 @@ const jsonLd = {
       ],
       knowsAbout: keywords,
       slogan: "現場を動かす、確かな統括力。",
-      sameAs: [companyInfo.partnerUrl, companyInfo.mapToolUrl],
+      sameAs: [
+        companyInfo.partnerUrl,
+        companyInfo.mapToolUrl,
+        companyInfo.yumiChaUrl,
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: companyInfo.phone,
@@ -189,7 +193,18 @@ const jsonLd = {
       url: "https://map.almondbagger.com",
       provider: { "@id": "https://www.almondbagger.com/#organization" },
       description:
-        "制作現場向けロケーション＆許認可マップツール。ロケハン情報・待機導線・許可エリアを地図上で共有。",
+        "制作現場向けロケーション＆許認可マップツール。ロケハン・控室・車両動線・道路使用許可エリアを地図化・PDF出力。",
+    },
+    {
+      "@type": ["SoftwareApplication", "Service"],
+      "@id": "https://www.almondbagger.com/#yumi-cha",
+      name: "YUMI-CHA（制作現場ブレインOS）",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: "https://yumi-cha.streamlit.app/",
+      provider: { "@id": "https://www.almondbagger.com/#organization" },
+      description:
+        "20年の映画・ドラマ制作部統括の知恵・許認可ノウハウ・ロケ地・ロケ弁データベースを学習した制作部専用AIアシスタント。",
     },
     {
       "@type": "FAQPage",
