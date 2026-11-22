@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import CinematicIntro from "@/components/CinematicIntro";
 import { companyInfo, faqItems, getFilmography } from "@/data/works";
 import "./globals.css";
 
@@ -273,6 +274,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="relative min-h-full bg-background font-sans text-foreground">
+        {/* Overlay only — main content stays in DOM for SEO/AEO crawlers */}
+        <CinematicIntro />
         {children}
       </body>
     </html>

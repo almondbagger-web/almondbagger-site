@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
+import OpeningReplayTrigger from "@/components/OpeningReplayTrigger";
 import { companyInfo, navLinks } from "@/data/works";
 
 export default function Footer() {
@@ -70,12 +71,15 @@ export default function Footer() {
               </Link>
             </nav>
 
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 self-start font-display text-sm font-extrabold tracking-[0.16em] text-gold transition-colors hover:text-white"
-            >
-              BACK TO TOP ↑
-            </Link>
+            <div className="flex flex-col gap-4 self-start">
+              <OpeningReplayTrigger variant="footer" />
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 font-display text-sm font-extrabold tracking-[0.16em] text-gold transition-colors hover:text-white"
+              >
+                BACK TO TOP ↑
+              </Link>
+            </div>
           </div>
         </div>
 

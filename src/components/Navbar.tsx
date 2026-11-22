@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import BrandLogo from "@/components/BrandLogo";
+import OpeningReplayTrigger from "@/components/OpeningReplayTrigger";
 import { navLinks } from "@/data/works";
 import { cn } from "@/lib/utils";
 
@@ -90,6 +91,10 @@ export default function Navbar({ forceLight = false }: NavbarProps) {
               <span className="mt-0.5 block truncate text-[9px] tracking-wide text-[#A68A56] sm:text-[10px] md:text-xs">
                 八王子フィルムコミッション × 制作部 × AIクリエイター
               </span>
+              <OpeningReplayTrigger
+                variant="header"
+                className="mt-1 hidden sm:inline-flex"
+              />
             </span>
           </Link>
 
