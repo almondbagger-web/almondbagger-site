@@ -214,10 +214,10 @@ export default function PortfolioPage() {
             </div>
             <div className="p-2 border-b border-slate-800 print:border-slate-200 flex justify-between items-center">
               <span className="font-bold text-white print:text-black">
-                『憧れの作家は人間じゃありませんでした』 (2023年)
+                『憧れの作家は人間じゃありませんでした』 (2026年 / Amazon Prime Video)
               </span>
               <span className="text-red-400 print:text-red-600 text-xs font-medium">
-                制作部
+                制作部・現場管理
               </span>
             </div>
             <div className="p-2 border-b border-slate-800 print:border-slate-200 flex justify-between items-center">
@@ -230,7 +230,7 @@ export default function PortfolioPage() {
             </div>
             <div className="p-2 border-b border-slate-800 print:border-slate-200 flex justify-between items-center">
               <span className="font-bold text-white print:text-black">
-                映画『そばかす』 (2022年 / 劇場公開映画)
+                映画『そばかす』 (2022年12月16日 / 劇場公開映画)
               </span>
               <span className="text-red-400 print:text-red-600 text-xs font-medium">
                 制作部ロケ支援
@@ -238,7 +238,7 @@ export default function PortfolioPage() {
             </div>
             <div className="p-2 border-b border-slate-800 print:border-slate-200 flex justify-between items-center">
               <span className="font-bold text-white print:text-black">
-                『ロマンティック・キラー』 (2022年 / Netflix)
+                映画『ロマンティック・キラー』 (2025年12月12日公開 / 東宝配給)
               </span>
               <span className="text-red-400 print:text-red-600 text-xs font-medium">
                 制作部
@@ -246,7 +246,7 @@ export default function PortfolioPage() {
             </div>
             <div className="p-2 border-b border-slate-800 print:border-slate-200 flex justify-between items-center">
               <span className="font-bold text-white print:text-black">
-                『かばん屋の相続』 (2021年 / WOWOW 連続ドラマW)
+                『かばん屋の相続』 (2025年12月 / WOWOW 連続ドラマW)
               </span>
               <span className="text-red-400 print:text-red-600 text-xs font-medium">
                 制作部

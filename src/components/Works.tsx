@@ -1,22 +1,22 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
-import { getFeaturedWorks, getFilmography, type Work } from "@/data/works";
+import {
+  getFeaturedWorks,
+  getFilmography,
+  workCategories,
+  type Work,
+  type WorkCategory,
+} from "@/data/works";
+import { cn } from "@/lib/utils";
 
 const featured = getFeaturedWorks();
 const filmography = getFilmography();
 
-function mediumLabel(work: Work) {
-  if (work.id === "w-moupapa") return "ABCテレビ（朝日放送テレビ）";
-  if (work.id === "w-luvntcom") return "Storm Labels配給 / 劇場公開映画";
-  if (work.id === "w-soulmate") return "Netflix世界独占配信";
-  if (work.id === "w-bl-drama" || work.id === "w-jikihai") return "FOD SHORT";
-  if (work.id === "w-kabanya") return "WOWOW";
-  if (work.id === "w-tokrev") return "ワーナー・ブラザース配給";
-  return work.client;
-}
+type Filter = (typeof workCategories)[number];
 
 function FeaturedCard({ work }: { work: Work }) {
   const isFlagship = work.id === "w-obanhurumai";
@@ -79,9 +79,26 @@ function FeaturedCard({ work }: { work: Work }) {
 }
 
 export default function Works() {
-  const years = Array.from(new Set(filmography.map((w) => w.year))).sort(
-    (a, b) => b - a,
+  const [filter, setFilter] = useState<Filter>("すべて");
+
+  const filtered = useMemo(() => {
+    if (filter === "すべて") return filmography;
+    return filmography.filter((w) => w.category === (filter as WorkCategory));
+  }, [filter]);
+
+  const years = useMemo(
+    () =>
+      Array.from(new Set(filtered.map((w) => w.year))).sort((a, b) => b - a),
+    [filtered],
   );
+
+  const showFeatured =
+    filter === "すべて" || filter === "MV・オリジナルIP";
+
+  const featuredVisible =
+    filter === "すべて"
+      ? featured
+      : featured.filter((w) => w.category === filter);
 
   return (
     <section
@@ -99,105 +116,146 @@ export default function Works() {
           tone="dark"
         />
         <p className="mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-white/60">
-          映像付きの代表作と、制作部・ロケーション統括のフィルモグラフィーを分けて掲載しています。
+          映像付きの代表作と、制作部・ロケーション統括のフィルモグラフィーを掲載しています。
         </p>
 
-        {/* Featured */}
-        <div className="mt-14">
-          <h3 className="font-display text-sm font-extrabold tracking-[0.18em] text-gold">
-            FEATURED WORKS
-          </h3>
-          <p className="mt-2 text-sm text-white/55">
-            ビジュアル・映像付きの代表作
-          </p>
-          <div className="mt-8 space-y-6">
-            {featured[0] ? <FeaturedCard work={featured[0]} /> : null}
-            <div className="grid gap-6 sm:grid-cols-2">
-              {featured.slice(1).map((work) => (
-                <FeaturedCard key={work.id} work={work} />
-              ))}
-            </div>
-          </div>
+        <div
+          className="mt-8 flex flex-wrap gap-2"
+          role="tablist"
+          aria-label="制作実績カテゴリ"
+        >
+          {workCategories.map((cat) => {
+            const active = filter === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => setFilter(cat)}
+                className={cn(
+                  "border px-3.5 py-2 font-display text-[0.68rem] font-extrabold tracking-[0.12em] transition-colors",
+                  active
+                    ? "border-gold bg-gold/15 text-gold"
+                    : "border-white/20 text-white/55 hover:border-white/40 hover:text-white",
+                )}
+              >
+                {cat}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Filmography table */}
+        {showFeatured && featuredVisible.length > 0 ? (
+          <div className="mt-14">
+            <h3 className="font-display text-sm font-extrabold tracking-[0.18em] text-gold">
+              FEATURED WORKS
+            </h3>
+            <p className="mt-2 text-sm text-white/55">
+              ビジュアル・映像付きの代表作
+            </p>
+            <div className="mt-8 space-y-6">
+              {featuredVisible[0] ? (
+                <FeaturedCard work={featuredVisible[0]} />
+              ) : null}
+              {featuredVisible.length > 1 ? (
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {featuredVisible.slice(1).map((work) => (
+                    <FeaturedCard key={work.id} work={work} />
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
+
         <div className="mt-20">
           <h3 className="font-display text-sm font-extrabold tracking-[0.18em] text-gold">
             FILMOGRAPHY
           </h3>
           <p className="mt-2 text-sm text-white/55">
             制作部・ロケーション統括実績（2026年〜2020年）
+            {filter !== "すべて" ? ` ／ ${filter}` : ""}
           </p>
 
-          <div className="mt-8 space-y-10">
-            {years.map((year) => {
-              const rows = filmography.filter((w) => w.year === year);
-              return (
-                <div key={year}>
-                  <div className="mb-4 flex items-baseline gap-4 border-b border-white/15 pb-3">
-                    <span className="font-display text-4xl font-black tracking-tighter text-gold md:text-5xl">
-                      {year}
-                    </span>
-                    <span className="font-mono text-[0.65rem] tracking-[0.14em] text-white/40">
-                      {rows.length.toString().padStart(2, "0")} TITLES
-                    </span>
-                  </div>
+          {years.length === 0 ? (
+            <p className="mt-10 text-sm text-white/45">
+              該当する作品がありません。
+            </p>
+          ) : (
+            <div className="mt-8 space-y-10">
+              {years.map((year) => {
+                const rows = filtered.filter((w) => w.year === year);
+                return (
+                  <div key={year}>
+                    <div className="mb-4 flex items-baseline gap-4 border-b border-white/15 pb-3">
+                      <span className="font-display text-4xl font-black tracking-tighter text-gold md:text-5xl">
+                        {year}
+                      </span>
+                      <span className="font-mono text-[0.65rem] tracking-[0.14em] text-white/40">
+                        {rows.length.toString().padStart(2, "0")} TITLES
+                      </span>
+                    </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full min-w-[640px] text-left text-sm">
-                      <thead>
-                        <tr className="border-b border-white/12 text-[0.7rem] tracking-wide text-white/40">
-                          <th className="py-3 pr-4 font-medium">作品</th>
-                          <th className="py-3 pr-4 font-medium">媒体 / 配給</th>
-                          <th className="py-3 pr-4 font-medium">担当</th>
-                          <th className="py-3 font-medium">リンク</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {rows.map((work) => (
-                          <tr
-                            key={work.id}
-                            className="border-b border-white/10 align-top last:border-b-0"
-                          >
-                            <td className="py-4 pr-4">
-                              <span className="font-serif text-[0.95rem] font-medium tracking-wide text-white">
-                                {work.title}
-                              </span>
-                              <span className="mt-1.5 block font-mono text-[0.62rem] tracking-[0.1em] text-gold/80">
-                                {work.periodLabel}
-                              </span>
-                            </td>
-                            <td className="py-4 pr-4 text-white/55">
-                              {mediumLabel(work)}
-                            </td>
-                            <td className="py-4 pr-4 text-white/80">
-                              {work.roleCredit}
-                            </td>
-                            <td className="py-4">
-                              {work.officialUrl ? (
-                                <a
-                                  href={work.officialUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 font-medium text-gold underline-offset-4 hover:underline"
-                                  aria-label={`${work.title} の公式ページ`}
-                                >
-                                  公式
-                                  <ArrowUpRight className="h-3.5 w-3.5" />
-                                </a>
-                              ) : (
-                                <span className="text-white/35">—</span>
-                              )}
-                            </td>
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[640px] text-left text-sm">
+                        <thead>
+                          <tr className="border-b border-white/12 text-[0.7rem] tracking-wide text-white/40">
+                            <th className="py-3 pr-4 font-medium">作品</th>
+                            <th className="py-3 pr-4 font-medium">媒体 / 配給</th>
+                            <th className="py-3 pr-4 font-medium">担当</th>
+                            <th className="py-3 font-medium">リンク</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {rows.map((work) => (
+                            <tr
+                              key={work.id}
+                              className="border-b border-white/10 align-top last:border-b-0"
+                            >
+                              <td className="py-4 pr-4">
+                                <span className="font-serif text-[0.95rem] font-medium tracking-wide text-white">
+                                  {work.title}
+                                </span>
+                                <span className="mt-1.5 block font-mono text-[0.62rem] tracking-[0.1em] text-gold/80">
+                                  {work.periodLabel}
+                                </span>
+                                <span className="mt-1 block text-[0.65rem] tracking-wide text-white/35">
+                                  {work.category}
+                                </span>
+                              </td>
+                              <td className="py-4 pr-4 text-white/55">
+                                {work.medium}
+                              </td>
+                              <td className="py-4 pr-4 text-white/80">
+                                {work.roleCredit}
+                              </td>
+                              <td className="py-4">
+                                {work.officialUrl ? (
+                                  <a
+                                    href={work.officialUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 font-medium text-gold underline-offset-4 hover:underline"
+                                    aria-label={`${work.title} の公式ページ`}
+                                  >
+                                    公式
+                                    <ArrowUpRight className="h-3.5 w-3.5" />
+                                  </a>
+                                ) : (
+                                  <span className="text-white/35">—</span>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>

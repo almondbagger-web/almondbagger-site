@@ -237,10 +237,16 @@ const jsonLd = {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "CreativeWork",
+          "@type":
+            work.category === "映画"
+              ? "Movie"
+              : work.category === "MV・オリジナルIP"
+                ? "MusicVideoObject"
+                : "TVSeries",
           name: work.title,
           datePublished: String(work.year),
-          description: work.description,
+          description: `${work.periodLabel}／${work.medium}／${work.roleCredit}。${work.description}`,
+          genre: work.category,
           creator: { "@id": "https://www.almondbagger.com/#organization" },
           ...(work.officialUrl ? { url: work.officialUrl } : {}),
           ...(work.client ? { publisher: work.client } : {}),
