@@ -9,6 +9,7 @@ const featured = getFeaturedWorks();
 const filmography = getFilmography();
 
 function mediumLabel(work: Work) {
+  if (work.id === "w-moupapa") return "ABCテレビ（朝日放送テレビ）";
   if (work.id === "w-luvntcom") return "Storm Labels配給 / 劇場公開映画";
   if (work.id === "w-soulmate") return "Netflix世界独占配信";
   if (work.id === "w-bl-drama" || work.id === "w-jikihai") return "FOD SHORT";
@@ -161,6 +162,9 @@ export default function Works() {
                             <td className="py-4 pr-4">
                               <span className="font-serif text-[0.95rem] font-medium tracking-wide text-white">
                                 {work.title}
+                              </span>
+                              <span className="mt-1.5 block font-mono text-[0.62rem] tracking-[0.1em] text-gold/80">
+                                {work.periodLabel}
                               </span>
                             </td>
                             <td className="py-4 pr-4 text-white/55">

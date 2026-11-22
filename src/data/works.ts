@@ -30,6 +30,21 @@ export type Work = {
  */
 export const works: Work[] = [
   {
+    id: "w-moupapa",
+    title: "もうパパ！",
+    client: "ABCテレビ（朝日放送テレビ）",
+    category: "ドラマ・配信",
+    tags: ["地上波連続ドラマ", "現在放送中", "ABCテレビ"],
+    year: 2026,
+    sortKey: 20261122,
+    periodLabel: "2026 / 現在放送中",
+    description:
+      "現在放送中の連続ドラマ。制作担当として撮影現場全体の統括・ロケーション調整・進行管理を担当。",
+    aspect: "landscape",
+    officialUrl: "https://www.asahi.co.jp/moupapa/",
+    roleCredit: "制作担当（制作部統括・現場進行）",
+  },
+  {
     id: "w-bl-drama",
     title: "BLドラマに女はいらない",
     client: "FOD（フジテレビ）",
@@ -346,6 +361,7 @@ export const featuredWorkIds = [
  * MV・自社IPは Featured 側に分離
  */
 export const filmographyIds = [
+  "w-moupapa",
   "w-luvntcom",
   "w-bl-drama",
   "w-jikihai",

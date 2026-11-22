@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
-import { companyInfo, faqItems } from "@/data/works";
+import { companyInfo, faqItems, getFilmography } from "@/data/works";
 import "./globals.css";
 
 const fontSans = Noto_Sans_JP({
@@ -222,6 +222,28 @@ const jsonLd = {
         acceptedAnswer: {
           "@type": "Answer",
           text: item.answer,
+        },
+      })),
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.almondbagger.com/#filmography",
+      name: "制作実績 Filmography",
+      description:
+        "株式会社ALMONDBAGGERの映画・ドラマ制作部統括・ロケーション実績一覧",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: getFilmography().length,
+      itemListElement: getFilmography().map((work, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "CreativeWork",
+          name: work.title,
+          datePublished: String(work.year),
+          description: work.description,
+          creator: { "@id": "https://www.almondbagger.com/#organization" },
+          ...(work.officialUrl ? { url: work.officialUrl } : {}),
+          ...(work.client ? { publisher: work.client } : {}),
         },
       })),
     },
