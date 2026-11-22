@@ -3,6 +3,7 @@
 import { ArrowUpRight, BrainCircuit, Map } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/SectionHeading";
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
 import { companyInfo } from "@/data/works";
 
 const tools = [
@@ -35,11 +36,11 @@ export default function Ecosystem() {
     <section
       id="ecosystem"
       aria-labelledby="ecosystem-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-surface section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-surface/90 section-y md:scroll-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
+      <PlatinumBackdrop />
 
-      <div className="relative mx-auto max-w-6xl section-pad">
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <SectionHeading
           english="ECOSYSTEM"
           japanese="制作部DX"

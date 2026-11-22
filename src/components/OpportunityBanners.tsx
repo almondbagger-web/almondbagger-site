@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
 
 const banners = [
   {
@@ -22,9 +23,10 @@ export default function OpportunityBanners() {
     <section
       id="opportunities"
       aria-labelledby="opportunities-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-background/85 section-y md:scroll-mt-28"
     >
-      <div className="mx-auto max-w-6xl section-pad">
+      <PlatinumBackdrop />
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <SectionHeading
           english="JOIN US"
           japanese="ご案内"

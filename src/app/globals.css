@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --surface: #f7f7f5;
-  --cinema: #08090c;
-  --ink: #111315;
-  --foreground: #111315;
-  --muted: #5a6170;
-  --border: #e6e4df;
-  --gold: #c5a059;
-  --gold-soft: #f4eee3;
-  --gold-deep: #9a7a3f;
-  --cyan: #0ea5e9;
-  --cyan-soft: rgba(14, 165, 233, 0.1);
-  --cyan-glow: rgba(14, 165, 233, 0.35);
-  --grid-line: rgba(17, 19, 21, 0.04);
+  --background: #f1f3f6;
+  --surface: #e6e9ef;
+  --cinema: #060913;
+  --ink: #12151c;
+  --foreground: #12151c;
+  --muted: #5c6472;
+  --border: color-mix(in oklab, #cbd5e1 70%, transparent);
+  --gold: #b89650;
+  --gold-soft: #f3ebd8;
+  --gold-deep: #8f7040;
+  --cyan: #7a8fa8;
+  --cyan-soft: rgba(122, 143, 168, 0.12);
+  --cyan-glow: rgba(184, 150, 80, 0.22);
+  --grid-line: rgba(100, 116, 139, 0.07);
 }
 
 @theme inline {
@@ -47,7 +47,9 @@ html {
 }
 
 body {
-  background: var(--background);
+  background:
+    linear-gradient(165deg, #f1f3f6 0%, #e6e9ef 48%, #eef1f5 100%);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -219,12 +221,13 @@ body {
   background-size: 48px 48px;
 }
 
-/* ─── Glass ─── */
+/* ─── Glass / Platinum frost ─── */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(228, 230, 235, 0.9);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid color-mix(in oklab, #cbd5e1 70%, transparent);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  box-shadow: 0 12px 40px rgba(18, 21, 28, 0.04);
 }
 
 .glass-dark {
@@ -307,8 +310,71 @@ body {
 }
 
 .gold-frame {
-  border: 1px solid color-mix(in oklab, var(--gold) 60%, white);
-  background: #fff;
+  border: 1px solid color-mix(in oklab, var(--gold) 55%, #cbd5e1);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  box-shadow: 0 10px 32px rgba(18, 21, 28, 0.04);
+}
+
+/* Cosmic sunrise — Hero / dark openers */
+.cosmic-sunrise {
+  background:
+    radial-gradient(
+      ellipse 95% 48% at 50% 108%,
+      rgba(255, 248, 231, 0.42) 0%,
+      rgba(212, 175, 55, 0.18) 28%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 32% at 48% 100%,
+      rgba(184, 150, 80, 0.38) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 40% 24% at 58% 96%,
+      rgba(255, 255, 255, 0.22) 0%,
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      #060913 0%,
+      #0a1020 32%,
+      #0d1424 58%,
+      #151821 78%,
+      #1c1820 100%
+    );
+}
+
+.cosmic-rays {
+  background: repeating-conic-gradient(
+    from -8deg at 50% 112%,
+    transparent 0deg,
+    rgba(255, 248, 231, 0.028) 0.35deg,
+    transparent 1.1deg,
+    transparent 3.2deg
+  );
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.35) 42%,
+    transparent 78%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.35) 42%,
+    transparent 78%
+  );
+}
+
+.cosmic-horizon {
+  background: linear-gradient(
+    to top,
+    rgba(255, 248, 231, 0.14) 0%,
+    rgba(184, 150, 80, 0.08) 18%,
+    transparent 55%
+  );
 }
 
 /* コントラスト厳守：暗い面には必ず白文字、明るい面にはチャコール */
@@ -460,12 +526,14 @@ body {
 
 .field-lux {
   width: 100%;
-  border: 1px solid var(--border);
-  background: #fff;
+  border: 1px solid color-mix(in oklab, #cbd5e1 70%, transparent);
+  background: rgba(255, 255, 255, 0.78);
   padding: 0.9rem 1rem;
   font-size: 0.9375rem;
   color: var(--foreground);
   outline: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;

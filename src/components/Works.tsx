@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import CosmicGoldParticles from "@/components/CosmicGoldParticles";
 import {
   getFeaturedWorks,
   getFilmography,
@@ -104,11 +105,20 @@ export default function Works() {
     <section
       id="works"
       aria-labelledby="works-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-[#0B0C0E] text-white section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-[#060913] text-white section-y md:scroll-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-60" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(184,150,80,0.12), transparent 55%), radial-gradient(ellipse 70% 40% at 80% 100%, rgba(255,248,231,0.06), transparent 50%)",
+        }}
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-45" />
+      <CosmicGoldParticles intensity="dark" />
 
-      <div className="relative mx-auto max-w-6xl section-pad">
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <SectionHeading
           english="WORKS"
           japanese="制作実績"

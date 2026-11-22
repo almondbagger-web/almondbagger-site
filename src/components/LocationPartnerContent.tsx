@@ -4,6 +4,7 @@ import { type FormEvent, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Send } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import CosmicGoldParticles from "@/components/CosmicGoldParticles";
 import { companyInfo } from "@/data/works";
 import { cn } from "@/lib/utils";
 
@@ -66,9 +67,11 @@ export default function LocationPartnerContent() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-cinema text-white">
-        <div className="pointer-events-none absolute inset-0 tech-grid opacity-20" />
-        <div className="relative mx-auto max-w-6xl section-pad py-20 md:py-28">
+      <section className="relative overflow-hidden border-b border-white/10 cosmic-sunrise text-white">
+        <div className="pointer-events-none absolute inset-0 cosmic-rays opacity-70" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-35" />
+        <CosmicGoldParticles intensity="hero" />
+        <div className="relative z-[2] mx-auto max-w-6xl section-pad py-20 md:py-28">
           <p className="font-display text-[0.7rem] font-extrabold tracking-[0.2em] text-gold">
             LOCATION PARTNER
           </p>
@@ -150,7 +153,7 @@ export default function LocationPartnerContent() {
             ].map((label) => (
               <li
                 key={label}
-                className="border border-border bg-white px-4 py-2 text-sm tracking-wide text-foreground"
+                className="border border-slate-300/70 bg-white/75 px-4 py-2 text-sm tracking-wide text-foreground backdrop-blur-sm"
               >
                 {label}
               </li>

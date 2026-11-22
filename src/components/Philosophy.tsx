@@ -1,11 +1,14 @@
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
+
 export default function Philosophy() {
   return (
     <section
       id="philosophy"
       aria-labelledby="philosophy-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-background/80 section-y md:scroll-mt-28"
     >
-      <div className="mx-auto max-w-5xl section-pad">
+      <PlatinumBackdrop />
+      <div className="relative z-[2] mx-auto max-w-5xl section-pad">
         <p className="font-display text-[0.7rem] font-extrabold tracking-[0.28em] text-gold">
           PHILOSOPHY
         </p>

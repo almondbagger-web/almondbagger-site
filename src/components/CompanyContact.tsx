@@ -5,6 +5,7 @@ import Link from "next/link";
 import { CheckCircle2, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/SectionHeading";
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
 import { companyInfo } from "@/data/works";
 import { cn } from "@/lib/utils";
 
@@ -67,10 +68,10 @@ export default function CompanyContact() {
       <section
         id="company"
         aria-labelledby="company-heading"
-        className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
+        className="relative scroll-mt-24 overflow-hidden bg-background/85 section-y md:scroll-mt-28"
       >
-        <div className="pointer-events-none absolute inset-0 tech-grid opacity-35" />
-        <div className="relative mx-auto max-w-6xl section-pad">
+        <PlatinumBackdrop />
+        <div className="relative z-[2] mx-auto max-w-6xl section-pad">
           <SectionHeading
             english="COMPANY"
             japanese="会社概要"
@@ -92,7 +93,7 @@ export default function CompanyContact() {
                     key={row.label}
                     className={cn(
                       "border-b border-border last:border-b-0",
-                      i % 2 === 0 ? "bg-white" : "bg-surface/60",
+                      i % 2 === 0 ? "bg-white/70" : "bg-surface/50",
                     )}
                   >
                     <th className="w-[34%] px-4 py-4 align-top text-[0.78rem] font-medium tracking-wide text-muted sm:w-[28%] md:px-6 md:py-5 md:text-[0.8125rem]">
@@ -127,10 +128,10 @@ export default function CompanyContact() {
       <section
         id="contact"
         aria-labelledby="contact-heading"
-        className="relative scroll-mt-24 overflow-hidden bg-surface section-y md:scroll-mt-28"
+        className="relative scroll-mt-24 overflow-hidden bg-surface/90 section-y md:scroll-mt-28"
       >
-        <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
-        <div className="relative mx-auto max-w-2xl section-pad">
+        <PlatinumBackdrop />
+        <div className="relative z-[2] mx-auto max-w-2xl section-pad">
           <div className="text-center">
             <SectionHeading
               english="CONTACT"

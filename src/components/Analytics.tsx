@@ -60,15 +60,15 @@ export default function Analytics() {
     <section
       id="analytics"
       aria-labelledby="analytics-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-cinema text-white section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-[#060913] text-white section-y md:scroll-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-70" />
+      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-45" />
       <div className="aurora-layer" aria-hidden>
-        <div className="aurora-blob right-[-10%] top-0 h-80 w-80 bg-cyan/15" />
-        <div className="aurora-blob bottom-0 left-[-8%] h-72 w-72 bg-gold/12" />
+        <div className="aurora-blob right-[-10%] top-0 h-80 w-80 bg-gold/12" />
+        <div className="aurora-blob bottom-0 left-[-8%] h-72 w-72 bg-[#FFF8E7]/08" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl section-pad">
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <SectionHeading
           english="ANALYTICS"
           japanese="戦略・ロジック"

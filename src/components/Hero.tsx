@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import CosmicGoldParticles from "@/components/CosmicGoldParticles";
 
 const badges = [
   "制作部統括 20年超",
@@ -15,33 +16,35 @@ export default function Hero() {
     <section
       id="top"
       aria-label="ALMONDBAGGER ヒーロー"
-      className="relative overflow-hidden bg-cinema pt-[4.25rem] text-white md:pt-[4.75rem]"
+      className="relative overflow-hidden cosmic-sunrise pt-[4.25rem] text-white md:pt-[4.75rem]"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid-dark opacity-80" />
-      <div className="aurora-layer" aria-hidden>
-        <div className="aurora-blob left-[-10%] top-[-10%] h-[28rem] w-[28rem] bg-gold/20" />
-        <div className="aurora-blob right-[-8%] top-[20%] h-[22rem] w-[22rem] bg-cyan/20" />
-      </div>
+      <div className="pointer-events-none absolute inset-0 cosmic-rays" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 cosmic-horizon" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-0 tech-grid-dark opacity-40"
+        aria-hidden
+      />
+      <CosmicGoldParticles intensity="hero" />
 
-      <div className="relative mx-auto max-w-6xl section-pad">
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <div className="grid items-center gap-10 py-14 md:py-18 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:py-20">
           <div>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem] tracking-[0.14em] text-white/50">
-              <span className="inline-flex items-center gap-2 text-cyan">
-                <span className="cyan-dot h-1.5 w-1.5 rounded-full bg-cyan" />
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.62rem] tracking-[0.14em] text-white/55">
+              <span className="inline-flex items-center gap-2 text-gold">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
                 REC ● 4K OPEN GATE 3:2
               </span>
-              <span className="text-gold">TC 01:00:00:00</span>
+              <span className="text-white/45">TC 01:00:00:00</span>
             </div>
 
             <p
               aria-hidden
-              className="mt-6 font-display text-[clamp(2.8rem,10vw,5.5rem)] font-black leading-[0.85] tracking-tighter text-white/[0.07]"
+              className="mt-6 font-display text-[clamp(2.8rem,10vw,5.5rem)] font-black leading-[0.85] tracking-tighter text-white/[0.08]"
             >
               PRODUCTION
             </p>
 
-            <h1 className="relative mt-[-0.35em] max-w-xl font-serif text-[1.9rem] font-bold leading-[1.3] tracking-wide sm:text-4xl md:text-[2.85rem] lg:text-[3.2rem]">
+            <h1 className="relative mt-[-0.35em] max-w-xl font-serif text-[1.9rem] font-bold leading-[1.3] tracking-wide text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)] sm:text-4xl md:text-[2.85rem] lg:text-[3.2rem]">
               現場を動かす、
               <br />
               確かな統括力。
@@ -55,10 +58,10 @@ export default function Hero() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-              className="mt-6 h-px w-28 origin-left bg-gradient-to-r from-gold via-gold to-cyan/60"
+              className="mt-6 h-px w-28 origin-left bg-gradient-to-r from-gold via-[#F8F0DC] to-transparent"
             />
 
-            <p className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-white/70 md:text-base">
+            <p className="mt-6 max-w-xl text-[0.95rem] leading-relaxed text-white/78 md:text-base">
               商業映画・地上波ドラマの制作部統括と、最先端AIクリエイティブ。オープンゲート縦横同時制作からプロダクションDXまで、一流の現場を支えます。
             </p>
 
@@ -66,7 +69,7 @@ export default function Hero() {
               {badges.map((label) => (
                 <span
                   key={label}
-                  className="inline-flex items-center border border-gold/50 px-3.5 py-2 text-[0.72rem] font-medium tracking-[0.04em] text-white"
+                  className="inline-flex items-center border border-gold/45 bg-white/5 px-3.5 py-2 text-[0.72rem] font-medium tracking-[0.04em] text-white backdrop-blur-sm"
                 >
                   {label}
                 </span>
@@ -88,7 +91,7 @@ export default function Hero() {
               <span>2.39:1 CINEMA</span>
               <span className="text-gold">FLAGSHIP IP</span>
             </div>
-            <div className="cinema-player border border-white/12 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+            <div className="cinema-player border border-white/15 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
               <div className="hud-corners absolute inset-0 z-10" aria-hidden>
                 <span className="tl" />
                 <span className="tr" />

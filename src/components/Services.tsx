@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/SectionHeading";
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
 import { companyInfo } from "@/data/works";
 
 const blocks = [
@@ -37,9 +38,10 @@ export default function Services() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-surface section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-surface/90 section-y md:scroll-mt-28"
     >
-      <div className="mx-auto max-w-6xl section-pad">
+      <PlatinumBackdrop />
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <SectionHeading
           english="SERVICE"
           japanese="事業内容"

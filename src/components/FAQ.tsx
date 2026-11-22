@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
 import { faqItems } from "@/data/works";
 import { cn } from "@/lib/utils";
 
@@ -12,11 +13,11 @@ export default function FAQ() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-surface section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-surface/90 section-y md:scroll-mt-28"
     >
-      <div className="pointer-events-none absolute inset-0 tech-grid opacity-40" />
+      <PlatinumBackdrop />
 
-      <div className="relative mx-auto max-w-3xl section-pad">
+      <div className="relative z-[2] mx-auto max-w-3xl section-pad">
         <div className="text-center">
           <p className="text-[0.7rem] font-medium tracking-[0.24em] text-gold">
             FAQ
@@ -41,7 +42,7 @@ export default function FAQ() {
             return (
               <div
                 key={item.question}
-                className="border border-border bg-white/90 backdrop-blur-md"
+                className="border border-slate-300/70 bg-white/75 backdrop-blur-md"
               >
                 <h3>
                   <button

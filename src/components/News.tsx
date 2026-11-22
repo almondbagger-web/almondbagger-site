@@ -1,4 +1,5 @@
 import SectionHeading from "@/components/SectionHeading";
+import PlatinumBackdrop from "@/components/PlatinumBackdrop";
 
 type NewsCategory = "WORKS" | "RELEASE" | "ON AIR";
 
@@ -48,9 +49,10 @@ export default function News() {
     <section
       id="news"
       aria-labelledby="news-heading"
-      className="relative scroll-mt-24 overflow-hidden bg-background section-y md:scroll-mt-28"
+      className="relative scroll-mt-24 overflow-hidden bg-background/85 section-y md:scroll-mt-28"
     >
-      <div className="mx-auto max-w-6xl section-pad">
+      <PlatinumBackdrop />
+      <div className="relative z-[2] mx-auto max-w-6xl section-pad">
         <SectionHeading english="NEWS" japanese="お知らせ" id="news-heading" />
 
         <ul className="mt-12 border-t border-border">
