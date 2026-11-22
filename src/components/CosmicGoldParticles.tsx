@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 type Intensity = "hero" | "dark" | "light";
+type Tone = "gold" | "platinum" | "rose" | "amber";
 
 type CosmicGoldParticlesProps = {
   intensity?: Intensity;
@@ -18,17 +19,32 @@ type Particle = {
   vx: number;
   phase: number;
   speed: number;
-  gold: boolean;
+  tone: Tone;
 };
 
 const CONFIG: Record<
   Intensity,
   { count: number; alphaMax: number; speed: number }
 > = {
-  hero: { count: 72, alphaMax: 0.55, speed: 0.22 },
-  dark: { count: 56, alphaMax: 0.4, speed: 0.16 },
-  light: { count: 36, alphaMax: 0.18, speed: 0.1 },
+  hero: { count: 72, alphaMax: 0.52, speed: 0.22 },
+  dark: { count: 56, alphaMax: 0.38, speed: 0.16 },
+  light: { count: 36, alphaMax: 0.16, speed: 0.1 },
 };
+
+const TONE_RGBA: Record<Tone, string> = {
+  gold: "212, 175, 55",
+  platinum: "255, 248, 231",
+  rose: "198, 139, 131",
+  amber: "212, 136, 74",
+};
+
+function pickTone(): Tone {
+  const r = Math.random();
+  if (r < 0.55) return "gold";
+  if (r < 0.78) return "platinum";
+  if (r < 0.9) return "rose";
+  return "amber";
+}
 
 export default function CosmicGoldParticles({
   intensity = "hero",
@@ -56,13 +72,23 @@ export default function CosmicGoldParticles({
     const spawn = (): Particle => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      r: 0.6 + Math.random() * 1.9,
+      r: 0.55 + Math.random() * 1.85,
       vy: -(0.05 + Math.random() * cfg.speed),
       vx: (Math.random() - 0.5) * 0.08,
       phase: Math.random() * Math.PI * 2,
       speed: 0.008 + Math.random() * 0.012,
-      gold: Math.random() > 0.35,
+      tone: pickTone(),
     });
+
+    const paint = (p: Particle, a: number) => {
+      const rgb = TONE_RGBA[p.tone];
+      const alpha =
+        p.tone === "rose" || p.tone === "amber" ? a * 0.72 : a;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${rgb}, ${alpha})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    };
 
     const resize = () => {
       const parent = canvas.parentElement;
@@ -86,12 +112,7 @@ export default function CosmicGoldParticles({
       ctx.clearRect(0, 0, w, h);
       for (const p of particles) {
         const a = cfg.alphaMax * (0.35 + 0.65 * Math.abs(Math.sin(p.phase)));
-        ctx.beginPath();
-        ctx.fillStyle = p.gold
-          ? `rgba(212, 175, 55, ${a})`
-          : `rgba(255, 248, 231, ${a * 0.9})`;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
+        paint(p, a);
       }
     };
 
@@ -111,14 +132,7 @@ export default function CosmicGoldParticles({
 
         const flicker =
           0.25 + 0.75 * (0.5 + 0.5 * Math.sin(p.phase * 1.4));
-        const a = cfg.alphaMax * flicker;
-
-        ctx.beginPath();
-        ctx.fillStyle = p.gold
-          ? `rgba(212, 175, 55, ${a})`
-          : `rgba(255, 248, 231, ${a * 0.85})`;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
+        paint(p, cfg.alphaMax * flicker);
       }
       raf = window.requestAnimationFrame(tick);
     };

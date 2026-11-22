@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f1f3f6;
-  --surface: #e6e9ef;
+  --background: #f3f5f8;
+  --surface: #eaedef;
   --cinema: #060913;
   --ink: #12151c;
   --foreground: #12151c;
@@ -11,6 +11,8 @@
   --gold: #b89650;
   --gold-soft: #f3ebd8;
   --gold-deep: #8f7040;
+  --rose: #c68b83;
+  --amber: #d4884a;
   --cyan: #7a8fa8;
   --cyan-soft: rgba(122, 143, 168, 0.12);
   --cyan-glow: rgba(184, 150, 80, 0.22);
@@ -28,6 +30,8 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-gold-deep: var(--gold-deep);
+  --color-rose: var(--rose);
+  --color-amber: var(--amber);
   --color-cyan: var(--cyan);
   --font-sans: var(--font-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
     "Noto Sans JP", "Segoe UI", system-ui, sans-serif;
@@ -48,7 +52,7 @@ html {
 
 body {
   background:
-    linear-gradient(165deg, #f1f3f6 0%, #e6e9ef 48%, #eef1f5 100%);
+    linear-gradient(165deg, #f3f5f8 0%, #eaedef 48%, #f0f2f5 100%);
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
@@ -223,7 +227,7 @@ body {
 
 /* ─── Glass / Platinum frost ─── */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.8);
   border: 1px solid color-mix(in oklab, #cbd5e1 70%, transparent);
   backdrop-filter: blur(14px) saturate(1.15);
   -webkit-backdrop-filter: blur(14px) saturate(1.15);
@@ -311,7 +315,7 @@ body {
 
 .gold-frame {
   border: 1px solid color-mix(in oklab, var(--gold) 55%, #cbd5e1);
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px) saturate(1.1);
   -webkit-backdrop-filter: blur(12px) saturate(1.1);
   box-shadow: 0 10px 32px rgba(18, 21, 28, 0.04);
@@ -322,18 +326,20 @@ body {
   background:
     radial-gradient(
       ellipse 95% 48% at 50% 108%,
-      rgba(255, 248, 231, 0.42) 0%,
-      rgba(212, 175, 55, 0.18) 28%,
-      transparent 58%
+      rgba(255, 248, 231, 0.4) 0%,
+      rgba(212, 136, 74, 0.28) 22%,
+      rgba(184, 150, 80, 0.16) 42%,
+      transparent 62%
     ),
     radial-gradient(
       ellipse 55% 32% at 48% 100%,
-      rgba(184, 150, 80, 0.38) 0%,
-      transparent 55%
+      rgba(212, 136, 74, 0.32) 0%,
+      rgba(198, 139, 131, 0.1) 40%,
+      transparent 58%
     ),
     radial-gradient(
       ellipse 40% 24% at 58% 96%,
-      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.2) 0%,
       transparent 50%
     ),
     linear-gradient(
@@ -344,6 +350,42 @@ body {
       #151821 78%,
       #1c1820 100%
     );
+}
+
+/* Classical chronograph — ultra-slow precision rotation */
+.chrono-spin-90 {
+  transform-origin: center center;
+  animation: chrono-spin 90s linear infinite;
+}
+
+.chrono-spin-90-rev {
+  transform-origin: center center;
+  animation: chrono-spin-rev 90s linear infinite;
+}
+
+.chrono-spin-120 {
+  transform-origin: center center;
+  animation: chrono-spin 120s linear infinite;
+}
+
+@keyframes chrono-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes chrono-spin-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chrono-spin-90,
+  .chrono-spin-90-rev,
+  .chrono-spin-120 {
+    animation: none !important;
+  }
 }
 
 .cosmic-rays {
@@ -371,8 +413,9 @@ body {
 .cosmic-horizon {
   background: linear-gradient(
     to top,
-    rgba(255, 248, 231, 0.14) 0%,
-    rgba(184, 150, 80, 0.08) 18%,
+    rgba(255, 248, 231, 0.12) 0%,
+    rgba(212, 136, 74, 0.12) 12%,
+    rgba(184, 150, 80, 0.07) 28%,
     transparent 55%
   );
 }

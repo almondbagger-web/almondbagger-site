@@ -61,7 +61,7 @@ export default function Navbar({ forceLight = false }: NavbarProps) {
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300",
           lightBar
-            ? "border-slate-300/70 bg-white/75 shadow-[0_1px_0_rgba(18,21,28,0.04)] backdrop-blur-md"
+            ? "border-slate-300/70 bg-white/80 shadow-[0_1px_0_rgba(18,21,28,0.04)] backdrop-blur-md"
             : "border-white/10 bg-[#060913]/65 backdrop-blur-md",
         )}
       >

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import CosmicGoldParticles from "@/components/CosmicGoldParticles";
+import ClassicalChronographBg from "@/components/ClassicalChronographBg";
 
 const badges = [
   "制作部統括 20年超",
@@ -21,9 +22,10 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 cosmic-rays" aria-hidden />
       <div className="pointer-events-none absolute inset-0 cosmic-horizon" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-0 tech-grid-dark opacity-40"
+        className="pointer-events-none absolute inset-0 tech-grid-dark opacity-35"
         aria-hidden
       />
+      <ClassicalChronographBg tone="hero" />
       <CosmicGoldParticles intensity="hero" />
 
       <div className="relative z-[2] mx-auto max-w-6xl section-pad">
