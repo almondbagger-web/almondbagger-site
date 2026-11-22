@@ -1,12 +1,8 @@
-"use client";
-
-import { type FormEvent, useState } from "react";
-import Link from "next/link";
-import { CheckCircle2, Send } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import CosmicGoldParticles from "@/components/CosmicGoldParticles";
-import { companyInfo } from "@/data/works";
-import { cn } from "@/lib/utils";
+import LocationShowcaseBoard from "@/components/LocationShowcaseBoard";
+import LocationOwnerSubmitForm from "@/components/LocationOwnerSubmitForm";
+import LocationShootInquiryForm from "@/components/LocationShootInquiryForm";
 
 const promises = [
   {
@@ -26,45 +22,7 @@ const promises = [
   },
 ] as const;
 
-const propertyTypes = [
-  "飲食店・カフェ",
-  "居酒屋",
-  "古民家・一軒家",
-  "オフィス",
-  "倉庫・スタジオ",
-  "美容室",
-  "その他",
-] as const;
-
-type FormState = {
-  name: string;
-  propertyName: string;
-  location: string;
-  propertyType: string;
-  email: string;
-  phone: string;
-  message: string;
-};
-
-const initial: FormState = {
-  name: "",
-  propertyName: "",
-  location: "",
-  propertyType: "飲食店・カフェ",
-  email: "",
-  phone: "",
-  message: "",
-};
-
 export default function LocationPartnerContent() {
-  const [form, setForm] = useState<FormState>(initial);
-  const [submitted, setSubmitted] = useState(false);
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
     <>
       <section className="relative overflow-hidden border-b border-white/10 cosmic-sunrise text-white">
@@ -81,11 +39,16 @@ export default function LocationPartnerContent() {
             ドラマや映画の舞台になる。
           </h1>
           <p className="mt-8 max-w-2xl text-sm leading-relaxed text-white/70 md:text-base">
-            地上波ドラマ・CM・Netflix・Amazon Prime Video等の制作会社へ直接ご提案。初期費用0円・本業優先・万全の養生と保険体制で、新たな副収入とお店のブランディングを実現します。
+            地上波ドラマ・CM・Netflix・Amazon Prime Video等の制作会社へ直接ご提案。初期費用0円・本業優先・万全の養生と保険体制で、新たな副収入とお店のブランディングを実現します。個人情報は公開せず、事務局が一括仲介します。
           </p>
-          <a href="#location-form" className="btn-on-dark mt-10 inline-flex">
-            相談してみる
-          </a>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a href="#location-showcase" className="btn-on-dark inline-flex">
+              提携ロケ地を見る
+            </a>
+            <a href="#location-submit" className="btn-on-dark-outline inline-flex">
+              物件を投稿する
+            </a>
+          </div>
         </div>
       </section>
 
@@ -130,7 +93,7 @@ export default function LocationPartnerContent() {
           />
           <div className="mt-12 max-w-3xl">
             <p className="text-base leading-relaxed text-muted md:text-lg">
-              制作会社から支払われる場所代（1回の撮影あたり数万円〜十数万円が目安）をオーナー様と分配。営業や制作会社との煩雑なスケジュール・条件交渉はすべて弊社が代行します。
+              制作会社から支払われる場所代（1回の撮影あたり数万円〜十数万円が目安）をオーナー様と分配。営業や制作会社との煩雑なスケジュール・条件交渉はすべて弊社が代行します。公開掲示板でも連絡先は非公開のため、中抜きを防ぎます。
             </p>
           </div>
 
@@ -162,179 +125,9 @@ export default function LocationPartnerContent() {
         </div>
       </section>
 
-      <section
-        id="location-form"
-        aria-labelledby="location-form-heading"
-        className="relative scroll-mt-24 bg-surface section-y md:scroll-mt-28"
-      >
-        <div className="mx-auto max-w-6xl section-pad">
-          <SectionHeading
-            english="CONTACT"
-            japanese="お問い合わせ"
-            id="location-form-heading"
-            tone="gold"
-          />
-          <p className="mt-8 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-            「まずは話だけ聞いてみたい」「うちの店でも撮影需要があるか知りたい」——お気軽にご相談ください。
-          </p>
-
-          <div className="glass-panel mt-12 p-6 md:p-10">
-            {submitted ? (
-              <div className="flex min-h-[280px] flex-col items-center justify-center text-center">
-                <CheckCircle2 className="mb-4 h-10 w-10 text-gold" />
-                <h3 className="font-serif text-xl font-medium tracking-wide">
-                  送信を受け付けました
-                </h3>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
-                  デモのため実送信は行いません。本番環境ではメール通知へ接続できます。
-                  <br />
-                  担当より {companyInfo.email} よりご連絡いたします。
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubmitted(false);
-                    setForm(initial);
-                  }}
-                  className="btn-gold-outline mt-8"
-                >
-                  フォームに戻る
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={onSubmit} className="space-y-5">
-                <div className="grid gap-5 md:grid-cols-2">
-                  <label className="block space-y-2">
-                    <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                      お名前 <span className="text-gold">*</span>
-                    </span>
-                    <input
-                      required
-                      className="field-lux"
-                      value={form.name}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, name: e.target.value }))
-                      }
-                      placeholder="山田 太郎"
-                    />
-                  </label>
-                  <label className="block space-y-2">
-                    <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                      店舗・物件名 <span className="text-gold">*</span>
-                    </span>
-                    <input
-                      required
-                      className="field-lux"
-                      value={form.propertyName}
-                      onChange={(e) =>
-                        setForm((f) => ({
-                          ...f,
-                          propertyName: e.target.value,
-                        }))
-                      }
-                      placeholder="〇〇カフェ"
-                    />
-                  </label>
-                </div>
-                <div className="grid gap-5 md:grid-cols-2">
-                  <label className="block space-y-2">
-                    <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                      所在地 <span className="text-gold">*</span>
-                    </span>
-                    <input
-                      required
-                      className="field-lux"
-                      value={form.location}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, location: e.target.value }))
-                      }
-                      placeholder="東京都八王子市…"
-                    />
-                  </label>
-                  <label className="block space-y-2">
-                    <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                      物件種別 <span className="text-gold">*</span>
-                    </span>
-                    <select
-                      required
-                      className="field-lux"
-                      value={form.propertyType}
-                      onChange={(e) =>
-                        setForm((f) => ({
-                          ...f,
-                          propertyType: e.target.value,
-                        }))
-                      }
-                    >
-                      {propertyTypes.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-                <div className="grid gap-5 md:grid-cols-2">
-                  <label className="block space-y-2">
-                    <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                      メールアドレス <span className="text-gold">*</span>
-                    </span>
-                    <input
-                      required
-                      type="email"
-                      className="field-lux"
-                      value={form.email}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, email: e.target.value }))
-                      }
-                      placeholder="you@example.com"
-                    />
-                  </label>
-                  <label className="block space-y-2">
-                    <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                      電話番号
-                    </span>
-                    <input
-                      className="field-lux"
-                      value={form.phone}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, phone: e.target.value }))
-                      }
-                      placeholder="090-0000-0000"
-                    />
-                  </label>
-                </div>
-                <label className="block space-y-2">
-                  <span className="text-[0.78rem] font-medium tracking-wide text-muted">
-                    ご相談内容
-                  </span>
-                  <textarea
-                    rows={5}
-                    className={cn("field-lux", "resize-y")}
-                    value={form.message}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, message: e.target.value }))
-                    }
-                    placeholder="定休日の有無、物件の特徴など、差し支えのない範囲でご記入ください。"
-                  />
-                </label>
-                <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                  <Link
-                    href="/privacy"
-                    className="text-[0.78rem] text-muted underline-offset-4 transition-colors hover:text-foreground hover:underline"
-                  >
-                    プライバシーポリシー
-                  </Link>
-                  <button type="submit" className="btn-dark w-full sm:w-auto">
-                    <Send className="h-4 w-4" />
-                    送信する
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
+      <LocationShowcaseBoard />
+      <LocationOwnerSubmitForm />
+      <LocationShootInquiryForm />
     </>
   );
 }

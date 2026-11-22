@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="µó×ëä¶ûŒ¨">
+  <defs>
+    <linearGradient id="g" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1f18"/>
+      <stop offset="50%" stop-color="#3d4a38"/>
+      <stop offset="100%" stop-color="#d4884a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <circle cx="600" cy="400" r="220" fill="none" stroke="#f3ebd8" stroke-width="1" opacity="0.35"/>
+  <text x="600" y="370" text-anchor="middle" fill="#f3ebd8" font-family="Georgia, serif" font-size="42">SAMPLE · ä¶ûŒ¨¸…</text>
+  <text x="600" y="430" text-anchor="middle" fill="#b89650" font-family="Helvetica, sans-serif" font-size="20" letter-spacing="4">AB-LOC-SAMPLE02 · k‹P¨ê¢</text>
+  <text x="600" y="490" text-anchor="middle" fill="#ffffff" font-family="Helvetica, sans-serif" font-size="16" opacity="0.7">²	¤áü¸(µó×ëŸ(niögoBŠ~[“	</text>
+</svg>

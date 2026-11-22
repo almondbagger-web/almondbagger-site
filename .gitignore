@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 *.mp4
+
+# location board runtime data / uploads (keep samples in public/)
+/data/location-board/
